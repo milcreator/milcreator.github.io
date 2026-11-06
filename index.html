@@ -1,418 +1,1067 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b14">
-<title>MILOS OS — Official Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <meta name="theme-color" content="#080b14">
+    <meta name="description" content="MILOS — Ubuntu tabanlı, KDE Plasma masaüstü ortamına sahip modern bir işletim sistemi.">
 
-html {
-    scroll-behavior: smooth;
-}
+    <title>MILOS — Özgürlüğün Yeni Hali</title>
 
-body {
-    background: #080b14;
-    color: white;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        /* GENEL AYARLAR */
 
-header {
-    height: 75px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 8%;
-    background: #0c1020;
-    border-bottom: 1px solid #252b42;
-}
+        :root {
+            --bg: #080b14;
+            --bg-light: #101625;
+            --card: #111827;
+            --text: #f5f7ff;
+            --muted: #a0abc0;
+            --accent: #795cff;
+            --accent2: #22d3ee;
+            --border: rgba(255,255,255,0.09);
+        }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 23px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-.logo img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-nav {
-    display: flex;
-    gap: 25px;
-}
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-nav a {
-    color: #aab3ce;
-    text-decoration: none;
-    transition: .3s;
-}
+        button {
+            font-family: inherit;
+        }
 
-nav a:hover {
-    color: #7788ff;
-}
+        .container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
 
-.hero {
-    min-height: 650px;
-    padding: 110px 20px 70px;
-    text-align: center;
-    background:
-    radial-gradient(circle at center, #26357855, transparent 65%);
-}
+        /* ARKA PLAN EFEKTLERİ */
 
-.badge {
-    display: inline-block;
-    padding: 9px 17px;
-    border: 1px solid #667aff66;
-    border-radius: 30px;
-    color: #aab7ff;
-    font-size: 13px;
-}
+        .background-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
 
-h1 {
-    font-size: clamp(55px, 9vw, 100px);
-    margin: 30px 0 20px;
-    letter-spacing: -4px;
-}
+        .glow-one {
+            background: #704cff;
+            top: -250px;
+            left: -200px;
+        }
 
-.gradient {
-    background: linear-gradient(90deg, #ffffff, #8194ff, #48d9e8);
-    -webkit-background-clip: text;
-    color: transparent;
-}
+        .glow-two {
+            background: #00bfff;
+            right: -250px;
+            top: 500px;
+        }
 
-.description {
-    max-width: 650px;
-    margin: auto;
-    color: #aab3ce;
-    font-size: 18px;
-    line-height: 1.7;
-}
+        /* NAVİGASYON */
 
-.buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(8, 11, 20, 0.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
 
-.btn {
-    display: inline-block;
-    padding: 14px 24px;
-    border-radius: 10px;
-    background: linear-gradient(110deg, #667aff, #4858db);
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: .3s;
-}
+        nav {
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-.btn:hover {
-    transform: translateY(-3px);
-    filter: brightness(1.2);
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
 
-.btn.secondary {
-    background: #171e35;
-    border: 1px solid #343d60;
-}
+        .logo img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
 
-.preview {
-    max-width: 900px;
-    margin: 75px auto 0;
-    padding: 10px;
-    background: #ffffff12;
-    border: 1px solid #ffffff25;
-    border-radius: 18px;
-    box-shadow: 0 30px 80px #0008;
-}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
 
-.preview img {
-    display: block;
-    width: 100%;
-    border-radius: 10px;
-}
+        .nav-links a {
+            color: var(--muted);
+            font-size: 14px;
+            transition: 0.3s;
+        }
 
-section {
-    padding: 90px 8%;
-}
+        .nav-links a:hover {
+            color: white;
+        }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
+        .nav-button {
+            padding: 11px 21px;
+            border-radius: 9px;
+            background: var(--accent);
+            color: white !important;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-.section-title h2 {
-    font-size: 42px;
-    margin: 15px 0;
-}
+        .nav-button:hover {
+            background: #6244e8;
+            transform: translateY(-2px);
+        }
 
-.section-title p {
-    color: #aab3ce;
-}
+        .menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 27px;
+            cursor: pointer;
+        }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
+        /* HERO */
 
-.card {
-    padding: 30px;
-    border: 1px solid #252d48;
-    border-radius: 16px;
-    background: linear-gradient(145deg, #151c30, #0c1120);
-    transition: .3s;
-}
+        .hero {
+            min-height: 760px;
+            display: flex;
+            align-items: center;
+            padding: 130px 0 80px;
+            text-align: center;
+        }
 
-.card:hover {
-    transform: translateY(-6px);
-    border-color: #667aff;
-}
+        .hero-content {
+            width: 100%;
+        }
 
-.card .icon {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 1px solid rgba(121, 92, 255, 0.35);
+            border-radius: 50px;
+            background: rgba(121, 92, 255, 0.1);
+            color: #c3b6ff;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
 
-.card h3 {
-    margin-bottom: 12px;
-    font-size: 21px;
-}
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            background: #8b75ff;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #8b75ff;
+        }
 
-.card p {
-    color: #aab3ce;
-    line-height: 1.7;
-}
+        .hero h1 {
+            font-size: clamp(55px, 10vw, 105px);
+            line-height: 1.08;
+            letter-spacing: -5px;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
 
-.about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
+        .gradient-text {
+            background: linear-gradient(100deg, #9b83ff, #42d9f5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-.about h2 {
-    font-size: 45px;
-    margin: 15px 0;
-}
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.8;
+        }
 
-.about p {
-    color: #aab3ce;
-    line-height: 1.8;
-}
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
 
-.terminal {
-    padding: 25px;
-    background: #10182b;
-    border: 1px solid #303a5b;
-    border-radius: 15px;
-    font-family: monospace;
-    line-height: 2;
-    color: #aab3ce;
-}
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-.terminal span {
-    color: #65dfbd;
-}
+        .button-primary {
+            color: white;
+            background: linear-gradient(110deg, #795cff, #583be0);
+            box-shadow: 0 10px 35px rgba(121, 92, 255, 0.25);
+        }
 
-.download {
-    text-align: center;
-    background: radial-gradient(circle, #28377b55, transparent 70%);
-}
+        .button-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(121, 92, 255, 0.4);
+        }
 
-.download h2 {
-    font-size: 45px;
-    margin-bottom: 15px;
-}
+        .button-secondary {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            color: white;
+        }
 
-.download p {
-    color: #aab3ce;
-    margin-bottom: 30px;
-}
+        .button-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-4px);
+        }
 
-footer {
-    padding: 30px 8%;
-    border-top: 1px solid #252b42;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 15px;
-    color: #8791aa;
-}
+        /* MASAÜSTÜ GÖRSELİ */
 
-@media(max-width: 750px) {
-    nav {
-        display: none;
-    }
+        .desktop-section {
+            padding: 30px 0 110px;
+        }
 
-    .cards {
-        grid-template-columns: 1fr;
-    }
+        .desktop-frame {
+            position: relative;
+            padding: 10px;
+            border-radius: 18px;
+            background: linear-gradient(
+                135deg,
+                rgba(121,92,255,0.5),
+                rgba(34,211,238,0.2)
+            );
+            box-shadow: 0 30px 100px rgba(0,0,0,0.45);
+        }
 
-    .about {
-        grid-template-columns: 1fr;
-    }
+        .desktop-image {
+            width: 100%;
+            display: block;
+            border-radius: 11px;
+            background: #151b2b;
+            min-height: 250px;
+            object-fit: cover;
+        }
 
-    h1 {
-        letter-spacing: -2px;
-    }
+        .desktop-caption {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 17px;
+        }
 
-    .about h2,
-    .download h2 {
-        font-size: 34px;
-    }
-}
-</style>
+        /* ORTAK BÖLÜM */
+
+        section {
+            scroll-margin-top: 100px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-label {
+            color: #a795ff;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            max-width: 620px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* ÖZELLİKLER */
+
+        .features {
+            padding: 80px 0 110px;
+            background: linear-gradient(
+                180deg,
+                transparent,
+                rgba(255,255,255,0.015),
+                transparent
+            );
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(121,92,255,0.5);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(121,92,255,0.13);
+            border-radius: 12px;
+            font-size: 25px;
+            margin-bottom: 22px;
+        }
+
+        .feature-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* SİSTEM BÖLÜMÜ */
+
+        .system {
+            padding: 100px 0;
+        }
+
+        .system-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 55px;
+            padding: 45px;
+            background: linear-gradient(
+                135deg,
+                rgba(121,92,255,0.1),
+                rgba(34,211,238,0.04)
+            );
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .system-box h2 {
+            font-size: 36px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .system-box p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+
+        .system-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .system-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 17px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .system-item-icon {
+            font-size: 22px;
+        }
+
+        .system-item strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .system-item span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* İNDİRME */
+
+        .download {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .download-box {
+            padding: 70px 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(121,92,255,0.3);
+            background:
+                radial-gradient(
+                    ellipse at top,
+                    rgba(121,92,255,0.2),
+                    transparent 65%
+                ),
+                var(--bg-light);
+        }
+
+        .download-box h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 15px;
+        }
+
+        .download-box p {
+            color: var(--muted);
+            max-width: 550px;
+            margin: auto;
+            font-size: 15px;
+        }
+
+        .download-box .button {
+            margin-top: 30px;
+        }
+
+        .download-note {
+            display: block;
+            color: #79869e;
+            font-size: 12px;
+            margin-top: 18px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .footer-text {
+            color: #78849a;
+            font-size: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--muted);
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* ANİMASYONLAR */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            animation: fadeUp 0.9s ease both;
+        }
+
+        /* MOBİL TASARIM */
+
+        @media (max-width: 850px) {
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .system-box {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .system-box h2 {
+                font-size: 30px;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                height: 68px;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 68px;
+                left: 0;
+                width: 100%;
+                padding: 25px 5%;
+                background: #0d1220;
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 22px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero {
+                min-height: 680px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+
+            .desktop-section {
+                padding-bottom: 65px;
+            }
+
+            .system-box {
+                padding: 27px;
+            }
+
+            .download-box {
+                padding: 50px 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+        }
+
+    </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">
-        <img src="MIL.png" alt="MILOS Logo">
-        MILOS
-    </div>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
 
-    <nav>
-        <a href="#">Ana Sayfa</a>
-        <a href="#features">Özellikler</a>
-        <a href="#about">Hakkında</a>
-        <a href="#download">İndir</a>
-    </nav>
-</header>
+    <!-- NAVİGASYON -->
 
-<section class="hero">
+    <header>
+        <div class="container">
+            <nav>
 
-    <div class="badge">
-        Ubuntu Based Linux Distribution
-    </div>
+                <a href="#anasayfa" class="logo">
+                    <img src="MIL.png" alt="MILOS Logo">
+                    <span>MILOS</span>
+                </a>
 
-    <h1>
-        <span class="gradient">MILOS OS</span>
-    </h1>
+                <button class="menu-button" id="menuButton" aria-label="Menüyü aç">
+                    ☰
+                </button>
 
-    <p class="description">
-        Ubuntu'nun gücünü KDE Plasma'nın özgürlüğüyle
-        birleştiriyoruz. Yeni nesil masaüstü Linux deneyimi
-        MILOS ile başlıyor.
-    </p>
+                <div class="nav-links" id="navLinks">
+                    <a href="#anasayfa">Ana Sayfa</a>
+                    <a href="#ozellikler">Özellikler</a>
+                    <a href="#sistem">Sistem Hakkında</a>
+                    <a href="#masaustu">Masaüstü</a>
+                    <a href="#indirme" class="nav-button">GitHub</a>
+                </div>
 
-    <div class="buttons">
-        <a href="#about" class="btn">MILOS'u Keşfet</a>
-        <a href="#download" class="btn secondary">İndir</a>
-    </div>
+            </nav>
+        </div>
+    </header>
 
-    <div class="preview">
-        <img src="plasma.png" alt="MILOS KDE Plasma Desktop">
-    </div>
 
-</section>
+    <main>
 
-<section id="features">
+        <!-- ANA SAYFA -->
 
-    <div class="section-title">
-        <h2>MILOS Özellikleri</h2>
-        <p>Güçlü altyapı, modern masaüstü deneyimi.</p>
-    </div>
+        <section class="hero" id="anasayfa">
 
-    <div class="cards">
+            <div class="container">
+                <div class="hero-content">
 
-        <div class="card">
-            <div class="icon">🐧</div>
-            <h3>Ubuntu Tabanlı</h3>
-            <p>
-                Ubuntu Linux altyapısı üzerine kurulu,
-                geniş yazılım ekosisteminden yararlanan sistem.
-            </p>
+                    <div class="badge">
+                        <span class="badge-dot"></span>
+                        Özgür ve açık kaynak dünyasına hoş geldin
+                    </div>
+
+                    <h1>
+                        Tanışın,<br>
+                        <span class="gradient-text">MILOS.</span>
+                    </h1>
+
+                    <p>
+                        Özgürlüğü, modern tasarımı ve Linux dünyasının gücünü
+                        bir araya getiren yeni nesil işletim sistemi.
+                        MILOS ile bilgisayarının kontrolü senin elinde.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#sistem" class="button button-primary">
+                            MILOS'u Keşfet →
+                        </a>
+
+                        <a href="#masaustu" class="button button-secondary">
+                            Masaüstünü Gör
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- MASAÜSTÜ GÖRSELİ -->
+
+        <section class="desktop-section" id="masaustu">
+
+            <div class="container">
+
+                <div class="desktop-frame">
+
+                    <img
+                        src="plasma.png"
+                        alt="MILOS KDE Plasma Masaüstü"
+                        class="desktop-image"
+                    >
+
+                </div>
+
+                <p class="desktop-caption">
+                    MILOS — KDE Plasma masaüstü ortamı
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ÖZELLİKLER -->
+
+        <section class="features" id="ozellikler">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">Neden MILOS?</div>
+
+                    <h2>Gücünü özgürlükten alır.</h2>
+
+                    <p>
+                        Linux'un esnekliğini modern bir masaüstü deneyimiyle
+                        buluşturmayı hedefleyen bir işletim sistemi.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">🐧</div>
+
+                        <h3>Ubuntu Tabanlı</h3>
+
+                        <p>
+                            Ubuntu altyapısından yararlanan Linux tabanlı
+                            bir sistem yaklaşımı.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">🖥️</div>
+
+                        <h3>KDE Plasma</h3>
+
+                        <p>
+                            Özelleştirilebilir, modern ve esnek KDE Plasma
+                            masaüstü deneyimi.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">⚡</div>
+
+                        <h3>Esnek Deneyim</h3>
+
+                        <p>
+                            Masaüstünü ve çalışma ortamını kendi
+                            tercihlerine göre düzenleyebilme özgürlüğü.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">🔓</div>
+
+                        <h3>Açık Kaynak</h3>
+
+                        <p>
+                            Linux ve açık kaynak yazılım dünyasının
+                            sunduğu özgürlük anlayışı.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">🎨</div>
+
+                        <h3>Modern Tasarım</h3>
+
+                        <p>
+                            Sade, çağdaş ve kullanıcı deneyimini
+                            önemseyen bir tasarım anlayışı.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">🌍</div>
+
+                        <h3>Özgür Dünya</h3>
+
+                        <p>
+                            Kendi bilgisayarın, kendi tercihlerin ve
+                            kendi çalışma düzenin.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SİSTEM HAKKINDA -->
+
+        <section class="system" id="sistem">
+
+            <div class="container">
+
+                <div class="system-box">
+
+                    <div>
+
+                        <div class="section-label">MILOS Hakkında</div>
+
+                        <h2>
+                            Linux'un gücü,<br>
+                            modern bir deneyim.
+                        </h2>
+
+                        <p>
+                            MILOS, Ubuntu tabanını KDE Plasma masaüstü
+                            ortamıyla bir araya getiren bir işletim sistemi
+                            projesidir.
+                        </p>
+
+                        <p>
+                            Amacı; kullanıcıya esnek, kişiselleştirilebilir
+                            ve modern bir bilgisayar deneyimi sunmaktır.
+                        </p>
+
+                    </div>
+
+
+                    <div class="system-list">
+
+                        <div class="system-item">
+
+                            <div class="system-item-icon">🐧</div>
+
+                            <div>
+                                <strong>Ubuntu</strong>
+                                <span>Temel sistem altyapısı</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="system-item">
+
+                            <div class="system-item-icon">🖥️</div>
+
+                            <div>
+                                <strong>KDE Plasma</strong>
+                                <span>Masaüstü ortamı</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="system-item">
+
+                            <div class="system-item-icon">💻</div>
+
+                            <div>
+                                <strong>Linux</strong>
+                                <span>Açık kaynak işletim sistemi dünyası</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="system-item">
+
+                            <div class="system-item-icon">💜</div>
+
+                            <div>
+                                <strong>MILOS</strong>
+                                <span>Özgürlük senin elinde.</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GITHUB / İNDİRME -->
+
+        <section class="download" id="indirme">
+
+            <div class="container">
+
+                <div class="download-box">
+
+                    <div class="section-label">MILOS Projesi</div>
+
+                    <h2>
+                        Gelecek senin elinde.
+                    </h2>
+
+                    <p>
+                        MILOS projesini GitHub üzerinden takip et.
+                        Kaynak kodunu incele, gelişimine katkıda bulun
+                        ve projeyi keşfet.
+                    </p>
+
+                    <!-- BURAYA KENDİ GITHUB REPO LİNKİNİ YAZ -->
+
+                    <a
+                        href="https://github.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="button button-primary"
+                    >
+                        GitHub'da Görüntüle →
+                    </a>
+
+                    <span class="download-note">
+                        Proje ve sürüm bilgileri için GitHub sayfasını ziyaret et.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+                    MILOS
+                </div>
+
+                <div class="footer-text">
+                    © 2026 MILOS Project. Tüm hakları saklıdır.
+                </div>
+
+                <div class="footer-links">
+
+                    <a href="#anasayfa">Ana Sayfa</a>
+
+                    <a href="#ozellikler">Özellikler</a>
+
+                    <a href="#sistem">Hakkında</a>
+
+                    <a
+                        href="https://github.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <div class="icon">🖥️</div>
-            <h3>KDE Plasma</h3>
-            <p>
-                Güçlü, modern ve kişiselleştirilebilir
-                KDE Plasma masaüstü ortamı.
-            </p>
-        </div>
+    </footer>
 
-        <div class="card">
-            <div class="icon">⚡</div>
-            <h3>MILOS Deneyimi</h3>
-            <p>
-                MILOS kimliğine özel tema, uygulamalar
-                ve masaüstü özelleştirmeleri.
-            </p>
-        </div>
 
-    </div>
+    <!-- JAVASCRIPT -->
 
-</section>
+    <script>
 
-<section id="about">
+        const menuButton = document.getElementById("menuButton");
+        const navLinks = document.getElementById("navLinks");
 
-    <div class="about">
+        menuButton.addEventListener("click", function () {
 
-        <div>
-            <h2>MILOS Nedir?</h2>
+            navLinks.classList.toggle("active");
 
-            <p>
-                MILOS, Ubuntu tabanlı ve KDE Plasma
-                masaüstü ortamını kullanan bir Linux
-                dağıtımı projesidir.
+            menuButton.textContent =
+                navLinks.classList.contains("active") ? "✕" : "☰";
 
-                Amacımız modern, kullanışlı ve
-                kişiselleştirilebilir bir işletim sistemi
-                deneyimi sunmak.
-            </p>
-        </div>
+        });
 
-        <div class="terminal">
-            <div><span>milos@system</span>:~$ neofetch</div>
-            <div>OS: MILOS Linux</div>
-            <div>Base: Ubuntu</div>
-            <div>Desktop: KDE Plasma</div>
-            <div>Architecture: x86_64</div>
-            <div><span>milos@system</span>:~$ _</div>
-        </div>
 
-    </div>
+        // Mobil menüden bağlantıya basıldığında menüyü kapat.
 
-</section>
+        document.querySelectorAll(".nav-links a").forEach(function (link) {
 
-<section id="download" class="download">
+            link.addEventListener("click", function () {
 
-    <h2>MILOS'u Keşfetmeye Hazır mısın?</h2>
+                navLinks.classList.remove("active");
+                menuButton.textContent = "☰";
 
-    <p>
-        MILOS'un kaynak kodlarını ve geliştirme sürecini
-        GitHub üzerinden takip edebilirsin.
-    </p>
+            });
 
-    <a href="https://github.com/" class="btn" target="_blank">
-        GitHub ↗
-    </a>
+        });
 
-</section>
 
-<footer>
-    <span>© 2026 MILOS OS</span>
-    <span>Powered by Ubuntu & KDE Plasma</span>
-</footer>
+        // Sayfa içindeki görsellerin yüklenmesi için hata kontrolü.
+
+        document.querySelectorAll("img").forEach(function (img) {
+
+            img.addEventListener("error", function () {
+                console.warn("Görsel bulunamadı: " + img.src);
+            });
+
+        });
+
+    </script>
 
 </body>
 </html>
-```
