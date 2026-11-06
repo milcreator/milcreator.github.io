@@ -1,303 +1,418 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Anatolia Roads</title>
+<meta name="theme-color" content="#080b14">
+<title>MILOS OS — Official Website</title>
 
 <style>
-  
-html{
-scroll-behavior:smooth;
-}
-  
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-background:#0d0d0d;
-color:white;
-overflow-x:hidden;
+html {
+    scroll-behavior: smooth;
 }
 
-.hero{
-height:100vh;
-background:
-linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),
-url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop');
-background-size:cover;
-background-position:center;
-display:flex;
-flex-direction:column;
+body {
+    background: #080b14;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:25px 60px;
+header {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    background: #0c1020;
+    border-bottom: 1px solid #252b42;
 }
 
-.logo{
-font-size:30px;
-font-weight:bold;
-color:#ff2b2b;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 23px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
-.logo span{
-color:white;
+.logo img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
 }
 
-nav ul{
-display:flex;
-list-style:none;
-gap:40px;
+nav {
+    display: flex;
+    gap: 25px;
 }
 
-nav ul li{
-cursor:pointer;
-transition:0.3s;
+nav a {
+    color: #aab3ce;
+    text-decoration: none;
+    transition: .3s;
 }
 
-nav ul li:hover{
-color:#ff2b2b;
+nav a:hover {
+    color: #7788ff;
 }
 
-.center{
-flex:1;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
+.hero {
+    min-height: 650px;
+    padding: 110px 20px 70px;
+    text-align: center;
+    background:
+    radial-gradient(circle at center, #26357855, transparent 65%);
 }
 
-.center h1{
-font-size:75px;
-max-width:900px;
-line-height:1.1;
+.badge {
+    display: inline-block;
+    padding: 9px 17px;
+    border: 1px solid #667aff66;
+    border-radius: 30px;
+    color: #aab7ff;
+    font-size: 13px;
 }
 
-.red{
-color:#ff2b2b;
+h1 {
+    font-size: clamp(55px, 9vw, 100px);
+    margin: 30px 0 20px;
+    letter-spacing: -4px;
 }
 
-.center p{
-margin-top:20px;
-font-size:22px;
-opacity:0.8;
+.gradient {
+    background: linear-gradient(90deg, #ffffff, #8194ff, #48d9e8);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.buttons{
-margin-top:40px;
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-justify-content:center;
+.description {
+    max-width: 650px;
+    margin: auto;
+    color: #aab3ce;
+    font-size: 18px;
+    line-height: 1.7;
 }
 
-.btn{
-padding:15px 35px;
-border-radius:15px;
-border:none;
-font-size:18px;
-cursor:pointer;
-transition:0.3s;
-font-weight:bold;
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.primary{
-background:#ff2b2b;
-color:white;
-box-shadow:0 0 20px rgba(255,43,43,0.5);
+.btn {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 10px;
+    background: linear-gradient(110deg, #667aff, #4858db);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
 }
 
-.secondary{
-background:transparent;
-border:2px solid white;
-color:white;
+.btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.2);
 }
 
-.btn:hover{
-transform:scale(1.05);
+.btn.secondary {
+    background: #171e35;
+    border: 1px solid #343d60;
 }
 
-.features{
-background:#111;
-padding:70px 20px;
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
+.preview {
+    max-width: 900px;
+    margin: 75px auto 0;
+    padding: 10px;
+    background: #ffffff12;
+    border: 1px solid #ffffff25;
+    border-radius: 18px;
+    box-shadow: 0 30px 80px #0008;
 }
 
-.card{
-background:#1a1a1a;
-padding:30px;
-width:300px;
-border-radius:25px;
-text-align:center;
-transition:0.3s;
+.preview img {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
 }
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px rgba(255,43,43,0.3);
+section {
+    padding: 90px 8%;
 }
 
-.card h2{
-margin:20px 0;
-color:#ff2b2b;
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
 }
 
-footer{
-padding:30px;
-text-align:center;
-background:#0a0a0a;
-opacity:0.6;
+.section-title h2 {
+    font-size: 42px;
+    margin: 15px 0;
 }
 
-@media(max-width:900px){
-
-.center h1{
-font-size:45px;
+.section-title p {
+    color: #aab3ce;
 }
 
-nav{
-padding:20px;
-flex-direction:column;
-gap:20px;
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
-nav ul{
-gap:20px;
-flex-wrap:wrap;
-justify-content:center;
-}
-@media(max-width:768px){
-
-nav{
-flex-direction:column;
-padding:20px;
-gap:20px;
+.card {
+    padding: 30px;
+    border: 1px solid #252d48;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #151c30, #0c1120);
+    transition: .3s;
 }
 
-nav ul{
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
+.card:hover {
+    transform: translateY(-6px);
+    border-color: #667aff;
 }
 
-.center h1{
-font-size:42px;
-line-height:1.2;
+.card .icon {
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
-.center p{
-font-size:18px;
-padding:0 15px;
+.card h3 {
+    margin-bottom: 12px;
+    font-size: 21px;
 }
 
-.buttons{
-flex-direction:column;
-width:100%;
-align-items:center;
+.card p {
+    color: #aab3ce;
+    line-height: 1.7;
 }
 
-.btn{
-width:85%;
-max-width:320px;
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
 }
 
-.features{
-padding:40px 15px;
+.about h2 {
+    font-size: 45px;
+    margin: 15px 0;
 }
 
-.card{
-width:100%;
-max-width:350px;
+.about p {
+    color: #aab3ce;
+    line-height: 1.8;
 }
 
-.logo img{
-width:45px;
-height:45px;
+.terminal {
+    padding: 25px;
+    background: #10182b;
+    border: 1px solid #303a5b;
+    border-radius: 15px;
+    font-family: monospace;
+    line-height: 2;
+    color: #aab3ce;
 }
 
-}
+.terminal span {
+    color: #65dfbd;
 }
 
+.download {
+    text-align: center;
+    background: radial-gradient(circle, #28377b55, transparent 70%);
+}
+
+.download h2 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.download p {
+    color: #aab3ce;
+    margin-bottom: 30px;
+}
+
+footer {
+    padding: 30px 8%;
+    border-top: 1px solid #252b42;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #8791aa;
+}
+
+@media(max-width: 750px) {
+    nav {
+        display: none;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .about h2,
+    .download h2 {
+        font-size: 34px;
+    }
+}
 </style>
 </head>
 
 <body>
 
+<header>
+    <div class="logo">
+        <img src="MIL.png" alt="MILOS Logo">
+        MILOS
+    </div>
+
+    <nav>
+        <a href="#">Ana Sayfa</a>
+        <a href="#features">Özellikler</a>
+        <a href="#about">Hakkında</a>
+        <a href="#download">İndir</a>
+    </nav>
+</header>
+
 <section class="hero">
 
-<nav>
-<div class="logo">
-<img src="logo.png">
-<span>ANATOLIA ROADS</span>
-</div>
+    <div class="badge">
+        Ubuntu Based Linux Distribution
+    </div>
 
-<ul>
-<li>Anasayfa</li>
-<li>Modlar</li>
-<li>Kurulum</li>
-<li>Hakkımızda</li>
-<li>İletişim</li>
-</ul>
-</nav>
+    <h1>
+        <span class="gradient">MILOS OS</span>
+    </h1>
 
-<div class="center">
+    <p class="description">
+        Ubuntu'nun gücünü KDE Plasma'nın özgürlüğüyle
+        birleştiriyoruz. Yeni nesil masaüstü Linux deneyimi
+        MILOS ile başlıyor.
+    </p>
 
-<h1>
-TÜRKİYE HARİTASI <br>
-<span class="red">& OTOBÜS MODLARI</span>
-</h1>
+    <div class="buttons">
+        <a href="#about" class="btn">MILOS'u Keşfet</a>
+        <a href="#download" class="btn secondary">İndir</a>
+    </div>
 
-<p>
-ETS 2 için en iyi Türkiye deneyimi
-</p>
-
-<div class="buttons">
-<a href="#modlar">
-<button class="btn primary">MODLARA GİT</button>
-</a>
-<button class="btn secondary">KURULUM REHBERİ</button>
-</div>
-
-</div>
+    <div class="preview">
+        <img src="plasma.png" alt="MILOS KDE Plasma Desktop">
+    </div>
 
 </section>
 
-<section class="features" id="modlar">
+<section id="features">
 
-<div class="card">
-<h2>🗺️ Türkiye Haritası</h2>
-<p>2K24, Oyuncuyusbis, HVT</p>
-</div>
+    <div class="section-title">
+        <h2>MILOS Özellikleri</h2>
+        <p>Güçlü altyapı, modern masaüstü deneyimi.</p>
+    </div>
 
-<div class="card">
-<h2>🚌 Otobüs Modları</h2>
-<p>Gerçekçi otobüs deneyimi</p>
-</div>
+    <div class="cards">
 
-<div class="card">
-<h2>⚙️ Eğlence Modları</h2>
-<p>Şiveli Navigasyonlar...</p>
-</div>
+        <div class="card">
+            <div class="icon">🐧</div>
+            <h3>Ubuntu Tabanlı</h3>
+            <p>
+                Ubuntu Linux altyapısı üzerine kurulu,
+                geniş yazılım ekosisteminden yararlanan sistem.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🖥️</div>
+            <h3>KDE Plasma</h3>
+            <p>
+                Güçlü, modern ve kişiselleştirilebilir
+                KDE Plasma masaüstü ortamı.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>MILOS Deneyimi</h3>
+            <p>
+                MILOS kimliğine özel tema, uygulamalar
+                ve masaüstü özelleştirmeleri.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about">
+
+    <div class="about">
+
+        <div>
+            <h2>MILOS Nedir?</h2>
+
+            <p>
+                MILOS, Ubuntu tabanlı ve KDE Plasma
+                masaüstü ortamını kullanan bir Linux
+                dağıtımı projesidir.
+
+                Amacımız modern, kullanışlı ve
+                kişiselleştirilebilir bir işletim sistemi
+                deneyimi sunmak.
+            </p>
+        </div>
+
+        <div class="terminal">
+            <div><span>milos@system</span>:~$ neofetch</div>
+            <div>OS: MILOS Linux</div>
+            <div>Base: Ubuntu</div>
+            <div>Desktop: KDE Plasma</div>
+            <div>Architecture: x86_64</div>
+            <div><span>milos@system</span>:~$ _</div>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="download" class="download">
+
+    <h2>MILOS'u Keşfetmeye Hazır mısın?</h2>
+
+    <p>
+        MILOS'un kaynak kodlarını ve geliştirme sürecini
+        GitHub üzerinden takip edebilirsin.
+    </p>
+
+    <a href="https://github.com/" class="btn" target="_blank">
+        GitHub ↗
+    </a>
 
 </section>
 
 <footer>
-Anatolia Roads © 2026
+    <span>© 2026 MILOS OS</span>
+    <span>Powered by Ubuntu & KDE Plasma</span>
 </footer>
 
 </body>
 </html>
+```
