@@ -336,4 +336,757 @@ section {
     border-radius: 18px;
     padding: 40px;
     display: grid;
-    grid-template-columns: 1fr 
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.history-box h3 {
+    font-size: 27px;
+    margin-bottom: 15px;
+}
+
+.history-box p {
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+
+.history-image {
+    width: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #183b2a;
+}
+
+.quote {
+    border-left: 3px solid var(--green-bright);
+    padding: 15px 20px;
+    margin-top: 20px;
+    color: var(--green-bright);
+    font-style: italic;
+}
+
+/* TARİH ZAMAN ÇİZELGESİ */
+
+.timeline {
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--green);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 45px;
+    margin-bottom: 35px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    background: var(--green-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(101,217,148,.5);
+}
+
+.timeline-item h3 {
+    color: var(--green-bright);
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.timeline-item p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* VİZYON VE MİSYON */
+
+.vm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.vm-card {
+    background: linear-gradient(140deg,#123b27,#0b2418);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 35px;
+}
+
+.vm-card h3 {
+    font-size: 25px;
+    color: var(--green-bright);
+    margin-bottom: 15px;
+}
+
+.vm-card p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* GITHUB */
+
+.download {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.download-box {
+    padding: 70px 25px;
+    border: 1px solid rgba(101,217,148,.25);
+    border-radius: 20px;
+    background: radial-gradient(ellipse at top,rgba(23,107,64,.3),transparent 70%),var(--bg2);
+}
+
+.download-box h2 {
+    font-size: clamp(32px,5vw,48px);
+    margin-bottom: 15px;
+}
+
+.download-box p {
+    color: var(--muted);
+    max-width: 600px;
+    margin: auto;
+}
+
+.download-box .btn {
+    margin-top: 28px;
+}
+
+.small-text {
+    display: block;
+    color: #849c8e;
+    font-size: 12px;
+    margin-top: 18px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 35px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-brand {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.footer-text {
+    color: #82998a;
+    font-size: 12px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.footer-links a:hover {
+    color: var(--green-bright);
+}
+
+/* ANİMASYON */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBİL */
+
+@media(max-width:900px) {
+    .grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .history-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:650px) {
+    nav {
+        height: 68px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        width: 100%;
+        padding: 25px 5%;
+        background: #0b2418;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hero {
+        min-height: 650px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .grid,
+    .vm-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .history-box {
+        padding: 23px;
+    }
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
+
+<!-- NAVİGASYON -->
+
+<header>
+    <div class="container">
+        <nav>
+
+            <a href="#anasayfa" class="logo">
+                <img src="MIL.png" alt="MILOS Logo">
+                <span>MILOS</span>
+            </a>
+
+            <button class="menu-button" id="menuButton" aria-label="Menüyü aç">
+                ☰
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#anasayfa">Ana Sayfa</a>
+                <a href="#ozellikler">Özellikler</a>
+                <a href="#ataturk">Atatürk</a>
+                <a href="#turkiye-tarihi">Türkiye Tarihi</a>
+                <a href="#vizyon-misyon">Vizyon & Misyon</a>
+                <a href="#indirme" class="nav-button">GitHub</a>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+
+<main>
+
+<!-- ANA SAYFA -->
+
+<section class="hero" id="anasayfa">
+    <div class="container">
+        <div class="hero-content">
+
+            <div class="badge">
+                ● Özgürlük, teknoloji ve yenilik
+            </div>
+
+            <h1>
+                Gelecek<br>
+                <span class="gradient-text">MILOS ile.</span>
+            </h1>
+
+            <p>
+                Linux'un özgürlüğünü, modern masaüstü deneyimini
+                ve güçlü teknolojileri bir araya getiren MILOS
+                dünyasına hoş geldin.
+            </p>
+
+            <div class="buttons">
+                <a href="#sistem" class="btn btn-primary">
+                    MILOS'u Keşfet →
+                </a>
+
+                <a href="#ataturk" class="btn btn-secondary">
+                    Tarih ve Değerlerimiz
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- MASAÜSTÜ -->
+
+<section class="desktop-section" id="masaustu">
+    <div class="container">
+
+        <div class="desktop-frame">
+            <img src="plasma.png" alt="MILOS KDE Plasma Masaüstü">
+        </div>
+
+        <p class="caption">
+            MILOS — KDE Plasma masaüstü ortamı
+        </p>
+
+    </div>
+</section>
+
+
+<!-- ÖZELLİKLER -->
+
+<section class="section" id="ozellikler">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Özellikler</div>
+            <h2>Teknoloji ve özgürlük bir arada.</h2>
+            <p>
+                MILOS'un temelini oluşturan teknolojileri ve
+                tasarım anlayışını keşfet.
+            </p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="icon">🐧</div>
+                <h3>Ubuntu Tabanlı</h3>
+                <p>
+                    Ubuntu altyapısını kullanan Linux tabanlı
+                    bir işletim sistemi projesi.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🖥️</div>
+                <h3>KDE Plasma</h3>
+                <p>
+                    Modern, esnek ve kişiselleştirilebilir
+                    masaüstü deneyimi.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h3>Esneklik</h3>
+                <p>
+                    Bilgisayarını ve çalışma ortamını
+                    kendi ihtiyaçlarına göre düzenle.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔓</div>
+                <h3>Açık Kaynak</h3>
+                <p>
+                    Açık kaynak yazılım dünyasının sunduğu
+                    özgürlük anlayışını benimser.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🌿</div>
+                <h3>Modern Tasarım</h3>
+                <p>
+                    Koyu yeşil tonları, sade görünüm
+                    ve kullanıcı odaklı tasarım.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🌍</div>
+                <h3>Özgür Dünya</h3>
+                <p>
+                    Kendi bilgisayarın, kendi tercihlerin
+                    ve kendi çalışma düzenin.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- SİSTEM HAKKINDA -->
+
+<section class="section" id="sistem">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">İşletim Sistemi</div>
+            <h2>MILOS nedir?</h2>
+            <p>
+                Modern Linux teknolojileriyle şekillenen
+                bir işletim sistemi projesi.
+            </p>
+        </div>
+
+        <div class="vm-grid">
+
+            <div class="vm-card">
+                <h3>Ubuntu Altyapısı</h3>
+                <p>
+                    MILOS, Ubuntu tabanını kullanarak Linux
+                    ekosisteminin sunduğu yazılım ve altyapı
+                    olanaklarından yararlanmayı hedefler.
+                </p>
+            </div>
+
+            <div class="vm-card">
+                <h3>KDE Plasma Deneyimi</h3>
+                <p>
+                    KDE Plasma masaüstü ortamı sayesinde
+                    kullanıcıya kişiselleştirilebilir ve
+                    modern bir masaüstü sunmayı amaçlar.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ATATÜRK -->
+
+<section class="section" id="ataturk">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Cumhuriyetimizin Kurucusu</div>
+            <h2>Mustafa Kemal Atatürk</h2>
+            <p>
+                Bir milletin bağımsızlık mücadelesine önderlik eden
+                ve Türkiye Cumhuriyeti'ni kuran lider.
+            </p>
+        </div>
+
+        <div class="history-box">
+
+            <div>
+                <h3>Hayatı ve Mücadelesi</h3>
+
+                <p>
+                    Mustafa Kemal Atatürk, 1881 yılında Selanik'te
+                    dünyaya geldi. Askerî eğitim aldı ve Osmanlı
+                    ordusunda çeşitli görevlerde bulundu.
+                </p>
+
+                <p>
+                    19 Mayıs 1919'da Samsun'a çıkarak Millî Mücadele'nin
+                    örgütlenmesinde öncü rol üstlendi.
+                </p>
+
+                <p>
+                    Kurtuluş Savaşı'nın kazanılmasının ardından
+                    29 Ekim 1923'te Türkiye Cumhuriyeti ilan edildi
+                    ve Mustafa Kemal Atatürk ilk cumhurbaşkanı oldu.
+                </p>
+
+                <p>
+                    Eğitim, hukuk, toplumsal yaşam, ekonomi ve
+                    yönetim alanlarında gerçekleştirilen inkılaplarla
+                    Türkiye'nin çağdaşlaşma sürecine öncülük etti.
+                </p>
+
+                <div class="quote">
+                    "Hayatta en hakiki mürşit ilimdir."
+                </div>
+            </div>
+
+            <div>
+                <!-- İstersen kendi Atatürk görselini buraya koyabilirsin. -->
+                <img
+                    src="ataturk.jpg"
+                    alt="Mustafa Kemal Atatürk"
+                    class="history-image"
+                >
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- TÜRKİYE TARİHİ -->
+
+<section class="section" id="turkiye-tarihi">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Geçmişimiz</div>
+            <h2>Türkiye Tarihi</h2>
+            <p>
+                Anadolu'nun tarihinden Türkiye Cumhuriyeti'nin
+                kuruluşuna uzanan önemli dönemler.
+            </p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <h3>Orta Asya Türk Tarihi</h3>
+                <p>
+                    Türk toplulukları Orta Asya'da çeşitli devletler
+                    kurdu. Göktürkler ve Uygurlar bu tarihin önemli
+                    uygarlıkları arasında yer aldı.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>1071 — Malazgirt Savaşı</h3>
+                <p>
+                    Büyük Selçuklu hükümdarı Alp Arslan'ın Bizans
+                    ordusuna karşı kazandığı zafer, Anadolu'nun
+                    Türkleşme sürecinde önemli bir dönüm noktası oldu.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>1299 — Osmanlı Devleti</h3>
+                <p>
+                    Osmanlı Beyliği'nin kuruluşuyla Anadolu'da
+                    uzun ömürlü bir devletin temelleri atıldı.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>1453 — İstanbul'un Fethi</h3>
+                <p>
+                    Fatih Sultan Mehmet'in İstanbul'u fethetmesi,
+                    Osmanlı tarihinin en önemli olaylarından biri oldu.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>1919 — Millî Mücadele</h3>
+                <p>
+                    Mustafa Kemal Atatürk'ün Samsun'a çıkışıyla
+                    Millî Mücadele dönemi başladı.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>1923 — Cumhuriyet'in İlanı</h3>
+                <p>
+                    29 Ekim 1923'te Türkiye Cumhuriyeti ilan edildi.
+                    Mustafa Kemal Atatürk, Türkiye'nin ilk
+                    cumhurbaşkanı seçildi.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Cumhuriyet Dönemi</h3>
+                <p>
+                    Cumhuriyet döneminde eğitim, hukuk, ekonomi,
+                    sanayi ve toplumsal yaşam alanlarında önemli
+                    değişimler gerçekleştirildi.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- VİZYON VE MİSYON -->
+
+<section class="section" id="vizyon-misyon">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Değerlerimiz</div>
+            <h2>Vizyonumuz ve Misyonumuz</h2>
+            <p>
+                MILOS'un geleceğe bakışını ve çalışma anlayışını
+                oluşturan temel değerler.
+            </p>
+        </div>
+
+        <div class="vm-grid">
+
+            <div class="vm-card">
+                <div class="icon">🔭</div>
+
+                <h3>Vizyonumuz</h3>
+
+                <p>
+                    MILOS'u özgür, güvenilir, yenilikçi ve kullanıcı
+                    odaklı bir işletim sistemi projesi hâline getirmek.
+                    Teknolojiyi herkes için daha erişilebilir kılmak
+                    ve açık kaynak dünyasında gelişen bir proje olmak.
+                </p>
+            </div>
+
+            <div class="vm-card">
+                <div class="icon">🎯</div>
+
+                <h3>Misyonumuz</h3>
+
+                <p>
+                    Açık kaynak teknolojilerini kullanarak modern,
+                    kişiselleştirilebilir ve erişilebilir bir
+                    bilgisayar deneyimi sunmak. Kullanıcıların
+                    özgürce öğrenebileceği, geliştirebileceği ve
+                    katkıda bulunabileceği bir ekosistem oluşturmak.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- GITHUB -->
+
+<section class="download" id="indirme">
+    <div class="container">
+
+        <div class="download-box">
+
+            <div class="section-label">MILOS Projesi</div>
+
+            <h2>Gelecek senin elinde.</h2>
+
+            <p>
+                MILOS projesini GitHub üzerinden takip et.
+                Kaynak kodunu incele ve projenin gelişimine
+                katkıda bulun.
+            </p>
+
+            <!-- KENDİ GITHUB DEPO LİNKİNİ BURAYA YAZ -->
+
+            <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+            >
+                GitHub'da Görüntüle →
+            </a>
+
+            <span class="small-text">
+                Sürüm ve proje bilgileri GitHub sayfasında paylaşılır.
+            </span>
+
+        </div>
+
+    </div>
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">MILOS</div>
+
+            <div class="footer-text">
+                © 2026 MILOS Project. Tüm hakları saklıdır.
+            </div>
+
+            <div class="footer-links">
+                <a href="#anasayfa">Ana Sayfa</a>
+                <a href="#ataturk">Atatürk</a>
+                <a href="#turkiye-tarihi">Türkiye Tarihi</a>
+                <a href="#vizyon-misyon">Vizyon & Misyon</a>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
+
+
+<script>
+const menuButton = document.getElementById("menuButton");
+const navLinks = document.getElementById("navLinks");
+
+menuButton.addEventListener("click", function() {
+    navLinks.classList.toggle("active");
+
+    menuButton.textContent =
+        navLinks.classList.contains("active") ? "✕" : "☰";
+});
+
+document.querySelectorAll(".nav-links a").forEach(function(link) {
+    link.addEventListener("click", function() {
+        navLinks.classList.remove("active");
+        menuButton.textContent = "☰";
+    });
+});
+</script>
+
+</body>
+</html>
+```
