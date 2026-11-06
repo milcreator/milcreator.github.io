@@ -16,8 +16,7 @@
 <style>
 :root {
     --page-color: #102c20;
-    --white: #ffffff;
-    --green: #9bd5a9;
+    --green: #a9ddb3;
     --glass: rgba(255,255,255,.09);
 }
 
@@ -28,12 +27,28 @@
     scroll-behavior: smooth;
 }
 
+html {
+    scroll-padding-top: 90px;
+}
+
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--page-color);
     color: white;
+    background: var(--page-color);
     overflow-x: hidden;
-    transition: background 1.2s ease;
+    transition: background-color 1.2s ease;
+}
+
+/* BÜTÜN SAYFADA YUMUŞAK RENK GEÇİŞİ */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--page-color);
+    transition: background-color 1.3s ease;
+    pointer-events: none;
 }
 
 a {
@@ -43,15 +58,18 @@ a {
 
 img {
     max-width: 100%;
+    display: block;
 }
 
 section {
     position: relative;
-    padding: 110px 8%;
+    padding: 110px 7%;
+    background: transparent;
     overflow: hidden;
 }
 
 .container {
+    width: 100%;
     max-width: 1250px;
     margin: auto;
 }
@@ -63,7 +81,7 @@ section {
 
 .section-heading span {
     display: inline-block;
-    color: #a9ddb3;
+    color: var(--green);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 5px;
@@ -80,29 +98,29 @@ section {
     max-width: 700px;
     margin: auto;
     line-height: 1.8;
-    color: rgba(255,255,255,.75);
+    color: rgba(255,255,255,.78);
 }
 
-/* NAVIGATION */
+/* MENÜ */
 
 .navbar {
     position: fixed;
-    top: 18px;
+    top: 16px;
     left: 50%;
     transform: translateX(-50%);
-    width: min(94%, 1200px);
+    width: min(94%, 1250px);
     z-index: 1000;
-    padding: 13px 23px;
+    padding: 12px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 15px;
     border: 1px solid rgba(255,255,255,.17);
-    background: rgba(10,30,21,.65);
+    background: rgba(8,25,17,.72);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,.15);
+    box-shadow: 0 10px 40px rgba(0,0,0,.2);
 }
 
 .nav-logo {
@@ -110,8 +128,9 @@ section {
     align-items: center;
     gap: 10px;
     font-weight: 900;
-    font-size: 22px;
+    font-size: 21px;
     letter-spacing: 2px;
+    flex-shrink: 0;
 }
 
 .nav-logo img {
@@ -123,19 +142,20 @@ section {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 19px;
+    gap: 16px;
 }
 
 .nav-links a {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 700;
     color: rgba(255,255,255,.78);
     transition: color .3s ease;
+    white-space: nowrap;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: #a9ddb3;
+    color: var(--green);
 }
 
 .menu-button {
@@ -143,21 +163,20 @@ section {
     background: transparent;
     color: white;
     border: none;
-    font-size: 25px;
+    font-size: 27px;
     cursor: pointer;
 }
 
-/* HERO */
+/* ANA SAYFA */
 
 .hero {
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     background:
-        radial-gradient(ellipse at 50% 40%, rgba(56,126,78,.35), transparent 60%),
-        linear-gradient(135deg, #071a12, #153c29);
+        radial-gradient(ellipse at 50% 40%, rgba(56,126,78,.35), transparent 60%);
 }
 
 .hero-content {
@@ -168,10 +187,10 @@ section {
 }
 
 .hero-logo {
-    width: 150px;
-    height: 150px;
+    width: 145px;
+    height: 145px;
     object-fit: contain;
-    margin-bottom: 25px;
+    margin: 0 auto 25px;
     filter: drop-shadow(0 10px 35px rgba(120,220,150,.25));
 }
 
@@ -183,14 +202,14 @@ section {
 }
 
 .hero h1 span {
-    color: #a5ddb0;
+    color: var(--green);
 }
 
 .hero-subtitle {
-    font-size: clamp(16px, 2vw, 22px);
+    font-size: clamp(15px, 2vw, 22px);
     margin-top: 25px;
-    color: rgba(255,255,255,.8);
-    line-height: 1.7;
+    color: rgba(255,255,255,.82);
+    line-height: 1.8;
 }
 
 .hero-buttons {
@@ -205,7 +224,7 @@ section {
     display: inline-block;
     padding: 15px 27px;
     border-radius: 13px;
-    background: #a5ddb0;
+    background: var(--green);
     color: #102b1c;
     font-weight: 800;
     font-size: 14px;
@@ -228,17 +247,17 @@ section {
     bottom: 35px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 4px;
-    color: rgba(255,255,255,.6);
+    color: rgba(255,255,255,.65);
     animation: floating 2s infinite;
 }
 
-/* GLASS CARDS */
+/* CAM EFEKTLİ KARTLAR */
 
 .glass-card {
     background: rgba(255,255,255,.075);
-    border: 1px solid rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.15);
     border-radius: 25px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -247,15 +266,11 @@ section {
 }
 
 .glass-card:hover {
-    transform: translateY(-7px);
+    transform: translateY(-6px);
     background: rgba(255,255,255,.12);
 }
 
-/* ABOUT */
-
-.about {
-    background: #163d2b;
-}
+/* HAKKIMIZDA */
 
 .about-grid {
     display: grid;
@@ -271,7 +286,7 @@ section {
 
 .about-text p {
     line-height: 1.9;
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,.82);
     margin-bottom: 17px;
 }
 
@@ -281,15 +296,12 @@ section {
 
 .about-image img {
     width: 100%;
+    max-height: 420px;
+    object-fit: contain;
     border-radius: 18px;
-    display: block;
 }
 
-/* VISION AND MISSION */
-
-.vision {
-    background: #234e38;
-}
+/* VİZYON */
 
 .vision-grid {
     display: grid;
@@ -308,16 +320,11 @@ section {
 }
 
 .vision-card p {
-    color: rgba(255,255,255,.82);
+    color: rgba(255,255,255,.84);
     line-height: 1.9;
-    font-size: 16px;
 }
 
-/* MISSION */
-
-.mission {
-    background: #173c43;
-}
+/* MİSYON */
 
 .mission-content {
     max-width: 850px;
@@ -333,14 +340,10 @@ section {
 
 .mission-content p {
     line-height: 2;
-    color: rgba(255,255,255,.82);
+    color: rgba(255,255,255,.84);
 }
 
-/* MILOS SYSTEM */
-
-.system {
-    background: #192f50;
-}
+/* İŞLETİM SİSTEMİ */
 
 .system-grid {
     display: grid;
@@ -354,7 +357,6 @@ section {
 }
 
 .system-image img {
-    display: block;
     width: 100%;
     border-radius: 17px;
 }
@@ -365,7 +367,7 @@ section {
 }
 
 .system-info p {
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,.82);
     line-height: 1.9;
     margin-bottom: 20px;
 }
@@ -384,48 +386,83 @@ section {
     font-size: 13px;
 }
 
-/* ATATURK */
+/* ATATÜRK BÖLÜMÜ */
 
-.ataturk {
-    background: #3b2729;
+.ataturk-intro {
+    max-width: 850px;
+    margin: 0 auto 45px;
+    text-align: center;
 }
 
-.ataturk-grid {
+.ataturk-intro p {
+    line-height: 1.9;
+    color: rgba(255,255,255,.84);
+}
+
+.ataturk-gallery {
     display: grid;
-    grid-template-columns: .8fr 1.2fr;
-    align-items: center;
-    gap: 55px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
 }
 
-.ataturk-image {
-    padding: 12px;
+.ataturk-photo {
+    overflow: hidden;
+    border-radius: 20px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    backdrop-filter: blur(18px);
+    transition: transform .4s ease, box-shadow .4s ease;
 }
 
-.ataturk-image img {
+.ataturk-photo:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0,0,0,.3);
+}
+
+.ataturk-photo img {
     width: 100%;
-    max-height: 550px;
+    height: 350px;
     object-fit: cover;
-    border-radius: 18px;
-    display: block;
+    object-position: center top;
+    transition: transform .6s ease;
 }
 
-.ataturk-text h3 {
-    font-size: 38px;
-    margin-bottom: 25px;
+.ataturk-photo:hover img {
+    transform: scale(1.045);
 }
 
-.ataturk-text p {
-    color: rgba(255,255,255,.85);
-    line-height: 2;
-    margin-bottom: 18px;
-    font-size: 16px;
+.photo-caption {
+    padding: 22px;
+}
+
+.photo-caption h3 {
+    color: #e6c3a5;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.photo-caption p {
+    color: rgba(255,255,255,.78);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.ataturk-quote {
+    max-width: 850px;
+    margin: 45px auto 0;
+    padding: 35px;
+    text-align: center;
+    border-left: 3px solid #d6b28d;
+}
+
+.ataturk-quote p {
+    font-size: 20px;
+    line-height: 1.8;
+    font-weight: 600;
+    color: #f1dfcc;
 }
 
 /* BURSA */
-
-.bursa {
-    background: #513a28;
-}
 
 .bursa-grid {
     display: grid;
@@ -454,7 +491,6 @@ section {
     height: 370px;
     object-fit: cover;
     border-radius: 18px;
-    display: block;
 }
 
 .bursa-badge {
@@ -467,15 +503,10 @@ section {
     color: #e7c99e;
     font-weight: 800;
     letter-spacing: 1px;
+    font-size: 12px;
 }
 
-/* HISTORY */
-
-.history-section {
-    background: #142d25;
-    padding-top: 120px;
-    padding-bottom: 120px;
-}
+/* TARİH */
 
 .history-heading {
     text-align: center;
@@ -495,7 +526,7 @@ section {
 }
 
 .history-heading p {
-    color: #c5d6cb;
+    color: rgba(255,255,255,.78);
     line-height: 1.8;
 }
 
@@ -512,7 +543,7 @@ section {
     top: 0;
     bottom: 0;
     width: 3px;
-    background: linear-gradient(transparent, #91c99d, #ffffff, #91c99d, transparent);
+    background: linear-gradient(transparent, #91c99d, #fff, #91c99d, transparent);
     transform: translateX(-50%);
 }
 
@@ -521,8 +552,8 @@ section {
     margin-bottom: 80px;
     position: relative;
     opacity: 0;
-    transform: translateY(70px);
-    transition: opacity .9s ease, transform .9s ease;
+    transform: translateY(65px);
+    transition: opacity .85s ease, transform .85s ease;
 }
 
 .history-card.visible {
@@ -565,21 +596,18 @@ section {
     background: rgba(255,255,255,.09);
     border: 1px solid rgba(255,255,255,.16);
     backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
     box-shadow: 0 15px 45px rgba(0,0,0,.2);
-    transition: transform .4s ease, box-shadow .4s ease;
+    transition: transform .4s ease;
 }
 
 .history-content:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 55px rgba(0,0,0,.35);
+    transform: translateY(-7px);
 }
 
 .history-content img {
     width: 100%;
     height: 260px;
     object-fit: cover;
-    display: block;
     transition: transform .6s ease;
 }
 
@@ -592,21 +620,18 @@ section {
 }
 
 .history-text h3 {
-    font-size: 23px;
+    font-size: 22px;
     margin-bottom: 12px;
     color: #b9e6c0;
 }
 
 .history-text p {
-    color: #e0e9e3;
+    color: rgba(255,255,255,.85);
     line-height: 1.8;
+    font-size: 14px;
 }
 
-/* MAP */
-
-.map-section {
-    background: #193c36;
-}
+/* HARİTA */
 
 .map-description {
     text-align: center;
@@ -622,7 +647,7 @@ section {
 }
 
 #turkiye-haritasi {
-    height: 650px;
+    height: 620px;
     width: 100%;
     border-radius: 18px;
     overflow: hidden;
@@ -635,7 +660,7 @@ section {
     justify-content: center;
     gap: 25px;
     margin-top: 25px;
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,.85);
     font-size: 13px;
 }
 
@@ -649,7 +674,6 @@ section {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    display: inline-block;
 }
 
 .legend-ankara {
@@ -660,13 +684,14 @@ section {
     background: #36d68b;
 }
 
-/* FOOTER */
+/* ALT BÖLÜM */
 
 footer {
-    background: #071810;
+    background: rgba(3,15,9,.75);
     padding: 55px 8%;
     text-align: center;
     border-top: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(15px);
 }
 
 .footer-logo {
@@ -677,12 +702,12 @@ footer {
 }
 
 footer p {
-    color: rgba(255,255,255,.55);
+    color: rgba(255,255,255,.65);
     line-height: 1.8;
     font-size: 13px;
 }
 
-/* ANIMATIONS */
+/* ANİMASYONLAR */
 
 @keyframes heroEnter {
     from {
@@ -704,9 +729,9 @@ footer p {
     }
 }
 
-/* MOBILE */
+/* TABLET */
 
-@media(max-width: 900px) {
+@media (max-width: 1050px) {
     .nav-links {
         gap: 10px;
     }
@@ -715,29 +740,35 @@ footer p {
         font-size: 10px;
     }
 
-    .about-grid,
-    .system-grid,
-    .ataturk-grid,
-    .bursa-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-image,
-    .system-image,
-    .ataturk-image,
-    .bursa-image {
-        max-width: 650px;
-        margin: auto;
+    .ataturk-photo img {
+        height: 300px;
     }
 }
 
-@media(max-width: 700px) {
+/* TELEFON */
+
+@media (max-width: 760px) {
+    html {
+        scroll-padding-top: 75px;
+    }
+
     section {
         padding: 85px 6%;
     }
 
     .navbar {
-        padding: 12px 17px;
+        top: 10px;
+        width: 94%;
+        padding: 10px 15px;
+    }
+
+    .nav-logo {
+        font-size: 19px;
+    }
+
+    .nav-logo img {
+        width: 34px;
+        height: 34px;
     }
 
     .menu-button {
@@ -747,15 +778,18 @@ footer p {
     .nav-links {
         display: none;
         position: absolute;
-        top: 68px;
+        top: 62px;
         left: 0;
         width: 100%;
-        padding: 20px;
-        border-radius: 18px;
-        background: rgba(8,27,18,.96);
-        backdrop-filter: blur(20px);
+        padding: 18px;
+        border-radius: 17px;
+        background: rgba(5,22,13,.97);
+        backdrop-filter: blur(22px);
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 4px;
+        max-height: 75vh;
+        overflow-y: auto;
     }
 
     .nav-links.open {
@@ -763,13 +797,58 @@ footer p {
     }
 
     .nav-links a {
-        font-size: 14px;
-        padding: 8px;
+        font-size: 13px;
+        padding: 12px;
         width: 100%;
+    }
+
+    .hero {
+        min-height: 100svh;
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .hero-logo {
+        width: 115px;
+        height: 115px;
     }
 
     .hero h1 {
         letter-spacing: 4px;
+    }
+
+    .hero-subtitle {
+        font-size: 15px;
+    }
+
+    .hero-buttons {
+        gap: 10px;
+    }
+
+    .button {
+        padding: 13px 18px;
+        font-size: 12px;
+    }
+
+    .section-heading {
+        margin-bottom: 38px;
+    }
+
+    .section-heading span {
+        letter-spacing: 3px;
+    }
+
+    .about-grid,
+    .system-grid,
+    .bursa-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .about-text h3,
+    .system-info h3,
+    .bursa-text h3 {
+        font-size: 29px;
     }
 
     .vision-grid {
@@ -778,7 +857,35 @@ footer p {
 
     .vision-card,
     .mission-content {
-        padding: 30px;
+        padding: 28px;
+    }
+
+    .ataturk-gallery {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .ataturk-photo img {
+        height: auto;
+        max-height: 430px;
+        object-fit: contain;
+        background: rgba(0,0,0,.15);
+    }
+
+    .ataturk-quote {
+        padding: 25px;
+    }
+
+    .ataturk-quote p {
+        font-size: 16px;
+    }
+
+    .bursa-image img {
+        height: 260px;
+    }
+
+    .history-heading {
+        margin-bottom: 55px;
     }
 
     .history-timeline::before {
@@ -789,6 +896,7 @@ footer p {
     .history-card:nth-child(even) {
         width: calc(100% - 35px);
         margin-left: 35px;
+        margin-bottom: 55px;
     }
 
     .history-card::after,
@@ -797,20 +905,66 @@ footer p {
         right: auto;
     }
 
+    .history-year {
+        font-size: 27px;
+    }
+
     .history-content img {
         height: 210px;
     }
 
-    #turkiye-haritasi {
-        height: 480px;
+    .history-text {
+        padding: 20px;
     }
 
-    .bursa-image img {
-        height: 260px;
+    #turkiye-haritasi {
+        height: 440px;
+    }
+
+    .map-wrapper {
+        padding: 7px;
+    }
+
+    .map-legend {
+        gap: 15px;
+        font-size: 11px;
+    }
+
+    footer {
+        padding: 45px 6%;
     }
 }
 
-@media(prefers-reduced-motion: reduce) {
+/* KÜÇÜK TELEFONLAR */
+
+@media (max-width: 380px) {
+    .hero h1 {
+        font-size: 48px;
+        letter-spacing: 2px;
+    }
+
+    .hero-logo {
+        width: 95px;
+        height: 95px;
+    }
+
+    .button {
+        padding: 12px 14px;
+        font-size: 11px;
+    }
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+    #turkiye-haritasi {
+        height: 370px;
+    }
+}
+
+/* HAREKET AZALTMA TERCİHİ */
+
+@media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
@@ -830,7 +984,7 @@ footer p {
         MILOS
     </a>
 
-    <button class="menu-button" id="menuButton" aria-label="Menüyü aç">☰</button>
+    <button class="menu-button" id="menuButton" aria-label="Menüyü aç" aria-expanded="false">☰</button>
 
     <div class="nav-links" id="navLinks">
         <a href="#anasayfa">Ana Sayfa</a>
@@ -869,7 +1023,7 @@ footer p {
 
 <!-- HAKKIMIZDA -->
 
-<section class="about" id="hakkimizda" data-color="#163d2b">
+<section id="hakkimizda" data-color="#163d2b">
     <div class="container">
         <div class="section-heading">
             <span>MILOS HAKKINDA</span>
@@ -908,7 +1062,7 @@ footer p {
 
 <!-- VİZYON -->
 
-<section class="vision" id="vizyon" data-color="#234e38">
+<section id="vizyon" data-color="#234e38">
     <div class="container">
         <div class="section-heading">
             <span>GELECEK HEDEFİMİZ</span>
@@ -939,7 +1093,7 @@ footer p {
 
 <!-- MİSYON -->
 
-<section class="mission" id="misyon" data-color="#173c43">
+<section id="misyon" data-color="#173c43">
     <div class="container">
         <div class="section-heading">
             <span>ÇALIŞMA İLKELERİMİZ</span>
@@ -962,7 +1116,7 @@ footer p {
 
 <!-- İŞLETİM SİSTEMİ -->
 
-<section class="system" id="sistem" data-color="#192f50">
+<section id="sistem" data-color="#192f50">
     <div class="container">
         <div class="section-heading">
             <span>TEKNOLOJİMİZ</span>
@@ -1003,45 +1157,82 @@ footer p {
 
 <!-- ATATÜRK -->
 
-<section class="ataturk" id="ataturk" data-color="#3b2729">
+<section id="ataturk" data-color="#3b2729">
     <div class="container">
         <div class="section-heading">
             <span>CUMHURİYETİMİZİN KURUCUSU</span>
             <h2>Mustafa Kemal Atatürk</h2>
         </div>
 
-        <div class="ataturk-grid">
-            <div class="ataturk-image glass-card">
-                <img src="ataturk.jpeg" alt="Mustafa Kemal Atatürk">
-            </div>
+        <div class="ataturk-intro">
+            <p>
+                Mustafa Kemal Atatürk, Türkiye Cumhuriyeti'nin kurucusu
+                ve ilk Cumhurbaşkanıdır. Millî Mücadele'ye önderlik ederek
+                bağımsızlık mücadelesini zafere ulaştırmış, Cumhuriyet'in
+                ilanıyla Türkiye'nin yeni dönemine öncülük etmiştir.
+            </p>
+        </div>
 
-            <div class="ataturk-text">
-                <h3>Bir Milletin Yeniden Doğuşu</h3>
+        <div class="ataturk-gallery">
 
-                <p>
-                    Mustafa Kemal Atatürk, Türkiye Cumhuriyeti'nin
-                    kurucusu ve ilk Cumhurbaşkanıdır.
-                </p>
+            <article class="ataturk-photo">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Ataturk_in_1923.jpg"
+                    alt="Mustafa Kemal Atatürk, 1923"
+                    loading="lazy">
 
-                <p>
-                    Millî Mücadele'ye önderlik ederek Türk milletinin
-                    bağımsızlık mücadelesini zafere ulaştırmış, 29 Ekim
-                    1923'te Cumhuriyet'in ilanına öncülük etmiştir.
-                </p>
+                <div class="photo-caption">
+                    <h3>Atatürk – 1923</h3>
+                    <p>
+                        Cumhuriyet'in ilan edildiği yıl çekilmiş
+                        Atatürk portresi.
+                    </p>
+                </div>
+            </article>
 
-                <p>
-                    Atatürk'ün bilim, eğitim, akıl ve çağdaşlaşmaya verdiği
-                    önem, Türkiye'nin gelişim yolculuğunda önemli bir
-                    yere sahiptir.
-                </p>
-            </div>
+            <article class="ataturk-photo">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Ataturk-1923.jpg"
+                    alt="Mustafa Kemal Paşa, Latife Hanım ve Kâzım Karabekir, 1923"
+                    loading="lazy">
+
+                <div class="photo-caption">
+                    <h3>Millî Mücadele Sonrası</h3>
+                    <p>
+                        Mustafa Kemal Paşa, Latife Hanım ve
+                        Kâzım Karabekir ile birlikte, 8 Şubat 1923.
+                    </p>
+                </div>
+            </article>
+
+            <article class="ataturk-photo">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Atat%C3%BCrk_TBMM%27den_%C3%A7%C4%B1karken.jpg"
+                    alt="Atatürk, İsmet İnönü ve Fevzi Çakmak TBMM'den çıkarken"
+                    loading="lazy">
+
+                <div class="photo-caption">
+                    <h3>Cumhuriyet Dönemi</h3>
+                    <p>
+                        Atatürk, İsmet İnönü ve Fevzi Çakmak,
+                        TBMM'den çıkarken, 29 Ekim 1929.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="ataturk-quote glass-card">
+            <p>
+                "Hayatta en hakiki mürşit ilimdir."
+            </p>
         </div>
     </div>
 </section>
 
 <!-- BURSA -->
 
-<section class="bursa" id="bursa" data-color="#513a28">
+<section id="bursa" data-color="#513a28">
     <div class="container">
         <div class="section-heading">
             <span>MILOS'UN DOĞDUĞU ŞEHİR</span>
@@ -1083,7 +1274,7 @@ footer p {
 
 <!-- TÜRKİYE TARİHİ -->
 
-<section class="history-section" id="turkiye-tarihi" data-color="#142d25">
+<section id="turkiye-tarihi" data-color="#142d25">
     <div class="container">
 
         <div class="history-heading">
@@ -1098,13 +1289,11 @@ footer p {
 
             <article class="history-card">
                 <div class="history-year">1071</div>
-
                 <div class="history-content">
                     <img
                         src="https://commons.wikimedia.org/wiki/Special:FilePath/131_Bataille_de_Malazgirt.jpg"
                         alt="Malazgirt Savaşı tasviri"
                         loading="lazy">
-
                     <div class="history-text">
                         <h3>Malazgirt Zaferi</h3>
                         <p>
@@ -1117,13 +1306,11 @@ footer p {
 
             <article class="history-card">
                 <div class="history-year">1299</div>
-
                 <div class="history-content">
                     <img
                         src="https://commons.wikimedia.org/wiki/Special:FilePath/Ottoman_conquests.jpg"
                         alt="Osmanlı Devleti haritası"
                         loading="lazy">
-
                     <div class="history-text">
                         <h3>Osmanlı Devleti'nin Kuruluşu</h3>
                         <p>
@@ -1137,13 +1324,11 @@ footer p {
 
             <article class="history-card">
                 <div class="history-year">1453</div>
-
                 <div class="history-content">
                     <img
                         src="https://commons.wikimedia.org/wiki/Special:FilePath/Constantinople_1453.jpg"
                         alt="İstanbul'un fethi"
                         loading="lazy">
-
                     <div class="history-text">
                         <h3>İstanbul'un Fethi</h3>
                         <p>
@@ -1157,13 +1342,11 @@ footer p {
 
             <article class="history-card">
                 <div class="history-year">1915</div>
-
                 <div class="history-content">
                     <img
                         src="https://commons.wikimedia.org/wiki/Special:FilePath/Turkish_trenches_at_Gallipoli.jpg"
                         alt="Çanakkale Cephesi"
                         loading="lazy">
-
                     <div class="history-text">
                         <h3>Çanakkale Zaferi</h3>
                         <p>
@@ -1177,18 +1360,35 @@ footer p {
 
             <article class="history-card">
                 <div class="history-year">1919</div>
-
                 <div class="history-content">
                     <img
-                        src="ataturk.jpeg"
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Band%C4%B1rma_Vapuru.png"
+                        alt="Bandırma Vapuru"
+                        loading="lazy">
+                    <div class="history-text">
+                        <h3>Millî Mücadele'nin Başlangıcı</h3>
+                        <p>
+                            Mustafa Kemal Paşa, 19 Mayıs 1919'da
+                            Samsun'a çıkarak Millî Mücadele'nin
+                            örgütlenmesinde önemli bir adım attı.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="history-card">
+                <div class="history-year">1920</div>
+                <div class="history-content">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Ataturk_in_1923.jpg"
                         alt="Mustafa Kemal Atatürk"
                         loading="lazy">
-
                     <div class="history-text">
-                        <h3>Kurtuluş Mücadelesi</h3>
+                        <h3>Türkiye Büyük Millet Meclisi</h3>
                         <p>
-                            19 Mayıs 1919'da Mustafa Kemal'in Samsun'a
-                            çıkışıyla Millî Mücadele'nin yeni dönemi başladı.
+                            23 Nisan 1920'de Türkiye Büyük Millet Meclisi
+                            açıldı. Millî egemenlik yolunda tarihî bir
+                            dönem başladı.
                         </p>
                     </div>
                 </div>
@@ -1196,13 +1396,11 @@ footer p {
 
             <article class="history-card">
                 <div class="history-year">1923</div>
-
                 <div class="history-content">
                     <img
-                        src="ataturk.jpeg"
-                        alt="Mustafa Kemal Atatürk"
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/1923_11_03_Resimli_Gazete_Cumhuriyetin_Ilani.jpg"
+                        alt="Cumhuriyet'in ilanına ilişkin tarihî gazete"
                         loading="lazy">
-
                     <div class="history-text">
                         <h3>Türkiye Cumhuriyeti'nin İlanı</h3>
                         <p>
@@ -1220,7 +1418,7 @@ footer p {
 
 <!-- TÜRKİYE FİZİKİ HARİTASI -->
 
-<section class="map-section" id="harita" data-color="#193c36">
+<section id="harita" data-color="#193c36">
     <div class="container">
 
         <div class="section-heading">
@@ -1257,18 +1455,9 @@ footer p {
 
 <footer>
     <div class="footer-logo">MILOS</div>
-
-    <p>
-        Özgür yazılım, özgür teknoloji, özgür gelecek.
-    </p>
-
-    <p style="margin-top:15px;">
-        Bursa'dan dünyaya.
-    </p>
-
-    <p style="margin-top:25px;">
-        © <span id="currentYear"></span> MILOS Projesi
-    </p>
+    <p>Özgür yazılım, özgür teknoloji, özgür gelecek.</p>
+    <p style="margin-top:15px;">Bursa'dan dünyaya.</p>
+    <p style="margin-top:25px;">© <span id="currentYear"></span> MILOS Projesi</p>
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -1280,55 +1469,60 @@ const menuButton = document.getElementById("menuButton");
 const navLinks = document.getElementById("navLinks");
 
 menuButton.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
+    const isOpen = navLinks.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", isOpen);
+    menuButton.textContent = isOpen ? "×" : "☰";
 });
 
 document.querySelectorAll(".nav-links a").forEach(link => {
     link.addEventListener("click", () => {
         navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
     });
 });
 
-/* TARİH ANİMASYONLARI */
-
-const historyObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            historyObserver.unobserve(entry.target);
-        }
-    });
-}, {
-    threshold: 0.15
-});
-
-document.querySelectorAll(".history-card").forEach((card, index) => {
-    card.style.transitionDelay = `${(index % 2) * 120}ms`;
-    historyObserver.observe(card);
-});
-
-/* SAYFA RENK GEÇİŞLERİ */
+/* KAYDIRDIKÇA RENK GEÇİŞİ */
 
 const colorSections = document.querySelectorAll("section[data-color]");
 
 const colorObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            document.body.style.setProperty(
+            document.documentElement.style.setProperty(
                 "--page-color",
                 entry.target.dataset.color
             );
         }
     });
 }, {
-    threshold: 0.25
+    rootMargin: "-35% 0px -35% 0px",
+    threshold: 0
 });
 
 colorSections.forEach(section => {
     colorObserver.observe(section);
 });
 
-/* AKTİF MENÜ */
+/* TARİH KARTLARI */
+
+const historyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            historyObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.12
+});
+
+document.querySelectorAll(".history-card").forEach((card, index) => {
+    card.style.transitionDelay = `${(index % 2) * 100}ms`;
+    historyObserver.observe(card);
+});
+
+/* AKTİF MENÜ BAĞLANTISI */
 
 const menuObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1342,24 +1536,24 @@ const menuObserver = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.35
+    rootMargin: "-35% 0px -55% 0px"
 });
 
 document.querySelectorAll("section[id]").forEach(section => {
     menuObserver.observe(section);
 });
 
-/* HARİTA */
+/* TÜRKİYE HARİTASI */
 
 let map = null;
+
+const mapElement = document.getElementById("turkiye-haritasi");
 
 if (typeof L !== "undefined") {
 
     map = L.map("turkiye-haritasi", {
         scrollWheelZoom: false
     }).setView([39.0, 35.0], 6);
-
-    /* FİZİKİ / TOPOGRAFİK HARİTA */
 
     L.tileLayer(
         "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
@@ -1370,7 +1564,7 @@ if (typeof L !== "undefined") {
         }
     ).addTo(map);
 
-    /* ANKARA */
+    /* ANKARA İŞARETİ */
 
     const ankaraIcon = L.divIcon({
         className: "custom-map-marker",
@@ -1398,7 +1592,7 @@ if (typeof L !== "undefined") {
         className: "map-label"
     });
 
-    /* BURSA */
+    /* BURSA İŞARETİ */
 
     const bursaIcon = L.divIcon({
         className: "custom-map-marker",
@@ -1426,7 +1620,7 @@ if (typeof L !== "undefined") {
         className: "map-label"
     });
 
-    /* İLLERİN SINIRLARI VE İSİMLERİ */
+    /* İL SINIRLARI */
 
     fetch(
         "https://raw.githubusercontent.com/theaiagent/turkiye_iller_geojson/main/turkiye_iller.geojson"
@@ -1439,8 +1633,9 @@ if (typeof L !== "undefined") {
     })
     .then(data => {
 
-        const provinceLayer = L.geoJSON(data, {
+        let provinceLayer;
 
+        provinceLayer = L.geoJSON(data, {
             style: {
                 color: "#ffffff",
                 weight: 1,
@@ -1484,7 +1679,6 @@ if (typeof L !== "undefined") {
                     }
                 });
             }
-
         }).addTo(map);
 
         try {
@@ -1494,34 +1688,31 @@ if (typeof L !== "undefined") {
         } catch(error) {
             console.log("Harita sınırları ayarlanamadı.", error);
         }
-
     })
     .catch(error => {
         console.error("Türkiye haritası yüklenemedi:", error);
+        mapElement.innerHTML =
+            "Türkiye haritası yüklenemedi. Lütfen internet bağlantınızı kontrol edin.";
     });
 
-    /* HARİTA BOYUTUNU DÜZELT */
+    /* TELEFONDA HARİTA BOYUTU */
 
     const mapResizeObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting && map) {
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 200);
+                setTimeout(() => map.invalidateSize(), 200);
             }
         });
     });
 
-    mapResizeObserver.observe(
-        document.getElementById("turkiye-haritasi")
-    );
+    mapResizeObserver.observe(mapElement);
 
 } else {
-    document.getElementById("turkiye-haritasi").innerHTML =
+    mapElement.innerHTML =
         "Harita kütüphanesi yüklenemedi. İnternet bağlantınızı kontrol edin.";
 }
 
-/* YIL */
+/* OTOMATİK YIL */
 
 document.getElementById("currentYear").textContent =
     new Date().getFullYear();
@@ -1532,11 +1723,11 @@ document.getElementById("currentYear").textContent =
 /* HARİTA ETİKETLERİ */
 
 .map-label {
-    background: rgba(8,25,17,.9) !important;
+    background: rgba(8,25,17,.92) !important;
     border: 1px solid rgba(255,255,255,.5) !important;
     color: white !important;
     font-family: Inter, sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
     padding: 7px 10px;
     border-radius: 8px;
