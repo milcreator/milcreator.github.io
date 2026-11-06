@@ -11,14 +11,7 @@
 
 <style>
 
-/* =====================================
-   TEMEL AYARLAR
-===================================== */
-
-:root {
-    --text: #ffffff;
-    --muted: #d0d6dc;
-}
+/* TEMEL */
 
 * {
     margin: 0;
@@ -27,23 +20,55 @@
     scroll-behavior: smooth;
 }
 
+:root {
+    --page-color: #071b12;
+    --text: #ffffff;
+    --muted: #d0d6dc;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: var(--text);
-    background: #071b12;
+    background: var(--page-color);
     overflow-x: hidden;
+    transition: background-color 1.5s ease;
+}
+
+/* ARKA PLAN RENK GEÇİŞİ */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-color: var(--page-color);
+    transition: background-color 1.5s ease;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.035),
+            transparent 35%
+        );
 }
 
 section {
     min-height: 100vh;
-    padding: 140px 8% 90px;
+    padding: 145px 8% 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-    isolation: isolate;
-    scroll-margin-top: 70px;
-    transition: background 1s ease;
+    background: transparent !important;
+    scroll-margin-top: 80px;
 }
 
 .container {
@@ -75,9 +100,7 @@ section {
     margin-bottom: 17px;
 }
 
-/* =====================================
-   LIQUID GLASS ORTAK EFEKT
-===================================== */
+/* LIQUID GLASS */
 
 .glass {
     background: rgba(255,255,255,.075);
@@ -89,24 +112,7 @@ section {
         0 15px 45px rgba(0,0,0,.2);
 }
 
-.glass::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 10%;
-    width: 80%;
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.65),
-        transparent
-    );
-}
-
-/* =====================================
-   NAVIGATION
-===================================== */
+/* MENÜ */
 
 header {
     position: fixed;
@@ -154,7 +160,7 @@ nav ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     list-style: none;
 }
 
@@ -176,15 +182,7 @@ nav a.active {
         0 4px 15px rgba(255,255,255,.08);
 }
 
-/* =====================================
-   ANA SAYFA - YEŞİL
-===================================== */
-
-#anasayfa {
-    background:
-        radial-gradient(circle at 80% 25%, rgba(45,180,105,.25), transparent 35%),
-        linear-gradient(135deg, #04180e, #0b3020);
-}
+/* ANA SAYFA */
 
 .hero-content {
     display: flex;
@@ -226,9 +224,7 @@ nav a.active {
     50% { transform: translateY(-18px); }
 }
 
-/* =====================================
-   GLASS BUTTON
-===================================== */
+/* BUTON */
 
 .button {
     display: inline-block;
@@ -276,65 +272,7 @@ nav a.active {
     transform: translateY(-4px);
 }
 
-/* =====================================
-   HAKKIMIZDA - LACİVERT
-===================================== */
-
-#hakkimizda {
-    background:
-        radial-gradient(circle at 80% 30%, rgba(70,130,230,.2), transparent 40%),
-        linear-gradient(135deg, #09172d, #142b50);
-}
-
-#hakkimizda .section-label {
-    color: #83b5ff;
-}
-
-/* =====================================
-   VİZYON - MOR
-===================================== */
-
-#vizyon {
-    background:
-        radial-gradient(circle at 20% 70%, rgba(180,100,255,.2), transparent 40%),
-        linear-gradient(135deg, #1a1035, #39215c);
-}
-
-#vizyon .section-label {
-    color: #d5a4ff;
-}
-
-/* =====================================
-   MİSYON - TURKUAZ
-===================================== */
-
-#misyon {
-    background:
-        radial-gradient(circle at 80% 20%, rgba(60,220,210,.18), transparent 40%),
-        linear-gradient(135deg, #062d35, #07505a);
-}
-
-#misyon .section-label {
-    color: #70e5df;
-}
-
-/* =====================================
-   İŞLETİM SİSTEMİ - GRİ
-===================================== */
-
-#sistem {
-    background:
-        radial-gradient(circle at 80% 20%, rgba(150,170,200,.15), transparent 40%),
-        linear-gradient(135deg, #171b22, #303844);
-}
-
-#sistem .section-label {
-    color: #a9c9f2;
-}
-
-/* =====================================
-   GLASS CARDS
-===================================== */
+/* KARTLAR */
 
 .cards {
     display: grid;
@@ -361,14 +299,12 @@ nav a.active {
 .card:hover {
     transform: translateY(-9px) scale(1.015);
     background: rgba(255,255,255,.14);
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.3),
-        0 20px 50px rgba(0,0,0,.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
 }
 
 .card h3 {
     margin-bottom: 15px;
-    color: #a9c9f2;
+    color: #d7e6ff;
     font-size: 22px;
 }
 
@@ -377,11 +313,9 @@ nav a.active {
     line-height: 1.8;
 }
 
-/* PLASMA SCREENSHOT */
+/* EKRAN GÖRÜNTÜSÜ */
 
 .plasma-box {
-    position: relative;
-    overflow: hidden;
     margin-top: 45px;
     padding: 25px;
     background: rgba(255,255,255,.075);
@@ -389,9 +323,7 @@ nav a.active {
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255,255,255,.2);
     border-radius: 22px;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.2),
-        0 20px 45px rgba(0,0,0,.2);
+    box-shadow: 0 20px 45px rgba(0,0,0,.2);
 }
 
 .plasma-box h3 {
@@ -405,19 +337,7 @@ nav a.active {
     border: 1px solid rgba(255,255,255,.25);
 }
 
-/* =====================================
-   ATATÜRK - KIRMIZI
-===================================== */
-
-#ataturk {
-    background:
-        radial-gradient(circle at 80% 25%, rgba(220,30,60,.2), transparent 40%),
-        linear-gradient(135deg, #24050b, #590d1b, #26060d);
-}
-
-#ataturk .section-label {
-    color: #ff8999;
-}
+/* ATATÜRK */
 
 .ataturk-content {
     display: grid;
@@ -448,19 +368,76 @@ nav a.active {
     line-height: 1.9;
 }
 
-/* =====================================
-   TÜRKİYE TARİHİ - ALTIN
-===================================== */
+/* BURSA - MILOS'UN DOĞDUĞU YER */
 
-#tarih {
-    background:
-        radial-gradient(circle at 80% 20%, rgba(230,180,90,.17), transparent 40%),
-        linear-gradient(135deg, #21170d, #49301a, #26180e);
+#bursa .bursa-content {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    align-items: center;
+    gap: 45px;
 }
 
-#tarih .section-label {
-    color: #e9bd73;
+.bursa-card {
+    position: relative;
+    overflow: hidden;
+    padding: 35px;
+    background: rgba(255,255,255,.09);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 25px;
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.25),
+        0 20px 50px rgba(0,0,0,.25);
 }
+
+.bursa-card h3 {
+    font-size: 30px;
+    margin-bottom: 18px;
+    color: #a8e6c1;
+}
+
+.bursa-card p {
+    color: #e0e9e3;
+    line-height: 1.9;
+}
+
+.bursa-coordinate {
+    margin-top: 25px;
+    padding: 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.08);
+    color: #c8f4d8;
+    font-size: 14px;
+}
+
+.bursa-glow {
+    width: 230px;
+    height: 230px;
+    margin: auto;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(90,220,150,.35),
+        rgba(40,140,100,.12),
+        transparent 70%
+    );
+    filter: blur(15px);
+    animation: bursaPulse 4s ease-in-out infinite;
+}
+
+@keyframes bursaPulse {
+    0%,100% {
+        transform: scale(.9);
+        opacity: .65;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+}
+
+/* TÜRKİYE TARİHİ */
 
 .timeline {
     position: relative;
@@ -524,17 +501,13 @@ nav a.active {
 }
 
 .timeline-card {
-    position: relative;
-    overflow: hidden;
     padding: 25px;
     background: rgba(255,255,255,.075);
     backdrop-filter: blur(25px) saturate(160%);
     -webkit-backdrop-filter: blur(25px) saturate(160%);
     border: 1px solid rgba(255,255,255,.2);
     border-radius: 20px;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.2),
-        0 15px 35px rgba(0,0,0,.2);
+    box-shadow: 0 15px 35px rgba(0,0,0,.2);
     transition: .4s;
 }
 
@@ -563,19 +536,7 @@ nav a.active {
     letter-spacing: 2px;
 }
 
-/* =====================================
-   TÜRKİYE HARİTASI - BORDO
-===================================== */
-
-#turkiye {
-    background:
-        radial-gradient(circle at 80% 20%, rgba(200,30,60,.2), transparent 40%),
-        linear-gradient(135deg, #210609, #500b19, #26060d);
-}
-
-#turkiye .section-label {
-    color: #ff9aa8;
-}
+/* FİZİKİ HARİTA */
 
 .map-wrapper {
     margin-top: 40px;
@@ -585,9 +546,7 @@ nav a.active {
     -webkit-backdrop-filter: blur(25px) saturate(160%);
     border: 1px solid rgba(255,255,255,.2);
     border-radius: 22px;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.2),
-        0 20px 50px rgba(0,0,0,.25);
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
 }
 
 .map-wrapper h3 {
@@ -596,14 +555,13 @@ nav a.active {
 
 #turkiye-haritasi {
     width: 100%;
-    height: 550px;
+    height: 570px;
     border-radius: 12px;
     overflow: hidden;
-    background: #210609;
+    background: #d5d0bd;
 }
 
 .leaflet-container {
-    background: #210609;
     font-family: Arial, sans-serif;
 }
 
@@ -616,17 +574,34 @@ nav a.active {
     font-weight: bold;
 }
 
-.ankara-icon {
-    background: white;
-    border: 3px solid #a90020;
+.ankara-icon,
+.bursa-icon {
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    width: 19px;
-    height: 19px;
-    box-shadow: 0 0 0 6px rgba(255,255,255,.2);
+    border: 3px solid white;
+    box-shadow: 0 0 0 5px rgba(0,0,0,.25);
+}
+
+.ankara-icon {
+    background: #c40029;
+}
+
+.bursa-icon {
+    background: #168d55;
 }
 
 .ankara-label {
-    background: #8f001b !important;
+    background: #9b001e !important;
+    color: white !important;
+    border: 2px solid white !important;
+    font-weight: bold;
+    padding: 8px 12px !important;
+    border-radius: 7px !important;
+}
+
+.bursa-label {
+    background: #087844 !important;
     color: white !important;
     border: 2px solid white !important;
     font-weight: bold;
@@ -641,9 +616,7 @@ nav a.active {
     line-height: 1.7;
 }
 
-/* =====================================
-   FOOTER
-===================================== */
+/* ALT BİLGİ */
 
 footer {
     padding: 40px;
@@ -655,27 +628,7 @@ footer {
     color: #d0bfc3;
 }
 
-/* =====================================
-   ARKA PLAN IŞIK EFEKTLERİ
-===================================== */
-
-section::before {
-    content: "";
-    position: absolute;
-    top: 10%;
-    right: -150px;
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.035);
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* =====================================
-   MOBİL UYUMLULUK
-===================================== */
+/* MOBİL */
 
 @media(max-width:900px) {
 
@@ -701,7 +654,8 @@ section::before {
         width: 190px;
     }
 
-    .ataturk-content {
+    .ataturk-content,
+    #bursa .bursa-content {
         grid-template-columns: 1fr;
         text-align: center;
     }
@@ -715,7 +669,7 @@ section::before {
 @media(max-width:600px) {
 
     section {
-        padding: 170px 6% 70px;
+        padding: 175px 6% 70px;
     }
 
     nav a {
@@ -746,7 +700,7 @@ section::before {
     }
 
     #turkiye-haritasi {
-        height: 390px;
+        height: 400px;
     }
 
     .map-wrapper {
@@ -754,8 +708,6 @@ section::before {
     }
 
 }
-
-/* HAREKET AZALTMA */
 
 @media(prefers-reduced-motion: reduce) {
     *,
@@ -772,7 +724,7 @@ section::before {
 
 <body>
 
-<!-- NAVIGATION -->
+<!-- MENÜ -->
 
 <header>
 <nav>
@@ -789,6 +741,7 @@ section::before {
         <li><a href="#misyon">Misyon</a></li>
         <li><a href="#sistem">MILOS</a></li>
         <li><a href="#ataturk">Atatürk</a></li>
+        <li><a href="#bursa">Bursa</a></li>
         <li><a href="#tarih">Tarihimiz</a></li>
         <li><a href="#turkiye">Türkiye</a></li>
     </ul>
@@ -798,7 +751,7 @@ section::before {
 
 <!-- ANA SAYFA -->
 
-<section id="anasayfa">
+<section id="anasayfa" data-color="#071b12">
 
 <div class="container hero-content">
 
@@ -830,7 +783,7 @@ section::before {
 
 <!-- HAKKIMIZDA -->
 
-<section id="hakkimizda">
+<section id="hakkimizda" data-color="#101d3c">
 
 <div class="container">
 
@@ -853,7 +806,7 @@ section::before {
 
 <!-- VİZYON -->
 
-<section id="vizyon">
+<section id="vizyon" data-color="#291344">
 
 <div class="container">
 
@@ -865,10 +818,6 @@ section::before {
         Teknolojide bağımsızlığı, yeniliği ve özgür yazılım
         kültürünü destekleyerek herkesin erişebileceği güçlü
         bir işletim sistemi ekosistemi oluşturmak.
-
-        MILOS'un gelecekte daha geniş bir kullanıcı kitlesine
-        ulaşmasını ve özgür teknoloji dünyasında yer edinmesini
-        hedefliyoruz.
     </p>
 
 </div>
@@ -877,7 +826,7 @@ section::before {
 
 <!-- MİSYON -->
 
-<section id="misyon">
+<section id="misyon" data-color="#06434b">
 
 <div class="container">
 
@@ -889,9 +838,6 @@ section::before {
         Kullanıcı dostu, güvenilir, güncel ve geliştirilebilir
         bir işletim sistemi sunmak; açık kaynak teknolojilerini
         destekleyerek teknoloji dünyasına katkıda bulunmak.
-
-        Her kullanıcının kendi ihtiyaçlarına göre
-        özelleştirebileceği bir sistem geliştirmek.
     </p>
 
 </div>
@@ -900,7 +846,7 @@ section::before {
 
 <!-- İŞLETİM SİSTEMİ -->
 
-<section id="sistem">
+<section id="sistem" data-color="#252c37">
 
 <div class="container">
 
@@ -956,7 +902,7 @@ section::before {
 
 <!-- ATATÜRK -->
 
-<section id="ataturk">
+<section id="ataturk" data-color="#430b19">
 
 <div class="container">
 
@@ -996,9 +942,63 @@ section::before {
 
 </section>
 
+<!-- BURSA -->
+
+<section id="bursa" data-color="#073d2b">
+
+<div class="container">
+
+    <span class="section-label">MILOS'un Doğduğu Yer</span>
+
+    <h2 class="section-title">Bursa</h2>
+
+    <div class="bursa-content">
+
+        <div>
+
+            <p class="section-description">
+                MILOS projesinin doğum yeri Bursa'dır.
+
+                Teknolojiye, özgür yazılıma ve yeniliğe uzanan
+                bu yolculuğun başlangıç noktası Bursa olarak
+                belirlenmiştir.
+
+                MILOS'un hikâyesi burada başlıyor.
+            </p>
+
+            <a href="#turkiye" class="button">
+                Bursa'yı Haritada Gör
+            </a>
+
+        </div>
+
+        <div class="bursa-card">
+
+            <h3>MILOS × BURSA</h3>
+
+            <p>
+                Bir şehirden doğan teknoloji fikri,
+                özgür bir işletim sistemi hedefiyle
+                geleceğe doğru ilerliyor.
+            </p>
+
+            <div class="bursa-coordinate">
+                DOĞUM YERİ: BURSA, TÜRKİYE
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bursa-glow"></div>
+
+</div>
+
+</section>
+
 <!-- TÜRKİYE TARİHİ -->
 
-<section id="tarih">
+<section id="tarih" data-color="#49301a">
 
 <div class="container">
 
@@ -1008,8 +1008,8 @@ section::before {
 
     <p class="section-description">
         Türk tarihinin önemli dönüm noktalarına doğru
-        bir yolculuk. Tarih çizgisini aşağı kaydırarak
-        geçmişten günümüze uzanan olayları keşfedin.
+        bir yolculuk. Aşağı kaydırarak geçmişten günümüze
+        uzanan tarih çizgisini keşfedin.
     </p>
 
     <div class="timeline">
@@ -1081,8 +1081,6 @@ section::before {
                 <p>
                     Fatih Sultan Mehmet, İstanbul'u fethederek
                     Bizans İmparatorluğu'na son verdi.
-                    Bu olay dünya tarihinde önemli bir dönüm
-                    noktası olarak kabul edilir.
                 </p>
             </div>
         </div>
@@ -1117,31 +1115,35 @@ section::before {
 
 </section>
 
-<!-- TÜRKİYE HARİTASI -->
+<!-- FİZİKİ TÜRKİYE HARİTASI -->
 
-<section id="turkiye">
+<section id="turkiye" data-color="#29101a">
 
 <div class="container">
 
     <span class="section-label">81 İl, Tek Ülke</span>
 
-    <h2 class="section-title">Türkiye</h2>
+    <h2 class="section-title">Türkiye Fiziki Haritası</h2>
 
     <p class="section-description">
-        Türkiye'nin 81 ilini interaktif harita üzerinden
-        keşfedin. Ankara, özel başkent işaretçisiyle
-        haritada ayrıca gösterilmektedir.
+        Türkiye'nin dağlarını, yükseltilerini, vadilerini
+        ve arazi yapısını fiziki harita üzerinden keşfedin.
+
+        Ankara başkent, Bursa ise MILOS'un doğum yeri
+        olarak özel işaretçilerle gösterilmektedir.
     </p>
 
     <div class="map-wrapper">
 
-        <h3>Türkiye İller Haritası</h3>
+        <h3>Türkiye Topoğrafik Haritası</h3>
 
         <div id="turkiye-haritasi"></div>
 
         <p class="map-note">
+            Yeşil işaretçi: Bursa – MILOS'un doğduğu yer.
+            Kırmızı işaretçi: Ankara – Türkiye'nin başkenti.
             İllerin üzerine gelerek isimlerini görüntüleyebilirsiniz.
-            Ankara beyaz çerçeveli kırmızı işaretçiyle gösterilmiştir.
+            Harita OpenTopoMap topoğrafik verilerini kullanır.
         </p>
 
     </div>
@@ -1150,19 +1152,52 @@ section::before {
 
 </section>
 
-<!-- FOOTER -->
-
 <footer>
     <p>MILOS | Özgür Teknoloji, Güçlü Gelecek</p>
+    <p style="margin-top:10px;">MILOS'un doğduğu yer: Bursa, Türkiye</p>
 </footer>
-
-<!-- JAVASCRIPT -->
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 
-/* TARİH ANİMASYONU */
+/* =====================================
+   AKICI RENK GEÇİŞİ
+===================================== */
+
+const allSections = document.querySelectorAll("section");
+
+const themeObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            const color = entry.target.dataset.color;
+
+            if (color) {
+                document.documentElement.style.setProperty(
+                    "--page-color",
+                    color
+                );
+            }
+
+        }
+
+    });
+
+}, {
+    threshold: 0.35
+});
+
+allSections.forEach(section => {
+    themeObserver.observe(section);
+});
+
+
+/* =====================================
+   TARİH ANİMASYONU
+===================================== */
 
 const timelineItems = document.querySelectorAll(".timeline-item");
 
@@ -1185,9 +1220,10 @@ timelineItems.forEach(item => {
 });
 
 
-/* AKTİF NAVİGASYON */
+/* =====================================
+   AKTİF MENÜ
+===================================== */
 
-const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 
 const sectionObserver = new IntersectionObserver((entries) => {
@@ -1216,12 +1252,14 @@ const sectionObserver = new IntersectionObserver((entries) => {
     rootMargin: "-30% 0px -60% 0px"
 });
 
-sections.forEach(section => {
+allSections.forEach(section => {
     sectionObserver.observe(section);
 });
 
 
-/* TÜRKİYE HARİTASI */
+/* =====================================
+   FİZİKİ TÜRKİYE HARİTASI
+===================================== */
 
 const mapElement = document.getElementById("turkiye-haritasi");
 
@@ -1232,13 +1270,27 @@ if (typeof L !== "undefined") {
         scrollWheelZoom: false
     });
 
+    /* FİZİKİ / TOPOĞRAFİK HARİTA KATMANI */
+
+    L.tileLayer(
+        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 17,
+            attribution:
+                'Map data: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Map style: © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)'
+        }
+    ).addTo(map);
+
+
+    /* İL SINIRLARI */
+
     const provincesLayer = L.geoJSON(null, {
 
         style: {
             color: "#ffffff",
-            weight: 1,
-            fillColor: "#a51f32",
-            fillOpacity: 0.88
+            weight: 1.3,
+            fillColor: "#ffffff",
+            fillOpacity: 0.02
         },
 
         onEachFeature: function(feature, layer) {
@@ -1263,10 +1315,10 @@ if (typeof L !== "undefined") {
                 mouseover: function() {
 
                     layer.setStyle({
-                        fillColor: "#f15b70",
-                        color: "#ffffff",
-                        weight: 2,
-                        fillOpacity: 1
+                        color: "#ffca65",
+                        weight: 3,
+                        fillColor: "#ffca65",
+                        fillOpacity: 0.18
                     });
 
                 },
@@ -1282,6 +1334,9 @@ if (typeof L !== "undefined") {
         }
 
     }).addTo(map);
+
+
+    /* TÜRKİYE İL VERİLERİ */
 
     fetch(
         "https://raw.githubusercontent.com/theaiagent/turkiye_iller_geojson/main/turkiye_iller.geojson"
@@ -1305,7 +1360,7 @@ if (typeof L !== "undefined") {
             padding: [15, 15]
         });
 
-        /* ANKARA BAŞKENT İŞARETÇİSİ */
+        /* ANKARA - BAŞKENT */
 
         const ankaraIcon = L.divIcon({
 
@@ -1313,9 +1368,9 @@ if (typeof L !== "undefined") {
 
             html: '<div class="ankara-icon"></div>',
 
-            iconSize: [19, 19],
+            iconSize: [20, 20],
 
-            iconAnchor: [9, 9]
+            iconAnchor: [10, 10]
 
         });
 
@@ -1340,12 +1395,48 @@ if (typeof L !== "undefined") {
             "<strong>Ankara</strong><br>Türkiye Cumhuriyeti'nin başkenti."
         );
 
+
+        /* BURSA - MILOS'UN DOĞUM YERİ */
+
+        const bursaIcon = L.divIcon({
+
+            className: "",
+
+            html: '<div class="bursa-icon"></div>',
+
+            iconSize: [20, 20],
+
+            iconAnchor: [10, 10]
+
+        });
+
+        const bursaMarker = L.marker(
+            [40.1950, 29.0600],
+            { icon: bursaIcon }
+        ).addTo(map);
+
+        bursaMarker.bindTooltip("MILOS'UN DOĞDUĞU YER: BURSA", {
+
+            permanent: true,
+
+            direction: "top",
+
+            offset: [0, -12],
+
+            className: "bursa-label"
+
+        });
+
+        bursaMarker.bindPopup(
+            "<strong>Bursa</strong><br>MILOS projesinin doğum yeri."
+        );
+
     })
 
     .catch(error => {
 
         mapElement.innerHTML =
-            "<p style='color:white;padding:30px;text-align:center;'>Türkiye haritası yüklenemedi. İnternet bağlantınızı kontrol edip sayfayı yenileyin.</p>";
+            "<p style='color:#222;padding:30px;text-align:center;'>Harita yüklenemedi. İnternet bağlantınızı kontrol ederek sayfayı yenileyin.</p>";
 
         console.error("Harita hatası:", error);
 
@@ -1354,9 +1445,28 @@ if (typeof L !== "undefined") {
 } else {
 
     mapElement.innerHTML =
-        "<p style='color:white;padding:30px;text-align:center;'>Harita kütüphanesi yüklenemedi. Sayfayı yenileyin.</p>";
+        "<p style='color:#222;padding:30px;text-align:center;'>Harita kütüphanesi yüklenemedi. Sayfayı yenileyin.</p>";
 
 }
+
+
+/* HARİTA BÖLÜMÜNE GELİNCE BOYUTU YENİLE */
+
+const mapSection = document.getElementById("turkiye");
+
+const mapResizeObserver = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting && typeof map !== "undefined") {
+            setTimeout(() => map.invalidateSize(), 200);
+        }
+
+    });
+
+});
+
+mapResizeObserver.observe(mapSection);
 
 </script>
 
