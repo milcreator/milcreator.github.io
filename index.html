@@ -3,15 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071b12">
+<meta name="theme-color" content="#102c20">
+<meta name="description" content="MILOS - Ubuntu tabanlı, KDE Plasma masaüstü kullanan özgür işletim sistemi projesi.">
+<title>MILOS | Özgürlüğün İşletim Sistemi</title>
 
-<title>MILOS | Özgür Teknoloji, Güçlü Gelecek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
-
-/* TEMEL */
+:root {
+    --page-color: #102c20;
+    --white: #ffffff;
+    --green: #9bd5a9;
+    --glass: rgba(255,255,255,.09);
+}
 
 * {
     margin: 0;
@@ -20,1455 +28,1539 @@
     scroll-behavior: smooth;
 }
 
-:root {
-    --page-color: #071b12;
-    --text: #ffffff;
-    --muted: #d0d6dc;
-}
-
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--text);
+    font-family: 'Inter', sans-serif;
     background: var(--page-color);
+    color: white;
     overflow-x: hidden;
-    transition: background-color 1.5s ease;
+    transition: background 1.2s ease;
 }
 
-/* ARKA PLAN RENK GEÇİŞİ */
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    background-color: var(--page-color);
-    transition: background-color 1.5s ease;
-    pointer-events: none;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(255,255,255,.035),
-            transparent 35%
-        );
+img {
+    max-width: 100%;
 }
 
 section {
-    min-height: 100vh;
-    padding: 145px 8% 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     position: relative;
-    background: transparent !important;
-    scroll-margin-top: 80px;
+    padding: 110px 8%;
+    overflow: hidden;
 }
 
 .container {
-    width: 100%;
-    max-width: 1150px;
+    max-width: 1250px;
     margin: auto;
 }
 
-.section-title {
-    font-size: clamp(36px, 5vw, 62px);
-    margin-bottom: 25px;
-    letter-spacing: 1px;
+.section-heading {
+    text-align: center;
+    margin-bottom: 55px;
 }
 
-.section-description {
-    max-width: 850px;
-    color: var(--muted);
-    font-size: 18px;
-    line-height: 1.9;
-}
-
-.section-label {
+.section-heading span {
     display: inline-block;
-    color: white;
+    color: #a9ddb3;
     font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 5px;
     margin-bottom: 17px;
 }
 
-/* LIQUID GLASS */
-
-.glass {
-    background: rgba(255,255,255,.075);
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border: 1px solid rgba(255,255,255,.19);
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.2),
-        0 15px 45px rgba(0,0,0,.2);
+.section-heading h2 {
+    font-size: clamp(32px, 5vw, 55px);
+    font-weight: 900;
+    margin-bottom: 18px;
 }
 
-/* MENÜ */
-
-header {
-    position: fixed;
-    z-index: 2000;
-    top: 12px;
-    left: 3%;
-    width: 94%;
-    background: rgba(255,255,255,.075);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 20px;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.2),
-        0 10px 40px rgba(0,0,0,.2);
-}
-
-nav {
-    max-width: 1400px;
+.section-heading p {
+    max-width: 700px;
     margin: auto;
-    padding: 13px 22px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.75);
+}
+
+/* NAVIGATION */
+
+.navbar {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(94%, 1200px);
+    z-index: 1000;
+    padding: 13px 23px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+    border: 1px solid rgba(255,255,255,.17);
+    background: rgba(10,30,21,.65);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.15);
 }
 
-.logo {
+.nav-logo {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    white-space: nowrap;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 2px;
 }
 
-.logo img {
-    width: 40px;
-    height: 40px;
+.nav-logo img {
+    width: 38px;
+    height: 38px;
     object-fit: contain;
 }
 
-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    list-style: none;
-}
-
-nav a {
-    display: inline-block;
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
-    padding: 10px 12px;
-    border-radius: 30px;
-    transition: .35s ease;
-}
-
-nav a:hover,
-nav a.active {
-    background: rgba(255,255,255,.17);
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.25),
-        0 4px 15px rgba(255,255,255,.08);
-}
-
-/* ANA SAYFA */
-
-.hero-content {
+.nav-links {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 45px;
+    gap: 19px;
 }
 
-.hero-text {
-    max-width: 700px;
+.nav-links a {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,.78);
+    transition: color .3s ease;
 }
 
-.hero h1 {
-    font-size: clamp(60px, 9vw, 110px);
-    letter-spacing: 7px;
-    margin-bottom: 20px;
+.nav-links a:hover,
+.nav-links a.active {
+    color: #a9ddb3;
 }
 
-.hero h1 span {
-    color: #55d58b;
+.menu-button {
+    display: none;
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
 }
 
-.hero p {
-    color: #d0e5d7;
-    font-size: 19px;
-    line-height: 1.9;
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(56,126,78,.35), transparent 60%),
+        linear-gradient(135deg, #071a12, #153c29);
+}
+
+.hero-content {
+    max-width: 950px;
+    position: relative;
+    z-index: 2;
+    animation: heroEnter 1.2s ease both;
 }
 
 .hero-logo {
-    width: min(300px, 35vw);
-    filter:
-        drop-shadow(0 0 20px rgba(255,255,255,.15))
-        drop-shadow(0 0 50px rgba(70,220,150,.25));
-    animation: float 4s ease-in-out infinite;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 10px 35px rgba(120,220,150,.25));
 }
 
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-18px); }
+.hero h1 {
+    font-size: clamp(55px, 12vw, 110px);
+    font-weight: 900;
+    letter-spacing: 9px;
+    line-height: 1;
 }
 
-/* BUTON */
+.hero h1 span {
+    color: #a5ddb0;
+}
+
+.hero-subtitle {
+    font-size: clamp(16px, 2vw, 22px);
+    margin-top: 25px;
+    color: rgba(255,255,255,.8);
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 35px;
+}
 
 .button {
     display: inline-block;
-    position: relative;
-    overflow: hidden;
-    margin-top: 30px;
-    padding: 16px 32px;
-    background: rgba(255,255,255,.13);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,.3);
-    border-radius: 50px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.3),
-        0 10px 30px rgba(0,0,0,.2);
-    transition: .4s;
-}
-
-.button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -120%;
-    width: 80%;
-    height: 100%;
-    background: linear-gradient(
-        110deg,
-        transparent,
-        rgba(255,255,255,.4),
-        transparent
-    );
-    transform: skewX(-20deg);
-    transition: left .7s;
-}
-
-.button:hover::after {
-    left: 130%;
+    padding: 15px 27px;
+    border-radius: 13px;
+    background: #a5ddb0;
+    color: #102b1c;
+    font-weight: 800;
+    font-size: 14px;
+    transition: .3s ease;
 }
 
 .button:hover {
-    background: rgba(255,255,255,.24);
-    transform: translateY(-4px);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.2);
 }
 
-/* KARTLAR */
+.button-outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.5);
+    color: white;
+}
 
-.cards {
+.scroll-indicator {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,.6);
+    animation: floating 2s infinite;
+}
+
+/* GLASS CARDS */
+
+.glass-card {
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 15px 45px rgba(0,0,0,.13);
+    transition: transform .4s ease, background .4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-7px);
+    background: rgba(255,255,255,.12);
+}
+
+/* ABOUT */
+
+.about {
+    background: #163d2b;
+}
+
+.about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-    gap: 22px;
-    margin-top: 45px;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 55px;
 }
 
-.card {
-    position: relative;
-    overflow: hidden;
-    padding: 30px;
-    background: rgba(255,255,255,.075);
-    backdrop-filter: blur(25px) saturate(170%);
-    -webkit-backdrop-filter: blur(25px) saturate(170%);
-    border: 1px solid rgba(255,255,255,.19);
-    border-radius: 20px;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.2),
-        0 15px 40px rgba(0,0,0,.2);
-    transition: .4s;
+.about-text h3 {
+    font-size: 35px;
+    margin-bottom: 22px;
 }
 
-.card:hover {
-    transform: translateY(-9px) scale(1.015);
-    background: rgba(255,255,255,.14);
-    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+.about-text p {
+    line-height: 1.9;
+    color: rgba(255,255,255,.8);
+    margin-bottom: 17px;
 }
 
-.card h3 {
-    margin-bottom: 15px;
-    color: #d7e6ff;
-    font-size: 22px;
+.about-image {
+    padding: 15px;
 }
 
-.card p {
-    color: #d0d7df;
-    line-height: 1.8;
+.about-image img {
+    width: 100%;
+    border-radius: 18px;
+    display: block;
 }
 
-/* EKRAN GÖRÜNTÜSÜ */
+/* VISION AND MISSION */
 
-.plasma-box {
-    margin-top: 45px;
-    padding: 25px;
-    background: rgba(255,255,255,.075);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 22px;
-    box-shadow: 0 20px 45px rgba(0,0,0,.2);
+.vision {
+    background: #234e38;
 }
 
-.plasma-box h3 {
+.vision-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.vision-card {
+    padding: 40px;
+}
+
+.vision-card h3 {
+    font-size: 29px;
+    margin-bottom: 20px;
+    color: #b5e5bd;
+}
+
+.vision-card p {
+    color: rgba(255,255,255,.82);
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+/* MISSION */
+
+.mission {
+    background: #173c43;
+}
+
+.mission-content {
+    max-width: 850px;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+}
+
+.mission-content h3 {
+    font-size: 32px;
     margin-bottom: 20px;
 }
 
-.plasma-box img {
-    width: 100%;
-    display: block;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,.25);
+.mission-content p {
+    line-height: 2;
+    color: rgba(255,255,255,.82);
 }
 
-/* ATATÜRK */
+/* MILOS SYSTEM */
 
-.ataturk-content {
+.system {
+    background: #192f50;
+}
+
+.system-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: .9fr 1.1fr;
     align-items: center;
-    gap: 45px;
+    gap: 50px;
+}
+
+.system-image {
+    padding: 12px;
+}
+
+.system-image img {
+    display: block;
+    width: 100%;
+    border-radius: 17px;
+}
+
+.system-info h3 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.system-info p {
+    color: rgba(255,255,255,.8);
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.system-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.system-tags span {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.17);
+    padding: 11px 17px;
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+/* ATATURK */
+
+.ataturk {
+    background: #3b2729;
+}
+
+.ataturk-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    align-items: center;
+    gap: 55px;
 }
 
 .ataturk-image {
+    padding: 12px;
+}
+
+.ataturk-image img {
     width: 100%;
-    max-height: 540px;
+    max-height: 550px;
     object-fit: cover;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,.25);
-    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    border-radius: 18px;
+    display: block;
 }
 
-.ataturk-quote {
-    margin-top: 30px;
-    padding: 24px;
-    background: rgba(255,255,255,.08);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255,255,255,.18);
-    border-left: 4px solid #e34d64;
-    border-radius: 0 18px 18px 0;
-    color: #ffe0e4;
-    line-height: 1.9;
+.ataturk-text h3 {
+    font-size: 38px;
+    margin-bottom: 25px;
 }
 
-/* BURSA - MILOS'UN DOĞDUĞU YER */
-
-#bursa .bursa-content {
-    display: grid;
-    grid-template-columns: 1.2fr .8fr;
-    align-items: center;
-    gap: 45px;
-}
-
-.bursa-card {
-    position: relative;
-    overflow: hidden;
-    padding: 35px;
-    background: rgba(255,255,255,.09);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: 1px solid rgba(255,255,255,.22);
-    border-radius: 25px;
-    box-shadow:
-        inset 0 1px 2px rgba(255,255,255,.25),
-        0 20px 50px rgba(0,0,0,.25);
-}
-
-.bursa-card h3 {
-    font-size: 30px;
+.ataturk-text p {
+    color: rgba(255,255,255,.85);
+    line-height: 2;
     margin-bottom: 18px;
-    color: #a8e6c1;
+    font-size: 16px;
 }
 
-.bursa-card p {
-    color: #e0e9e3;
+/* BURSA */
+
+.bursa {
+    background: #513a28;
+}
+
+.bursa-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.bursa-text h3 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.bursa-text p {
     line-height: 1.9;
+    color: rgba(255,255,255,.85);
+    margin-bottom: 18px;
 }
 
-.bursa-coordinate {
-    margin-top: 25px;
-    padding: 16px;
-    border-radius: 14px;
-    background: rgba(255,255,255,.08);
-    color: #c8f4d8;
-    font-size: 14px;
+.bursa-image {
+    padding: 12px;
 }
 
-.bursa-glow {
-    width: 230px;
-    height: 230px;
+.bursa-image img {
+    width: 100%;
+    height: 370px;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+}
+
+.bursa-badge {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 18px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    color: #e7c99e;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* HISTORY */
+
+.history-section {
+    background: #142d25;
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+.history-heading {
+    text-align: center;
+    margin-bottom: 85px;
+}
+
+.history-label {
+    color: #a9ddb3;
+    letter-spacing: 5px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.history-heading h2 {
+    font-size: clamp(32px, 5vw, 55px);
+    margin: 18px 0;
+}
+
+.history-heading p {
+    color: #c5d6cb;
+    line-height: 1.8;
+}
+
+.history-timeline {
+    max-width: 1000px;
     margin: auto;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(90,220,150,.35),
-        rgba(40,140,100,.12),
-        transparent 70%
-    );
-    filter: blur(15px);
-    animation: bursaPulse 4s ease-in-out infinite;
-}
-
-@keyframes bursaPulse {
-    0%,100% {
-        transform: scale(.9);
-        opacity: .65;
-    }
-    50% {
-        transform: scale(1.15);
-        opacity: 1;
-    }
-}
-
-/* TÜRKİYE TARİHİ */
-
-.timeline {
     position: relative;
-    max-width: 900px;
-    margin: 65px auto 0;
 }
 
-.timeline::before {
+.history-timeline::before {
     content: "";
     position: absolute;
     left: 50%;
     top: 0;
     bottom: 0;
     width: 3px;
-    background: linear-gradient(#e5b45e, #a85e2a);
+    background: linear-gradient(transparent, #91c99d, #ffffff, #91c99d, transparent);
     transform: translateX(-50%);
 }
 
-.timeline-item {
+.history-card {
+    width: 46%;
+    margin-bottom: 80px;
     position: relative;
-    width: 50%;
-    padding: 0 40px 55px;
     opacity: 0;
-    transform: translateY(45px);
-    transition: opacity .8s ease, transform .8s ease;
+    transform: translateY(70px);
+    transition: opacity .9s ease, transform .9s ease;
 }
 
-.timeline-item.visible {
+.history-card.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.timeline-item:nth-child(odd) {
-    left: 0;
-    text-align: right;
+.history-card:nth-child(even) {
+    margin-left: 54%;
 }
 
-.timeline-item:nth-child(even) {
-    left: 50%;
-    text-align: left;
-}
-
-.timeline-item::after {
+.history-card::after {
     content: "";
     position: absolute;
-    top: 7px;
+    top: 10px;
+    right: -10%;
     width: 17px;
     height: 17px;
     border-radius: 50%;
-    background: #f1c16e;
-    border: 4px solid #49301a;
-    box-shadow: 0 0 20px #e5b45e;
+    background: #a9ddb3;
+    border: 4px solid #142d25;
+    box-shadow: 0 0 15px #a9ddb3;
 }
 
-.timeline-item:nth-child(odd)::after {
-    right: -10px;
+.history-card:nth-child(even)::after {
+    left: -17%;
+    right: auto;
 }
 
-.timeline-item:nth-child(even)::after {
-    left: -10px;
+.history-year {
+    font-size: 32px;
+    font-weight: 900;
+    color: #a7d8af;
+    margin-bottom: 15px;
 }
 
-.timeline-card {
+.history-content {
+    overflow: hidden;
+    border-radius: 22px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 15px 45px rgba(0,0,0,.2);
+    transition: transform .4s ease, box-shadow .4s ease;
+}
+
+.history-content:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 55px rgba(0,0,0,.35);
+}
+
+.history-content img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform .6s ease;
+}
+
+.history-content:hover img {
+    transform: scale(1.05);
+}
+
+.history-text {
     padding: 25px;
-    background: rgba(255,255,255,.075);
-    backdrop-filter: blur(25px) saturate(160%);
-    -webkit-backdrop-filter: blur(25px) saturate(160%);
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,.2);
-    transition: .4s;
 }
 
-.timeline-card:hover {
-    transform: translateY(-6px);
-    background: rgba(255,255,255,.13);
-}
-
-.timeline-card h3 {
-    color: #f1c16e;
+.history-text h3 {
     font-size: 23px;
     margin-bottom: 12px;
+    color: #b9e6c0;
 }
 
-.timeline-card p {
-    color: #e1d2bf;
+.history-text p {
+    color: #e0e9e3;
     line-height: 1.8;
 }
 
-.timeline-date {
-    display: inline-block;
-    margin-bottom: 12px;
-    color: #f5d69d;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
+/* MAP */
+
+.map-section {
+    background: #193c36;
 }
 
-/* FİZİKİ HARİTA */
+.map-description {
+    text-align: center;
+    max-width: 750px;
+    margin: -25px auto 35px;
+    line-height: 1.8;
+    color: rgba(255,255,255,.8);
+}
 
 .map-wrapper {
-    margin-top: 40px;
-    padding: 25px;
-    background: rgba(255,255,255,.075);
-    backdrop-filter: blur(25px) saturate(160%);
-    -webkit-backdrop-filter: blur(25px) saturate(160%);
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 22px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.25);
-}
-
-.map-wrapper h3 {
-    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 25px;
 }
 
 #turkiye-haritasi {
+    height: 650px;
     width: 100%;
-    height: 570px;
-    border-radius: 12px;
+    border-radius: 18px;
     overflow: hidden;
-    background: #d5d0bd;
+    z-index: 1;
 }
 
-.leaflet-container {
-    font-family: Arial, sans-serif;
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 25px;
+    color: rgba(255,255,255,.8);
+    font-size: 13px;
 }
 
-.leaflet-tooltip {
-    background: #170306 !important;
-    color: white !important;
-    border: 1px solid #ff7184 !important;
-    border-radius: 7px !important;
-    padding: 8px 12px !important;
-    font-weight: bold;
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
 }
 
-.ankara-icon,
-.bursa-icon {
-    width: 20px;
-    height: 20px;
+.legend-dot {
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 0 0 5px rgba(0,0,0,.25);
+    display: inline-block;
 }
 
-.ankara-icon {
-    background: #c40029;
+.legend-ankara {
+    background: #e84b4b;
 }
 
-.bursa-icon {
-    background: #168d55;
+.legend-bursa {
+    background: #36d68b;
 }
 
-.ankara-label {
-    background: #9b001e !important;
-    color: white !important;
-    border: 2px solid white !important;
-    font-weight: bold;
-    padding: 8px 12px !important;
-    border-radius: 7px !important;
-}
-
-.bursa-label {
-    background: #087844 !important;
-    color: white !important;
-    border: 2px solid white !important;
-    font-weight: bold;
-    padding: 8px 12px !important;
-    border-radius: 7px !important;
-}
-
-.map-note {
-    margin-top: 18px;
-    color: #e2bfc4;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-/* ALT BİLGİ */
+/* FOOTER */
 
 footer {
-    padding: 40px;
+    background: #071810;
+    padding: 55px 8%;
     text-align: center;
-    background: rgba(0,0,0,.4);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-top: 1px solid rgba(255,255,255,.15);
-    color: #d0bfc3;
+    border-top: 1px solid rgba(255,255,255,.1);
 }
 
-/* MOBİL */
-
-@media(max-width:900px) {
-
-    nav {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    nav ul {
-        gap: 5px;
-    }
-
-    nav a {
-        padding: 8px;
-    }
-
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero-logo {
-        width: 190px;
-    }
-
-    .ataturk-content,
-    #bursa .bursa-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .ataturk-image {
-        max-height: 400px;
-    }
-
+.footer-logo {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
 }
 
-@media(max-width:600px) {
+footer p {
+    color: rgba(255,255,255,.55);
+    line-height: 1.8;
+    font-size: 13px;
+}
 
-    section {
-        padding: 175px 6% 70px;
+/* ANIMATIONS */
+
+@keyframes heroEnter {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floating {
+    0%, 100% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, -10px);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+    .nav-links {
+        gap: 10px;
     }
 
-    nav a {
+    .nav-links a {
         font-size: 10px;
     }
 
-    .logo {
-        font-size: 20px;
+    .about-grid,
+    .system-grid,
+    .ataturk-grid,
+    .bursa-grid {
+        grid-template-columns: 1fr;
     }
 
-    .timeline::before {
-        left: 10px;
+    .about-image,
+    .system-image,
+    .ataturk-image,
+    .bursa-image {
+        max-width: 650px;
+        margin: auto;
+    }
+}
+
+@media(max-width: 700px) {
+    section {
+        padding: 85px 6%;
     }
 
-    .timeline-item,
-    .timeline-item:nth-child(odd),
-    .timeline-item:nth-child(even) {
+    .navbar {
+        padding: 12px 17px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
         width: 100%;
-        left: 0;
-        padding: 0 0 35px 35px;
-        text-align: left;
+        padding: 20px;
+        border-radius: 18px;
+        background: rgba(8,27,18,.96);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .timeline-item:nth-child(odd)::after,
-    .timeline-item:nth-child(even)::after {
-        left: 0;
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .hero h1 {
+        letter-spacing: 4px;
+    }
+
+    .vision-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vision-card,
+    .mission-content {
+        padding: 30px;
+    }
+
+    .history-timeline::before {
+        left: 8px;
+    }
+
+    .history-card,
+    .history-card:nth-child(even) {
+        width: calc(100% - 35px);
+        margin-left: 35px;
+    }
+
+    .history-card::after,
+    .history-card:nth-child(even)::after {
+        left: -35px;
         right: auto;
     }
 
+    .history-content img {
+        height: 210px;
+    }
+
     #turkiye-haritasi {
-        height: 400px;
+        height: 480px;
     }
 
-    .map-wrapper {
-        padding: 14px;
+    .bursa-image img {
+        height: 260px;
     }
-
 }
 
 @media(prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
+        scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- MENÜ -->
-
-<header>
-<nav>
-
-    <div class="logo">
+<nav class="navbar">
+    <a href="#anasayfa" class="nav-logo">
         <img src="MIL.png" alt="MILOS Logo">
         MILOS
+    </a>
+
+    <button class="menu-button" id="menuButton" aria-label="Menüyü aç">☰</button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#anasayfa">Ana Sayfa</a>
+        <a href="#hakkimizda">Hakkımızda</a>
+        <a href="#vizyon">Vizyonumuz</a>
+        <a href="#misyon">Misyonumuz</a>
+        <a href="#sistem">İşletim Sistemi</a>
+        <a href="#ataturk">Atatürk</a>
+        <a href="#bursa">Bursa</a>
+        <a href="#turkiye-tarihi">Tarihimiz</a>
+        <a href="#harita">Harita</a>
     </div>
-
-    <ul>
-        <li><a href="#anasayfa">Ana Sayfa</a></li>
-        <li><a href="#hakkimizda">Hakkımızda</a></li>
-        <li><a href="#vizyon">Vizyon</a></li>
-        <li><a href="#misyon">Misyon</a></li>
-        <li><a href="#sistem">MILOS</a></li>
-        <li><a href="#ataturk">Atatürk</a></li>
-        <li><a href="#bursa">Bursa</a></li>
-        <li><a href="#tarih">Tarihimiz</a></li>
-        <li><a href="#turkiye">Türkiye</a></li>
-    </ul>
-
 </nav>
-</header>
 
 <!-- ANA SAYFA -->
 
-<section id="anasayfa" data-color="#071b12">
+<section class="hero" id="anasayfa" data-color="#102c20">
+    <div class="hero-content">
+        <img src="MIL.png" class="hero-logo" alt="MILOS Logo">
 
-<div class="container hero-content">
+        <h1>MI<span>LOS</span></h1>
 
-    <div class="hero-text">
-
-        <span class="section-label">Özgür Teknoloji</span>
-
-        <h1>MIL<span>OS</span></h1>
-
-        <p>
-            Özgür teknoloji, güçlü gelecek.
-
-            Ubuntu tabanlı ve KDE Plasma masaüstü ortamıyla
-            geliştirilen MILOS, modern ve erişilebilir bir
-            işletim sistemi deneyimi sunmayı hedefler.
+        <p class="hero-subtitle">
+            Özgürlüğün, teknolojinin ve yeniliğin buluştuğu nokta.<br>
+            Geleceğe açılan özgür işletim sistemi projesi.
         </p>
 
-        <a href="#hakkimizda" class="button">
-            MILOS'u Keşfet
-        </a>
-
+        <div class="hero-buttons">
+            <a href="#sistem" class="button">MILOS'u Keşfet</a>
+            <a href="#hakkimizda" class="button button-outline">Bizi Tanıyın</a>
+        </div>
     </div>
 
-    <img src="MIL.png" class="hero-logo" alt="MILOS Logo">
-
-</div>
-
+    <div class="scroll-indicator">AŞAĞI KAYDIR</div>
 </section>
 
 <!-- HAKKIMIZDA -->
 
-<section id="hakkimizda" data-color="#101d3c">
+<section class="about" id="hakkimizda" data-color="#163d2b">
+    <div class="container">
+        <div class="section-heading">
+            <span>MILOS HAKKINDA</span>
+            <h2>Biz Kimiz?</h2>
+            <p>Teknolojiyi özgürleştirme hedefiyle yola çıkan bir işletim sistemi projesi.</p>
+        </div>
 
-<div class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>Geleceği Birlikte Tasarlıyoruz</h3>
 
-    <span class="section-label">Biz Kimiz?</span>
+                <p>
+                    MILOS, özgür yazılım dünyasının sunduğu imkânlardan
+                    yararlanarak geliştirilen bir işletim sistemi projesidir.
+                </p>
 
-    <h2 class="section-title">Hakkımızda</h2>
+                <p>
+                    Kullanıcıların bilgisayarları üzerinde daha fazla kontrol
+                    sahibi olmasını, modern ve kullanışlı bir masaüstü
+                    deneyimi yaşamasını amaçlıyoruz.
+                </p>
 
-    <p class="section-description">
-        MILOS, özgür yazılım anlayışını benimseyen,
-        Ubuntu altyapısı üzerine geliştirilen bir işletim
-        sistemi projesidir.
+                <p>
+                    Projemizin çıkış noktası Bursa'dır. MILOS, yerli bir
+                    teknoloji geliştirme fikrinin özgür yazılım anlayışıyla
+                    buluşmasının bir örneğidir.
+                </p>
+            </div>
 
-        Kullanıcılarına sade, modern, güvenilir ve güçlü
-        bir masaüstü deneyimi sunmayı amaçlar.
-    </p>
-
-</div>
-
+            <div class="about-image glass-card">
+                <img src="MIL.png" alt="MILOS proje logosu">
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- VİZYON -->
 
-<section id="vizyon" data-color="#291344">
+<section class="vision" id="vizyon" data-color="#234e38">
+    <div class="container">
+        <div class="section-heading">
+            <span>GELECEK HEDEFİMİZ</span>
+            <h2>Vizyonumuz</h2>
+        </div>
 
-<div class="container">
+        <div class="vision-grid">
+            <div class="vision-card glass-card">
+                <h3>Teknolojide Özgürlük</h3>
+                <p>
+                    Herkesin erişebileceği, geliştirebileceği ve kendi
+                    ihtiyaçlarına göre şekillendirebileceği özgür bir
+                    işletim sistemi deneyimini yaygınlaştırmak istiyoruz.
+                </p>
+            </div>
 
-    <span class="section-label">Gelecek Hedefimiz</span>
-
-    <h2 class="section-title">Vizyonumuz</h2>
-
-    <p class="section-description">
-        Teknolojide bağımsızlığı, yeniliği ve özgür yazılım
-        kültürünü destekleyerek herkesin erişebileceği güçlü
-        bir işletim sistemi ekosistemi oluşturmak.
-    </p>
-
-</div>
-
+            <div class="vision-card glass-card">
+                <h3>Yerli Teknoloji</h3>
+                <p>
+                    Türkiye'den doğan teknoloji projelerinin gelişmesine
+                    katkıda bulunmak ve MILOS'u sürekli gelişen bir
+                    platform hâline getirmek istiyoruz.
+                </p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- MİSYON -->
 
-<section id="misyon" data-color="#06434b">
+<section class="mission" id="misyon" data-color="#173c43">
+    <div class="container">
+        <div class="section-heading">
+            <span>ÇALIŞMA İLKELERİMİZ</span>
+            <h2>Misyonumuz</h2>
+        </div>
 
-<div class="container">
+        <div class="mission-content glass-card">
+            <h3>Herkes İçin Kullanışlı Teknoloji</h3>
 
-    <span class="section-label">Amacımız</span>
-
-    <h2 class="section-title">Misyonumuz</h2>
-
-    <p class="section-description">
-        Kullanıcı dostu, güvenilir, güncel ve geliştirilebilir
-        bir işletim sistemi sunmak; açık kaynak teknolojilerini
-        destekleyerek teknoloji dünyasına katkıda bulunmak.
-    </p>
-
-</div>
-
+            <p>
+                MILOS'un misyonu; açık kaynak teknolojilerinden yararlanarak
+                güvenilir, erişilebilir, modern ve kullanıcı dostu bir
+                işletim sistemi geliştirmektir.
+                Sürekli öğrenmeyi, geliştirmeyi ve özgür yazılım kültürünü
+                desteklemeyi temel ilkelerimiz arasında görüyoruz.
+            </p>
+        </div>
+    </div>
 </section>
 
 <!-- İŞLETİM SİSTEMİ -->
 
-<section id="sistem" data-color="#252c37">
-
-<div class="container">
-
-    <span class="section-label">Teknolojimiz</span>
-
-    <h2 class="section-title">MILOS İşletim Sistemi</h2>
-
-    <p class="section-description">
-        MILOS, Ubuntu tabanlıdır ve KDE Plasma masaüstü
-        ortamını kullanır. Modern masaüstü özelliklerini
-        özgür yazılım altyapısıyla bir araya getirir.
-    </p>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>Ubuntu Tabanlı</h3>
-            <p>
-                Ubuntu altyapısıyla geniş yazılım desteği
-                ve güçlü bir temel.
-            </p>
+<section class="system" id="sistem" data-color="#192f50">
+    <div class="container">
+        <div class="section-heading">
+            <span>TEKNOLOJİMİZ</span>
+            <h2>MILOS İşletim Sistemi</h2>
+            <p>Ubuntu altyapısı ve KDE Plasma masaüstü deneyimi.</p>
         </div>
 
-        <div class="card">
-            <h3>KDE Plasma</h3>
-            <p>
-                Özelleştirilebilir, modern ve kullanıcı dostu
-                masaüstü ortamı.
-            </p>
-        </div>
+        <div class="system-grid">
+            <div class="system-image glass-card">
+                <img src="plasma.png" alt="MILOS KDE Plasma masaüstü görüntüsü">
+            </div>
 
-        <div class="card">
-            <h3>Özgür Yazılım</h3>
-            <p>
-                Açık kaynak dünyasının sunduğu özgürlük
-                ve esneklik.
-            </p>
-        </div>
+            <div class="system-info">
+                <h3>Modern. Özgür. Kullanışlı.</h3>
 
+                <p>
+                    MILOS, Ubuntu tabanlı bir Linux işletim sistemi
+                    projesidir. Ubuntu'nun yazılım altyapısından yararlanırken
+                    KDE Plasma masaüstü ortamının özelleştirilebilir
+                    arayüzünü kullanır.
+                </p>
+
+                <p>
+                    Amacımız, modern bir masaüstü deneyimini özgür yazılım
+                    anlayışıyla bir araya getirmektir.
+                </p>
+
+                <div class="system-tags">
+                    <span>Ubuntu Tabanlı</span>
+                    <span>Linux</span>
+                    <span>KDE Plasma</span>
+                    <span>Açık Kaynak</span>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="plasma-box">
-
-        <h3>MILOS KDE Plasma Masaüstü</h3>
-
-        <img src="plasma.png" alt="MILOS KDE Plasma Masaüstü">
-
-    </div>
-
-</div>
-
 </section>
 
 <!-- ATATÜRK -->
 
-<section id="ataturk" data-color="#430b19">
-
-<div class="container">
-
-    <div class="ataturk-content">
-
-        <div>
-
-            <span class="section-label">
-                Cumhuriyetimizin Kurucusu
-            </span>
-
-            <h2 class="section-title">
-                Mustafa Kemal Atatürk
-            </h2>
-
-            <p class="section-description">
-                Mustafa Kemal Atatürk, Türkiye Cumhuriyeti'nin
-                kurucusu ve ilk cumhurbaşkanıdır.
-
-                Bağımsızlık, çağdaşlaşma, bilim ve akıl ilkeleriyle
-                Türkiye'nin geleceğine yön vermiştir.
-            </p>
-
-            <div class="ataturk-quote">
-                "Hayatta en hakiki mürşit ilimdir."
-            </div>
-
+<section class="ataturk" id="ataturk" data-color="#3b2729">
+    <div class="container">
+        <div class="section-heading">
+            <span>CUMHURİYETİMİZİN KURUCUSU</span>
+            <h2>Mustafa Kemal Atatürk</h2>
         </div>
 
-        <img src="ataturk.jpeg"
-             alt="Mustafa Kemal Atatürk"
-             class="ataturk-image">
+        <div class="ataturk-grid">
+            <div class="ataturk-image glass-card">
+                <img src="ataturk.jpeg" alt="Mustafa Kemal Atatürk">
+            </div>
 
+            <div class="ataturk-text">
+                <h3>Bir Milletin Yeniden Doğuşu</h3>
+
+                <p>
+                    Mustafa Kemal Atatürk, Türkiye Cumhuriyeti'nin
+                    kurucusu ve ilk Cumhurbaşkanıdır.
+                </p>
+
+                <p>
+                    Millî Mücadele'ye önderlik ederek Türk milletinin
+                    bağımsızlık mücadelesini zafere ulaştırmış, 29 Ekim
+                    1923'te Cumhuriyet'in ilanına öncülük etmiştir.
+                </p>
+
+                <p>
+                    Atatürk'ün bilim, eğitim, akıl ve çağdaşlaşmaya verdiği
+                    önem, Türkiye'nin gelişim yolculuğunda önemli bir
+                    yere sahiptir.
+                </p>
+            </div>
+        </div>
     </div>
-
-</div>
-
 </section>
 
 <!-- BURSA -->
 
-<section id="bursa" data-color="#073d2b">
-
-<div class="container">
-
-    <span class="section-label">MILOS'un Doğduğu Yer</span>
-
-    <h2 class="section-title">Bursa</h2>
-
-    <div class="bursa-content">
-
-        <div>
-
-            <p class="section-description">
-                MILOS projesinin doğum yeri Bursa'dır.
-
-                Teknolojiye, özgür yazılıma ve yeniliğe uzanan
-                bu yolculuğun başlangıç noktası Bursa olarak
-                belirlenmiştir.
-
-                MILOS'un hikâyesi burada başlıyor.
-            </p>
-
-            <a href="#turkiye" class="button">
-                Bursa'yı Haritada Gör
-            </a>
-
+<section class="bursa" id="bursa" data-color="#513a28">
+    <div class="container">
+        <div class="section-heading">
+            <span>MILOS'UN DOĞDUĞU ŞEHİR</span>
+            <h2>Bursa</h2>
         </div>
 
-        <div class="bursa-card">
+        <div class="bursa-grid">
+            <div class="bursa-text">
+                <h3>Bir Fikirden Bir Projeye</h3>
 
-            <h3>MILOS × BURSA</h3>
+                <p>
+                    Bursa, tarihî ve kültürel zenginliğiyle Türkiye'nin
+                    önemli şehirlerinden biridir.
+                </p>
 
-            <p>
-                Bir şehirden doğan teknoloji fikri,
-                özgür bir işletim sistemi hedefiyle
-                geleceğe doğru ilerliyor.
-            </p>
+                <p>
+                    MILOS işletim sistemi projesinin doğduğu yer de
+                    Bursa'dır. Projemiz, bu şehirden yola çıkarak
+                    teknoloji alanında üretme ve geliştirme hedefi taşır.
+                </p>
 
-            <div class="bursa-coordinate">
-                DOĞUM YERİ: BURSA, TÜRKİYE
+                <p>
+                    Bursa'dan doğan bu fikir, özgür yazılım dünyasında
+                    kendi yolunu çizmeyi amaçlıyor.
+                </p>
+
+                <span class="bursa-badge">MILOS PROJESİNİN DOĞUM YERİ</span>
             </div>
 
+            <div class="bursa-image glass-card">
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Bursa_Ulu_Camii.jpg"
+                    alt="Bursa Ulu Camii"
+                    loading="lazy">
+            </div>
         </div>
-
     </div>
-
-    <div class="bursa-glow"></div>
-
-</div>
-
 </section>
 
 <!-- TÜRKİYE TARİHİ -->
 
-<section id="tarih" data-color="#49301a">
+<section class="history-section" id="turkiye-tarihi" data-color="#142d25">
+    <div class="container">
 
-<div class="container">
-
-    <span class="section-label">Geçmişten Günümüze</span>
-
-    <h2 class="section-title">Türkiye Tarihi</h2>
-
-    <p class="section-description">
-        Türk tarihinin önemli dönüm noktalarına doğru
-        bir yolculuk. Aşağı kaydırarak geçmişten günümüze
-        uzanan tarih çizgisini keşfedin.
-    </p>
-
-    <div class="timeline">
-
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">MÖ 220</span>
-                <h3>Asya Hun Devleti</h3>
-                <p>
-                    Orta Asya'da kurulan Asya Hun Devleti,
-                    Türk tarihinin bilinen ilk büyük siyasi
-                    teşkilatlanmalarından biri olarak kabul edilir.
-                </p>
-            </div>
+        <div class="history-heading">
+            <span class="history-label">GEÇMİŞTEN GELECEĞE</span>
+            <h2>Türkiye'nin Tarih Yolculuğu</h2>
+            <p>
+                Asırlara yayılan bir tarih, medeniyet ve bağımsızlık mücadelesi.
+            </p>
         </div>
 
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">552</span>
-                <h3>Göktürk Kağanlığı</h3>
-                <p>
-                    Bumin Kağan tarafından kurulan Göktürk Kağanlığı,
-                    Türk adını devlet adı olarak kullanan ilk
-                    Türk devleti olarak bilinir.
-                </p>
-            </div>
-        </div>
+        <div class="history-timeline">
 
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">751</span>
-                <h3>Talas Savaşı</h3>
-                <p>
-                    Abbasiler ile Çin arasında gerçekleşen Talas
-                    Savaşı, Türklerin İslam dünyasıyla ilişkilerinde
-                    önemli bir dönüm noktası oldu.
-                </p>
-            </div>
-        </div>
+            <article class="history-card">
+                <div class="history-year">1071</div>
 
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">1071</span>
-                <h3>Malazgirt Savaşı</h3>
-                <p>
-                    Büyük Selçuklu Sultanı Alp Arslan'ın zaferi,
-                    Anadolu'nun Türk yerleşimine açılmasında
-                    önemli rol oynadı.
-                </p>
-            </div>
-        </div>
+                <div class="history-content">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/131_Bataille_de_Malazgirt.jpg"
+                        alt="Malazgirt Savaşı tasviri"
+                        loading="lazy">
 
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">1299</span>
-                <h3>Osmanlı Devleti</h3>
-                <p>
-                    Osman Gazi'nin liderliğinde Osmanlı Beyliği
-                    ortaya çıktı ve zamanla geniş bir imparatorluğa
-                    dönüştü.
-                </p>
-            </div>
-        </div>
+                    <div class="history-text">
+                        <h3>Malazgirt Zaferi</h3>
+                        <p>
+                            1071 Malazgirt Zaferi, Anadolu'nun Türk yurdu
+                            hâline gelmesinde önemli bir dönüm noktası oldu.
+                        </p>
+                    </div>
+                </div>
+            </article>
 
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">1453</span>
-                <h3>İstanbul'un Fethi</h3>
-                <p>
-                    Fatih Sultan Mehmet, İstanbul'u fethederek
-                    Bizans İmparatorluğu'na son verdi.
-                </p>
-            </div>
-        </div>
+            <article class="history-card">
+                <div class="history-year">1299</div>
 
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">1919</span>
-                <h3>Millî Mücadele</h3>
-                <p>
-                    Mustafa Kemal Atatürk'ün 19 Mayıs 1919'da
-                    Samsun'a çıkmasıyla Millî Mücadele süreci
-                    başladı.
-                </p>
-            </div>
-        </div>
+                <div class="history-content">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Ottoman_conquests.jpg"
+                        alt="Osmanlı Devleti haritası"
+                        loading="lazy">
 
-        <div class="timeline-item">
-            <div class="timeline-card">
-                <span class="timeline-date">1923</span>
-                <h3>Türkiye Cumhuriyeti</h3>
-                <p>
-                    29 Ekim 1923'te Cumhuriyet ilan edildi.
-                    Mustafa Kemal Atatürk, Türkiye Cumhuriyeti'nin
-                    ilk cumhurbaşkanı oldu.
-                </p>
-            </div>
-        </div>
+                    <div class="history-text">
+                        <h3>Osmanlı Devleti'nin Kuruluşu</h3>
+                        <p>
+                            Osmanlı Beyliği'nin ortaya çıkışı, yüzyıllar
+                            boyunca üç kıtada etkili olacak bir devletin
+                            temellerini oluşturdu.
+                        </p>
+                    </div>
+                </div>
+            </article>
 
+            <article class="history-card">
+                <div class="history-year">1453</div>
+
+                <div class="history-content">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Constantinople_1453.jpg"
+                        alt="İstanbul'un fethi"
+                        loading="lazy">
+
+                    <div class="history-text">
+                        <h3>İstanbul'un Fethi</h3>
+                        <p>
+                            Fatih Sultan Mehmet, 29 Mayıs 1453'te
+                            İstanbul'u fethetti. Bu olay dünya tarihinin
+                            önemli dönüm noktalarından biri oldu.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="history-card">
+                <div class="history-year">1915</div>
+
+                <div class="history-content">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Turkish_trenches_at_Gallipoli.jpg"
+                        alt="Çanakkale Cephesi"
+                        loading="lazy">
+
+                    <div class="history-text">
+                        <h3>Çanakkale Zaferi</h3>
+                        <p>
+                            Çanakkale'de verilen mücadele, milletin
+                            bağımsızlık iradesini ve direniş gücünü
+                            ortaya koydu.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="history-card">
+                <div class="history-year">1919</div>
+
+                <div class="history-content">
+                    <img
+                        src="ataturk.jpeg"
+                        alt="Mustafa Kemal Atatürk"
+                        loading="lazy">
+
+                    <div class="history-text">
+                        <h3>Kurtuluş Mücadelesi</h3>
+                        <p>
+                            19 Mayıs 1919'da Mustafa Kemal'in Samsun'a
+                            çıkışıyla Millî Mücadele'nin yeni dönemi başladı.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="history-card">
+                <div class="history-year">1923</div>
+
+                <div class="history-content">
+                    <img
+                        src="ataturk.jpeg"
+                        alt="Mustafa Kemal Atatürk"
+                        loading="lazy">
+
+                    <div class="history-text">
+                        <h3>Türkiye Cumhuriyeti'nin İlanı</h3>
+                        <p>
+                            29 Ekim 1923'te Cumhuriyet ilan edildi.
+                            Türkiye, yeni yönetim sistemiyle yeni bir
+                            döneme adım attı.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+        </div>
     </div>
-
-</div>
-
 </section>
 
-<!-- FİZİKİ TÜRKİYE HARİTASI -->
+<!-- TÜRKİYE FİZİKİ HARİTASI -->
 
-<section id="turkiye" data-color="#29101a">
+<section class="map-section" id="harita" data-color="#193c36">
+    <div class="container">
 
-<div class="container">
+        <div class="section-heading">
+            <span>ANADOLU'NUN COĞRAFYASI</span>
+            <h2>Türkiye Fiziki Haritası</h2>
+        </div>
 
-    <span class="section-label">81 İl, Tek Ülke</span>
-
-    <h2 class="section-title">Türkiye Fiziki Haritası</h2>
-
-    <p class="section-description">
-        Türkiye'nin dağlarını, yükseltilerini, vadilerini
-        ve arazi yapısını fiziki harita üzerinden keşfedin.
-
-        Ankara başkent, Bursa ise MILOS'un doğum yeri
-        olarak özel işaretçilerle gösterilmektedir.
-    </p>
-
-    <div class="map-wrapper">
-
-        <h3>Türkiye Topoğrafik Haritası</h3>
-
-        <div id="turkiye-haritasi"></div>
-
-        <p class="map-note">
-            Yeşil işaretçi: Bursa – MILOS'un doğduğu yer.
-            Kırmızı işaretçi: Ankara – Türkiye'nin başkenti.
-            İllerin üzerine gelerek isimlerini görüntüleyebilirsiniz.
-            Harita OpenTopoMap topoğrafik verilerini kullanır.
+        <p class="map-description">
+            Türkiye'nin dağlarını, yükseltilerini ve coğrafi yapısını
+            keşfet. Şehirlerin üzerine gelerek isimlerini görebilir,
+            Ankara ve Bursa'nın konumlarını inceleyebilirsin.
         </p>
 
+        <div class="map-wrapper glass-card">
+            <div id="turkiye-haritasi"></div>
+        </div>
+
+        <div class="map-legend">
+            <div class="legend-item">
+                <span class="legend-dot legend-ankara"></span>
+                Başkent Ankara
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot legend-bursa"></span>
+                MILOS'un doğduğu yer: Bursa
+            </div>
+        </div>
+
     </div>
-
-</div>
-
 </section>
 
+<!-- FOOTER -->
+
 <footer>
-    <p>MILOS | Özgür Teknoloji, Güçlü Gelecek</p>
-    <p style="margin-top:10px;">MILOS'un doğduğu yer: Bursa, Türkiye</p>
+    <div class="footer-logo">MILOS</div>
+
+    <p>
+        Özgür yazılım, özgür teknoloji, özgür gelecek.
+    </p>
+
+    <p style="margin-top:15px;">
+        Bursa'dan dünyaya.
+    </p>
+
+    <p style="margin-top:25px;">
+        © <span id="currentYear"></span> MILOS Projesi
+    </p>
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+/* MOBİL MENÜ */
 
-/* =====================================
-   AKICI RENK GEÇİŞİ
-===================================== */
+const menuButton = document.getElementById("menuButton");
+const navLinks = document.getElementById("navLinks");
 
-const allSections = document.querySelectorAll("section");
+menuButton.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+});
 
-const themeObserver = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-            const color = entry.target.dataset.color;
-
-            if (color) {
-                document.documentElement.style.setProperty(
-                    "--page-color",
-                    color
-                );
-            }
-
-        }
-
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
     });
-
-}, {
-    threshold: 0.35
 });
 
-allSections.forEach(section => {
-    themeObserver.observe(section);
-});
+/* TARİH ANİMASYONLARI */
 
-
-/* =====================================
-   TARİH ANİMASYONU
-===================================== */
-
-const timelineItems = document.querySelectorAll(".timeline-item");
-
-const timelineObserver = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
+const historyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add("visible");
+            historyObserver.unobserve(entry.target);
         }
-
     });
-
 }, {
     threshold: 0.15
 });
 
-timelineItems.forEach(item => {
-    timelineObserver.observe(item);
+document.querySelectorAll(".history-card").forEach((card, index) => {
+    card.style.transitionDelay = `${(index % 2) * 120}ms`;
+    historyObserver.observe(card);
 });
 
+/* SAYFA RENK GEÇİŞLERİ */
 
-/* =====================================
-   AKTİF MENÜ
-===================================== */
+const colorSections = document.querySelectorAll("section[data-color]");
 
-const navLinks = document.querySelectorAll("nav a");
-
-const sectionObserver = new IntersectionObserver((entries) => {
-
+const colorObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-
         if (entry.isIntersecting) {
-
-            navLinks.forEach(link => {
-                link.classList.remove("active");
-            });
-
-            const activeLink = document.querySelector(
-                'nav a[href="#' + entry.target.id + '"]'
+            document.body.style.setProperty(
+                "--page-color",
+                entry.target.dataset.color
             );
-
-            if (activeLink) {
-                activeLink.classList.add("active");
-            }
-
         }
-
     });
-
 }, {
-    rootMargin: "-30% 0px -60% 0px"
+    threshold: 0.25
 });
 
-allSections.forEach(section => {
-    sectionObserver.observe(section);
+colorSections.forEach(section => {
+    colorObserver.observe(section);
 });
 
+/* AKTİF MENÜ */
 
-/* =====================================
-   FİZİKİ TÜRKİYE HARİTASI
-===================================== */
+const menuObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            document.querySelectorAll(".nav-links a").forEach(link => {
+                link.classList.toggle(
+                    "active",
+                    link.getAttribute("href") === "#" + entry.target.id
+                );
+            });
+        }
+    });
+}, {
+    threshold: 0.35
+});
 
-const mapElement = document.getElementById("turkiye-haritasi");
+document.querySelectorAll("section[id]").forEach(section => {
+    menuObserver.observe(section);
+});
+
+/* HARİTA */
+
+let map = null;
 
 if (typeof L !== "undefined") {
 
-    const map = L.map("turkiye-haritasi", {
-        zoomControl: true,
+    map = L.map("turkiye-haritasi", {
         scrollWheelZoom: false
-    });
+    }).setView([39.0, 35.0], 6);
 
-    /* FİZİKİ / TOPOĞRAFİK HARİTA KATMANI */
+    /* FİZİKİ / TOPOGRAFİK HARİTA */
 
     L.tileLayer(
         "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
         {
             maxZoom: 17,
             attribution:
-                'Map data: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Map style: © <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)'
+                'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)'
         }
     ).addTo(map);
 
+    /* ANKARA */
 
-    /* İL SINIRLARI */
+    const ankaraIcon = L.divIcon({
+        className: "custom-map-marker",
+        html: `
+            <div style="
+                width:17px;
+                height:17px;
+                background:#e84b4b;
+                border:3px solid white;
+                border-radius:50%;
+                box-shadow:0 0 15px #e84b4b;
+            "></div>
+        `,
+        iconSize: [17, 17],
+        iconAnchor: [8, 8]
+    });
 
-    const provincesLayer = L.geoJSON(null, {
+    L.marker([39.9334, 32.8597], {
+        icon: ankaraIcon
+    })
+    .addTo(map)
+    .bindTooltip("BAŞKENT ANKARA", {
+        permanent: true,
+        direction: "top",
+        className: "map-label"
+    });
 
-        style: {
-            color: "#ffffff",
-            weight: 1.3,
-            fillColor: "#ffffff",
-            fillOpacity: 0.02
-        },
+    /* BURSA */
 
-        onEachFeature: function(feature, layer) {
+    const bursaIcon = L.divIcon({
+        className: "custom-map-marker",
+        html: `
+            <div style="
+                width:17px;
+                height:17px;
+                background:#36d68b;
+                border:3px solid white;
+                border-radius:50%;
+                box-shadow:0 0 15px #36d68b;
+            "></div>
+        `,
+        iconSize: [17, 17],
+        iconAnchor: [8, 8]
+    });
 
-            const properties = feature.properties || {};
+    L.marker([40.1950, 29.0600], {
+        icon: bursaIcon
+    })
+    .addTo(map)
+    .bindTooltip("MILOS'UN DOĞDUĞU YER: BURSA", {
+        permanent: true,
+        direction: "top",
+        className: "map-label"
+    });
 
-            const provinceName =
-                properties.il_adi ||
-                properties.name ||
-                properties.NAME_1 ||
-                properties.name_tr ||
-                properties.il ||
-                "Türkiye İli";
-
-            layer.bindTooltip(provinceName, {
-                sticky: true,
-                direction: "top"
-            });
-
-            layer.on({
-
-                mouseover: function() {
-
-                    layer.setStyle({
-                        color: "#ffca65",
-                        weight: 3,
-                        fillColor: "#ffca65",
-                        fillOpacity: 0.18
-                    });
-
-                },
-
-                mouseout: function() {
-
-                    provincesLayer.resetStyle(layer);
-
-                }
-
-            });
-
-        }
-
-    }).addTo(map);
-
-
-    /* TÜRKİYE İL VERİLERİ */
+    /* İLLERİN SINIRLARI VE İSİMLERİ */
 
     fetch(
         "https://raw.githubusercontent.com/theaiagent/turkiye_iller_geojson/main/turkiye_iller.geojson"
     )
-
     .then(response => {
-
         if (!response.ok) {
             throw new Error("Harita verisi yüklenemedi.");
         }
-
         return response.json();
-
     })
-
     .then(data => {
 
-        provincesLayer.addData(data);
+        const provinceLayer = L.geoJSON(data, {
 
-        map.fitBounds(provincesLayer.getBounds(), {
-            padding: [15, 15]
-        });
+            style: {
+                color: "#ffffff",
+                weight: 1,
+                opacity: 0.8,
+                fillColor: "#32835a",
+                fillOpacity: 0.12
+            },
 
-        /* ANKARA - BAŞKENT */
+            onEachFeature: function(feature, layer) {
 
-        const ankaraIcon = L.divIcon({
+                const properties = feature.properties || {};
 
-            className: "",
+                const provinceName =
+                    properties.il_adi ||
+                    properties.name ||
+                    properties.NAME_1 ||
+                    properties.name_tr ||
+                    properties.il ||
+                    "Türkiye ili";
 
-            html: '<div class="ankara-icon"></div>',
+                layer.bindTooltip(provinceName, {
+                    sticky: true,
+                    direction: "top",
+                    className: "province-tooltip"
+                });
 
-            iconSize: [20, 20],
+                layer.on({
+                    mouseover: function(event) {
+                        event.target.setStyle({
+                            fillColor: "#a9ddb3",
+                            fillOpacity: 0.65,
+                            color: "#ffffff",
+                            weight: 2
+                        });
 
-            iconAnchor: [10, 10]
+                        event.target.bringToFront();
+                    },
 
-        });
+                    mouseout: function(event) {
+                        provinceLayer.resetStyle(event.target);
+                    }
+                });
+            }
 
-        const ankaraMarker = L.marker(
-            [39.9334, 32.8597],
-            { icon: ankaraIcon }
-        ).addTo(map);
+        }).addTo(map);
 
-        ankaraMarker.bindTooltip("BAŞKENT ANKARA", {
-
-            permanent: true,
-
-            direction: "top",
-
-            offset: [0, -12],
-
-            className: "ankara-label"
-
-        });
-
-        ankaraMarker.bindPopup(
-            "<strong>Ankara</strong><br>Türkiye Cumhuriyeti'nin başkenti."
-        );
-
-
-        /* BURSA - MILOS'UN DOĞUM YERİ */
-
-        const bursaIcon = L.divIcon({
-
-            className: "",
-
-            html: '<div class="bursa-icon"></div>',
-
-            iconSize: [20, 20],
-
-            iconAnchor: [10, 10]
-
-        });
-
-        const bursaMarker = L.marker(
-            [40.1950, 29.0600],
-            { icon: bursaIcon }
-        ).addTo(map);
-
-        bursaMarker.bindTooltip("MILOS'UN DOĞDUĞU YER: BURSA", {
-
-            permanent: true,
-
-            direction: "top",
-
-            offset: [0, -12],
-
-            className: "bursa-label"
-
-        });
-
-        bursaMarker.bindPopup(
-            "<strong>Bursa</strong><br>MILOS projesinin doğum yeri."
-        );
-
-    })
-
-    .catch(error => {
-
-        mapElement.innerHTML =
-            "<p style='color:#222;padding:30px;text-align:center;'>Harita yüklenemedi. İnternet bağlantınızı kontrol ederek sayfayı yenileyin.</p>";
-
-        console.error("Harita hatası:", error);
-
-    });
-
-} else {
-
-    mapElement.innerHTML =
-        "<p style='color:#222;padding:30px;text-align:center;'>Harita kütüphanesi yüklenemedi. Sayfayı yenileyin.</p>";
-
-}
-
-
-/* HARİTA BÖLÜMÜNE GELİNCE BOYUTU YENİLE */
-
-const mapSection = document.getElementById("turkiye");
-
-const mapResizeObserver = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting && typeof map !== "undefined") {
-            setTimeout(() => map.invalidateSize(), 200);
+        try {
+            map.fitBounds(provinceLayer.getBounds(), {
+                padding: [15, 15]
+            });
+        } catch(error) {
+            console.log("Harita sınırları ayarlanamadı.", error);
         }
 
+    })
+    .catch(error => {
+        console.error("Türkiye haritası yüklenemedi:", error);
     });
 
-});
+    /* HARİTA BOYUTUNU DÜZELT */
 
-mapResizeObserver.observe(mapSection);
+    const mapResizeObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && map) {
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 200);
+            }
+        });
+    });
+
+    mapResizeObserver.observe(
+        document.getElementById("turkiye-haritasi")
+    );
+
+} else {
+    document.getElementById("turkiye-haritasi").innerHTML =
+        "Harita kütüphanesi yüklenemedi. İnternet bağlantınızı kontrol edin.";
+}
+
+/* YIL */
+
+document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
 
 </script>
+
+<style>
+/* HARİTA ETİKETLERİ */
+
+.map-label {
+    background: rgba(8,25,17,.9) !important;
+    border: 1px solid rgba(255,255,255,.5) !important;
+    color: white !important;
+    font-family: Inter, sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 7px 10px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+}
+
+.province-tooltip {
+    background: #102c20 !important;
+    border: 1px solid #a9ddb3 !important;
+    color: white !important;
+    border-radius: 8px;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    padding: 7px 10px;
+}
+
+.leaflet-container {
+    font-family: Inter, sans-serif;
+}
+
+.leaflet-control-attribution {
+    font-size: 9px !important;
+}
+</style>
 
 </body>
 </html>
