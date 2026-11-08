@@ -17,7 +17,7 @@
     --muted: #b3c8bb;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+html { scroll-behavior: smooth; }
 body {
     font-family: 'Inter', sans-serif;
     color: var(--white);
@@ -181,11 +181,11 @@ button { font: inherit; cursor: pointer; }
     overflow: hidden;
 }
 .hero-page.active { display: flex; }
-.hero-tag { color: var(--light-green); letter-spacing: 5px; font-size: 11px; font-weight: 800; margin-bottom: 5px; }
+.hero-tag { color: var(--light-green); letter-spacing: 5px; font-size: 11px; font-weight: 800; margin-bottom: 15px; }
 .hero-logo-img {
     width: min(220px, 40vw);
     height: auto;
-    margin: 10px auto 20px;
+    margin: 0 auto 25px;
     display: block;
     border-radius: 24px;
     object-fit: contain;
@@ -216,7 +216,7 @@ button { font: inherit; cursor: pointer; }
 .feature { padding: 17px; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; background: rgba(255,255,255,.04); color: #d9eee1; font-size: 13px; }
 .feature strong { display: block; color: var(--light-green); margin-bottom: 6px; }
 
-/* ===== ATATÜRK / TARİH / HARİTA — KIRMIZI GEÇİŞ ===== */
+/* ===== KIRMIZI TEMA ===== */
 .page.red-theme { background: #1a0a0a; }
 .page.red-theme::before {
     content: "";
@@ -236,6 +236,7 @@ button { font: inherit; cursor: pointer; }
 .red-theme .section-label { color: #ff9e9e; }
 .red-theme .glass-card { border-color: rgba(255, 120, 120, 0.2); }
 .red-theme .glass-card:hover { border-color: rgba(255, 150, 150, 0.5); }
+.red-theme .section-text { color: #d4b8b8; }
 
 .ataturk-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
 .ataturk-gallery img { width: 100%; height: 320px; object-fit: cover; object-position: center top; border-radius: 18px; border: 1px solid rgba(255,255,255,.13); transition: transform .4s; filter: saturate(.85); }
@@ -279,7 +280,7 @@ footer p { color: #91a99a; font-size: 12px; line-height: 1.8; }
     .dock-sep { display: none; }
     .dock-btn { padding: 6px 8px; font-size: 10px; }
     .dock-btn .icon { display: none; }
-    .page { padding: 100px 6% 70px; }
+    .page { padding: 130px 6% 70px; }
     .hero-page h1 { letter-spacing: 7px; }
     .grid-3, .about-layout, .bursa-layout, .ataturk-gallery { grid-template-columns: 1fr; }
     .ataturk-gallery img { height: 350px; }
@@ -311,7 +312,7 @@ footer p { color: #91a99a; font-size: 12px; line-height: 1.8; }
 <!-- ANA SAYFA -->
 <div class="page hero-page active" id="page-anasayfa">
     <div class="hero-tag">ÖZGÜRLÜĞÜN YENİ YÜZÜ</div>
-    <img class="hero-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Wolf_black_canva.png/400px-Wolf_black_canva.png" alt="MILOS Bozkurt">
+    <img class="hero-logo-img" src="MIL.png" alt="MILOS Logo" onerror="this.style.display='none'">
     <h1>MILOS</h1>
     <p class="hero-description">Özgürlük, teknoloji ve bağımsızlık ruhuyla geliştirilen yeni nesil işletim sistemi projesi.</p>
     <div class="hero-buttons">
@@ -338,7 +339,7 @@ footer p { color: #91a99a; font-size: 12px; line-height: 1.8; }
                 <div class="feature"><strong>MILOS Tasarımı</strong>Kendine özgü görünüm</div>
             </div>
         </div>
-        <img class="about-image" src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&q=80" alt="MILOS Masaüstü">
+        <img class="about-image" src="plasma.png" alt="MILOS Masaüstü" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Desktop'">
     </div>
 </div>
 
@@ -378,7 +379,7 @@ footer p { color: #91a99a; font-size: 12px; line-height: 1.8; }
         <p class="section-text center">Red Hat altyapısı ve KDE Plasma masaüstü ortamıyla şekillenen MILOS, özgün bir Linux deneyimi oluşturmayı hedefler.</p>
     </div>
     <div class="about-layout">
-        <img class="about-image" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" alt="MILOS Red Hat">
+        <img class="about-image" src="plasma.png" alt="MILOS Red Hat" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Red+Hat'">
         <div>
             <h3 class="section-title" style="font-size:30px;">Güçlü altyapı, özgün görünüm.</h3>
             <p class="section-text">MILOS projesinde Red Hat'in kurumsal Linux altyapısından ve KDE Plasma'nın esnek masaüstü ortamından yararlanıyoruz. Kendi görsel kimliğimizi ve kullanıcı deneyimimizi geliştirmeye odaklanıyoruz.</p>
@@ -400,9 +401,9 @@ footer p { color: #91a99a; font-size: 12px; line-height: 1.8; }
         <p class="section-text center">Türkiye Cumhuriyeti'nin kurucusu Mustafa Kemal Atatürk'ü saygı ve minnetle anıyoruz.</p>
     </div>
     <div class="ataturk-gallery">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ataturk_in_1923.jpg/500px-Ataturk_in_1923.jpg" alt="Atatürk 1923" loading="lazy">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Mustafa_Kemal_Ataturk.png/500px-Mustafa_Kemal_Ataturk.png" alt="Atatürk portresi" loading="lazy">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Atat%C3%BCrk_TBMM%27den_%C3%A7%C4%B1karken.jpg/500px-Atat%C3%BCrk_TBMM%27den_%C3%A7%C4%B1karken.jpg" alt="Atatürk TBMM'den çıkarken" loading="lazy">
+        <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+1923" alt="Atatürk 1923" loading="lazy">
+        <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+Portresi" alt="Atatürk portresi" loading="lazy">
+        <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=TBMM" alt="Atatürk TBMM'den çıkarken" loading="lazy">
     </div>
     <div class="glass-card center" style="max-width:750px;margin:35px auto 0;">
         <h3>Bağımsızlık ve Cumhuriyet</h3>
@@ -418,7 +419,7 @@ footer p { color: #91a99a; font-size: 12px; line-height: 1.8; }
         <p class="section-text center">MILOS projesinin doğduğu şehir: Bursa.</p>
     </div>
     <div class="bursa-layout">
-        <img src="https://images.unsplash.com/photo-1590333747305-3b5b5b6e1b1a?w=800&q=80" alt="Bursa Ulu Camii" loading="lazy">
+        <img src="https://placehold.co/800x500/0d2a1d/8df0bd?text=Bursa+Ulu+Camii" alt="Bursa Ulu Camii" loading="lazy">
         <div>
             <h3 class="section-title" style="font-size:32px;">Tarihin ve üretimin şehri.</h3>
             <p class="section-text">Osmanlı Devleti'nin ilk başkentlerinden biri olan Bursa; tarihi yapıları, kültürü ve doğal güzellikleriyle Türkiye'nin önemli şehirlerinden biridir.</p>
@@ -435,9 +436,37 @@ footer p { color: #91a99a; font-size: 12px; line-height: 1.8; }
         <p class="section-text center">Anadolu ve Türkiye tarihinin önemli dönüm noktalarından bazıları.</p>
     </div>
     <div class="timeline">
-        <div class="timeline-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/131_Bataille_de_Malazgirt.jpg/500px-131_Bataille_de_Malazgirt.jpg" alt="Malazgirt" loading="lazy"><h3>1071 – Malazgirt</h3><p>Malazgirt Savaşı, Anadolu'nun Türk tarihindeki yerini değiştiren önemli dönüm noktalarından biridir.</p></div>
-        <div class="timeline-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Ottoman_conquests.jpg/500px-Ottoman_conquests.jpg" alt="Osmanlı" loading="lazy"><h3>1299 – Osmanlı Devleti</h3><p>Osmanlı Beyliği'nin kuruluşuyla Anadolu'da yeni bir siyasi dönem başladı.</p></div>
-        <div class="timeline-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Constantinople_1453.jpg/500px-Constantinople_1453.jpg" alt="İstanbul'un Fethi" loading="lazy"><h3>1453 – İstanbul'un Fethi</h3><p>Fatih Sultan Mehmet'in İstanbul'u fethetmesi dünya tarihinin önemli olaylarından biri oldu.</p></div>
-        <div class="timeline-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Turkish_trenches_at_Gallipoli.jpg/500px-Turkish_trenches_at_Gallipoli.jpg" alt="Çanakkale" loading="lazy"><h3>1915 – Çanakkale</h3><p>Çanakkale Cephesi, Türk tarihinin en önemli mücadelelerinden biri olarak hafızalara kazındı.</p></div>
-        <div class="timeline-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Band%C4%B1rma_Vapuru.png/500px-Band%C4%B1rma_Vapuru.png" alt="Bandırma Vapuru" loading="lazy"><h3>1919 – Samsun'a Çıkış</h3><p>Mustafa Kemal Atatürk'ün Samsun'a çıkışı Millî Mücadele'nin başlangıcı kabul edilir.</p></div>
-        <div class="timeline-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Ataturk_in_1923.jpg/500px-Ataturk_in_1923.jpg" alt="TBMM" loading="lazy"><h3>1920 – TBMM'nin Açılmas
+        <div class="timeline-item">
+            <img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1071+Malazgirt" alt="Malazgirt" loading="lazy">
+            <h3>1071 – Malazgirt</h3>
+            <p>Malazgirt Savaşı, Anadolu'nun Türk tarihindeki yerini değiştiren önemli dönüm noktalarından biridir.</p>
+        </div>
+        <div class="timeline-item">
+            <img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1299+Osmanl%C4%B1" alt="Osmanlı" loading="lazy">
+            <h3>1299 – Osmanlı Devleti</h3>
+            <p>Osmanlı Beyliği'nin kuruluşuyla Anadolu'da yeni bir siyasi dönem başladı.</p>
+        </div>
+        <div class="timeline-item">
+            <img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1453+%C4%B0stanbul" alt="İstanbul'un Fethi" loading="lazy">
+            <h3>1453 – İstanbul'un Fethi</h3>
+            <p>Fatih Sultan Mehmet'in İstanbul'u fethetmesi dünya tarihinin önemli olaylarından biri oldu.</p>
+        </div>
+        <div class="timeline-item">
+            <img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1915+%C3%87anakkale" alt="Çanakkale" loading="lazy">
+            <h3>1915 – Çanakkale</h3>
+            <p>Çanakkale Cephesi, Türk tarihinin en önemli mücadelelerinden biri olarak hafızalara kazındı.</p>
+        </div>
+        <div class="timeline-item">
+            <img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1919+Samsun" alt="Bandırma Vapuru" loading="lazy">
+            <h3>1919 – Samsun'a Çıkış</h3>
+            <p>Mustafa Kemal Atatürk'ün Samsun'a çıkışı Millî Mücadele'nin başlangıcı kabul edilir.</p>
+        </div>
+        <div class="timeline-item">
+            <img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1920+TBMM" alt="TBMM" loading="lazy">
+            <h3>1920 – TBMM'nin Açılması</h3>
+            <p>Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açıldı.</p>
+        </div>
+        <div class="timeline-item">
+            <img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1923+Cumhuriyet" alt="Cumhuriyetin ilanı" loading="lazy">
+            <h3>1923 – Cumhuriyet</h3>
+            <p>29 Ekim 1923'te Cum
