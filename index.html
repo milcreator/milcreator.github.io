@@ -9,413 +9,335 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-:root {
-    --page-color: #071b13;
-    --green: #19a66a;
-    --light-green: #8df0bd;
-    --white: #f4fff8;
-    --muted: #b3c8bb;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 110px; }
-body {
-    font-family: 'Inter', sans-serif;
-    color: var(--white);
-    background: var(--page-color);
-    overflow-x: hidden;
-    transition: background-color 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-    min-height: 100vh;
-}
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse at 15% 15%, rgba(20,150,90,.17), transparent 45%),
-        radial-gradient(ellipse at 85% 75%, rgba(0,90,55,.18), transparent 50%);
-    transition: opacity 1.4s ease;
-}
-a { color: inherit; text-decoration: none; }
-button { font: inherit; cursor: pointer; }
+:root{--page-color:#071b13;--green:#19a66a;--light-green:#8df0bd;--white:#f4fff8;--muted:#b3c8bb}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{font-family:'Inter',sans-serif;color:var(--white);background:var(--page-color);overflow-x:hidden;transition:background-color 1.4s cubic-bezier(.22,1,.36,1);min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 15% 15%,rgba(20,150,90,.17),transparent 45%),radial-gradient(ellipse at 85% 75%,rgba(0,90,55,.18),transparent 50%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
 
-/* ===== LIQUID GLASS DOCK ===== */
-.dock {
-    position: fixed;
-    top: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 14px;
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(22px) saturate(180%);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.35),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-        0 8px 40px rgba(0, 0, 0, 0.45);
-    transition: background 0.3s, box-shadow 0.3s;
-}
-.dock:hover {
-    background: rgba(255, 255, 255, 0.13);
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.45),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-        0 12px 50px rgba(0, 0, 0, 0.55);
-}
-.dock-brand {
-    font-weight: 900;
-    font-size: 16px;
-    letter-spacing: 3px;
-    padding: 0 12px 0 4px;
-    color: var(--light-green);
-    white-space: nowrap;
-}
-.dock-sep {
-    width: 1px;
-    height: 22px;
-    background: rgba(255, 255, 255, 0.15);
-    margin: 0 4px;
-}
-.dock-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 13px;
-    border-radius: 14px;
-    border: none;
-    background: transparent;
-    color: #d5e7dc;
-    font-size: 12px;
-    font-weight: 600;
-    transition: background 0.25s, color 0.25s, transform 0.2s;
-    white-space: nowrap;
-}
-.dock-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--light-green);
-}
-.dock-btn.active {
-    background: rgba(141, 240, 189, 0.15);
-    color: var(--light-green);
-}
-.dock-btn .icon {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
-    background: currentColor;
-    opacity: 0.6;
-    flex-shrink: 0;
-}
-.dock-btn.active .icon { opacity: 1; }
+/* DOCK */
+.dock{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;align-items:center;gap:4px;padding:8px 14px;border-radius:22px;background:rgba(255,255,255,.08);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(255,255,255,.08),0 8px 40px rgba(0,0,0,.45);transition:background .3s,box-shadow .3s}
+.dock:hover{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(255,255,255,.1),0 12px 50px rgba(0,0,0,.55)}
+.dock-brand{font-weight:900;font-size:16px;letter-spacing:3px;padding:0 12px 0 4px;color:var(--light-green);white-space:nowrap}
+.dock-sep{width:1px;height:22px;background:rgba(255,255,255,.15);margin:0 4px}
+.dock-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:14px;border:none;background:transparent;color:#d5e7dc;font-size:12px;font-weight:600;transition:background .25s,color .25s;white-space:nowrap}
+.dock-btn:hover{background:rgba(255,255,255,.1);color:var(--light-green)}
+.dock-btn.active{background:rgba(141,240,189,.15);color:var(--light-green)}
+.dock-btn .icon{display:inline-block;width:14px;height:14px;border-radius:4px;background:currentColor;opacity:.6;flex-shrink:0}
+.dock-btn.active .icon{opacity:1}
 
-/* ===== BÖLÜMLER ===== */
-section {
-    position: relative;
-    padding: 120px 8% 100px;
-    isolation: isolate;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.section-label {
-    font-size: 11px;
-    color: var(--light-green);
-    letter-spacing: 4px;
-    font-weight: 800;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-.section-title {
-    font-size: clamp(30px, 5vw, 54px);
-    font-weight: 900;
-    line-height: 1.15;
-    margin-bottom: 22px;
-}
-.section-text {
-    color: var(--muted);
-    line-height: 1.9;
-    font-size: 15px;
-    max-width: 760px;
-}
-.center { text-align: center; margin-left: auto; margin-right: auto; }
+/* SECTIONS */
+section{position:relative;padding:120px 8% 100px;isolation:isolate;min-height:100vh;display:flex;flex-direction:column;justify-content:center;transition:background-color 1.4s cubic-bezier(.22,1,.36,1)}
+.section-label{font-size:11px;color:var(--light-green);letter-spacing:4px;font-weight:800;margin-bottom:15px;text-transform:uppercase;transition:color 1.2s ease}
+.section-title{font-size:clamp(30px,5vw,54px);font-weight:900;line-height:1.15;margin-bottom:22px}
+.section-text{color:var(--muted);line-height:1.9;font-size:15px;max-width:760px;transition:color 1.2s ease}
+.center{text-align:center;margin-left:auto;margin-right:auto}
 
-/* ===== HERO ===== */
-.hero {
-    min-height: 100vh;
-    padding: 120px 5% 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-}
-.hero-tag {
-    color: var(--light-green);
-    letter-spacing: 5px;
-    font-size: 11px;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
-.hero-logo-img {
-    width: min(220px, 45vw);
-    height: auto;
-    margin: 0 auto 25px;
-    display: block;
-    border-radius: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 40px rgba(141, 240, 189, 0.35));
-}
-.hero h1 {
-    font-size: clamp(48px, 9vw, 100px);
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: 12px;
-    margin: 0 0 17px;
-    background: linear-gradient(110deg, #fff, #9ae9bd 50%, #42b87b);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-.hero-description {
-    max-width: 620px;
-    color: #c0d4c8;
-    font-size: 15px;
-    line-height: 1.9;
-}
-.hero-buttons {
-    display: flex;
-    gap: 13px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
-}
-.btn {
-    padding: 14px 24px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 800;
-    transition: .3s;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: none;
-}
-.btn-primary {
-    background: #1b9e64;
-    color: white;
-    box-shadow: 0 8px 35px rgba(27,158,100,.22);
-}
-.btn-primary:hover {
-    transform: translateY(-4px);
-    background: #27bd7a;
-}
-.btn-outline {
-    border: 1px solid rgba(255,255,255,.25);
-    background: rgba(255,255,255,.04);
-    color: white;
-}
-.btn-outline:hover {
-    background: rgba(255,255,255,.12);
-    transform: translateY(-4px);
-}
-.scroll-hint {
-    margin-top: 45px;
-    color: #8da99a;
-    font-size: 10px;
-    letter-spacing: 3px;
-}
+/* HERO */
+.hero{min-height:100vh;padding:120px 5% 70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-tag{color:var(--light-green);letter-spacing:5px;font-size:11px;font-weight:800;margin-bottom:20px}
+.hero-logo-img{width:min(220px,45vw);height:auto;margin:0 auto 25px;display:block;border-radius:24px;object-fit:contain;filter:drop-shadow(0 0 40px rgba(141,240,189,.35))}
+.hero h1{font-size:clamp(48px,9vw,100px);line-height:1;font-weight:900;letter-spacing:12px;margin:0 0 17px;background:linear-gradient(110deg,#fff,#9ae9bd 50%,#42b87b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-description{max-width:620px;color:#c0d4c8;font-size:15px;line-height:1.9}
+.hero-buttons{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+.btn{padding:14px 24px;border-radius:30px;font-size:13px;font-weight:800;transition:.3s;display:inline-flex;justify-content:center;align-items:center;cursor:pointer;border:none}
+.btn-primary{background:#1b9e64;color:#fff;box-shadow:0 8px 35px rgba(27,158,100,.22)}
+.btn-primary:hover{transform:translateY(-4px);background:#27bd7a}
+.btn-outline{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,.12);transform:translateY(-4px)}
+.scroll-hint{margin-top:45px;color:#8da99a;font-size:10px;letter-spacing:3px}
 
-/* ===== KARTLAR ===== */
-.glass-card {
-    background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.025));
-    border: 1px solid rgba(255,255,255,.12);
-    backdrop-filter: blur(18px);
-    border-radius: 22px;
-    padding: 30px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.12);
-    transition: transform .35s, border-color .35s, background .35s;
-}
-.glass-card:hover {
-    transform: translateY(-7px);
-    border-color: rgba(130,235,175,.4);
-    background: rgba(255,255,255,.09);
-}
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-    margin-top: 48px;
-}
-.card-number {
-    font-size: 13px;
-    color: var(--light-green);
-    letter-spacing: 3px;
-    font-weight: 900;
-    margin-bottom: 18px;
-}
-.glass-card h3 {
-    font-size: 21px;
-    margin-bottom: 13px;
-}
-.glass-card p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.8;
-}
+/* CARDS */
+.glass-card{background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(18px);border-radius:22px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.12);transition:transform .35s,border-color .35s,background .35s}
+.glass-card:hover{transform:translateY(-7px);border-color:rgba(130,235,175,.4);background:rgba(255,255,255,.09)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.card-number{font-size:13px;color:var(--light-green);letter-spacing:3px;font-weight:900;margin-bottom:18px;transition:color 1.2s ease}
+.glass-card h3{font-size:21px;margin-bottom:13px}
+.glass-card p{color:var(--muted);font-size:14px;line-height:1.8;transition:color 1.2s ease}
 
-/* ===== HAKKIMIZDA / MILOS ===== */
-.about-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-    margin-top: 45px;
-}
-.about-image {
-    width: 100%;
-    border-radius: 24px;
-    border: 1px solid rgba(255,255,255,.12);
-    box-shadow: 0 25px 70px rgba(0,0,0,.25);
-}
-.os-features {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 13px;
-    margin-top: 25px;
-}
-.feature {
-    padding: 17px;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 14px;
-    background: rgba(255,255,255,.04);
-    color: #d9eee1;
-    font-size: 13px;
-}
-.feature strong {
-    display: block;
-    color: var(--light-green);
-    margin-bottom: 6px;
-}
+/* ABOUT */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-top:45px}
+.about-image{width:100%;border-radius:24px;border:1px solid rgba(255,255,255,.12);box-shadow:0 25px 70px rgba(0,0,0,.25)}
+.os-features{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:25px}
+.feature{padding:17px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.04);color:#d9eee1;font-size:13px}
+.feature strong{display:block;color:var(--light-green);margin-bottom:6px;transition:color 1.2s ease}
 
-/* ===== BURSA ===== */
-.bursa-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 45px;
-    margin-top: 40px;
-}
-.bursa-layout img {
-    width: 100%;
-    border-radius: 22px;
-    max-height: 390px;
-    object-fit: cover;
-}
-.bursa-fact {
-    margin-top: 22px;
-    padding: 18px;
-    border-left: 3px solid #54d997;
-    background: rgba(255,255,255,.05);
-    color: #d7eadf;
-    line-height: 1.8;
-}
+/* BURSA */
+.bursa-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:45px;margin-top:40px}
+.bursa-layout img{width:100%;border-radius:22px;max-height:390px;object-fit:cover}
+.bursa-fact{margin-top:22px;padding:18px;border-left:3px solid #54d997;background:rgba(255,255,255,.05);color:#d7eadf;line-height:1.8}
 
-/* ===== KIRMIZI TEMA BÖLÜMLER ===== */
-section.red-theme {
-    background: #1a0a0a;
-    transition: background-color 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-section.red-theme .section-label { color: #ff9e9e; }
-section.red-theme .glass-card { border-color: rgba(255, 120, 120, 0.2); }
-section.red-theme .glass-card:hover { border-color: rgba(255, 150, 150, 0.5); }
-section.red-theme .section-text { color: #d4b8b8; }
-section.red-theme .card-number { color: #ff9e9e; }
-section.red-theme .glass-card p { color: #c4a8a8; }
+/* RED THEME */
+section.red-theme{background:#1a0a0a}
+section.red-theme .section-label{color:#ff9e9e}
+section.red-theme .glass-card{border-color:rgba(255,120,120,.2)}
+section.red-theme .glass-card:hover{border-color:rgba(255,150,150,.5)}
+section.red-theme .section-text{color:#d4b8b8}
+section.red-theme .card-number{color:#ff9e9e}
+section.red-theme .glass-card p{color:#c4a8a8}
+section.red-theme .feature strong{color:#ff9e9e}
 
-.red-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse at 20% 20%, rgba(180, 40, 40, .25), transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(120, 20, 20, .28), transparent 55%);
-    opacity: 0;
-    transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.red-overlay.active { opacity: 1; }
+/* ATATURK */
+.ataturk-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.ataturk-gallery img{width:100%;height:320px;object-fit:cover;object-position:center top;border-radius:18px;border:1px solid rgba(255,255,255,.13);transition:transform .4s;filter:saturate(.85)}
+.ataturk-gallery img:hover{transform:scale(1.025);filter:saturate(1)}
 
-.ataturk-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-top: 40px;
-}
-.ataturk-gallery img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    object-position: center top;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,.13);
-    transition: transform .4s;
-    filter: saturate(.85);
-}
-.ataturk-gallery img:hover {
-    transform: scale(1.025);
-    filter: saturate(1);
-}
+/* TIMELINE */
+.timeline{position:relative;max-width:900px;margin:55px auto 0}
+.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(transparent,#c44,#c44,transparent);transform:translateX(-50%)}
+.timeline-item{width:50%;padding:0 35px 35px 0;position:relative}
+.timeline-item:nth-child(even){margin-left:50%;padding:0 0 35px 35px}
+.timeline-item::after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:#ff8a8a;border:4px solid #1a0a0a;right:-9px;top:20px;box-shadow:0 0 20px #c44}
+.timeline-item:nth-child(even)::after{right:auto;left:-9px}
+.timeline-item img{width:100%;height:180px;object-fit:cover;border-radius:13px;margin-bottom:15px}
+.timeline-item h3{color:#ff9e9e;font-size:21px;margin-bottom:8px}
+.timeline-item p{color:#d4b8b8;line-height:1.8;font-size:13px}
 
-/* ===== TIMELINE ===== */
-.timeline {
-    position: relative;
-    max-width: 900px;
-    margin: 55px auto 0;
+/* MAP */
+#turkiye-map{width:100%;height:560px;margin-top:35px;border-radius:22px;border:1px solid rgba(255,255,255,.15);overflow:hidden;background:#12271d;z-index:1}
+.map-legend{display:flex;flex-wrap:wrap;gap:20px;margin-top:17px;color:#c8dbcf;font-size:13px}
+.legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}
+.map-note{color:#a8c1b1;font-size:12px;margin-top:15px;line-height:1.8}
+
+/* FOOTER */
+footer{padding:45px 7%;background:rgba(0,0,0,.22);border-top:1px solid rgba(255,255,255,.08);text-align:center}
+.footer-brand{font-size:27px;font-weight:900;letter-spacing:5px;margin-bottom:12px}
+footer p{color:#91a99a;font-size:12px;line-height:1.8}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .dock{gap:2px;padding:6px 10px}
+  .dock-btn{padding:7px 10px;font-size:11px}
+  .dock-brand{font-size:14px;padding-right:8px}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  section{padding:100px 6%}
 }
-.timeline::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(transparent, #c44, #c44, transparent);
-    transform: translateX(-50%);
+@media(max-width:760px){
+  .dock{top:10px;padding:5px 8px;gap:0;border-radius:18px;max-width:96vw;flex-wrap:wrap;justify-content:center}
+  .dock-brand{font-size:13px;letter-spacing:2px;padding:4px 6px}
+  .dock-sep{display:none}
+  .dock-btn{padding:6px 8px;font-size:10px}
+  .dock-btn .icon{display:none}
+  section{padding:130px 6% 70px}
+  .hero{padding-top:130px}
+  .hero h1{letter-spacing:7px}
+  .grid-3,.about-layout,.bursa-layout,.ataturk-gallery{grid-template-columns:1fr}
+  .ataturk-gallery img{height:350px}
+  .timeline::before{left:8px}
+  .timeline-item,.timeline-item:nth-child(even){width:100%;margin-left:0;padding:0 0 30px 32px}
+  .timeline-item::after,.timeline-item:nth-child(even)::after{left:0;right:auto}
+  #turkiye-map{height:430px}
+  .os-features{grid-template-columns:1fr 1fr}
+  .glass-card{padding:23px}
 }
-.timeline-item {
-    width: 50%;
-    padding: 0 35px 35px 0;
-    position: relative;
-}
-.timeline-item:nth-child(even) {
-    margin-left: 50%;
-    padding: 0 0 35px 35px;
-}
-.timeline-item::after {
-    content: "";
-    position: absolute;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: #ff8a8a;
-    border: 4px solid #1a0a0a;
-    right: -9px;
-    top: 20px;
-    box-shadow: 0 0 20px #c44;
-}
-.timeline-item:nth-child(even)::after {
-    right: auto;
-    left: -9px;
-}
-.tim
+</style>
+</head>
+<body>
+
+<nav class="dock" id="dock">
+  <span class="dock-brand">MILOS</span>
+  <span class="dock-sep"></span>
+  <button class="dock-btn active" data-target="anasayfa"><span class="icon"></span>Ana Sayfa</button>
+  <button class="dock-btn" data-target="hakkimizda"><span class="icon"></span>Hakkımızda</button>
+  <button class="dock-btn" data-target="vizyon"><span class="icon"></span>Vizyon</button>
+  <button class="dock-btn" data-target="misyon"><span class="icon"></span>Misyon</button>
+  <button class="dock-btn" data-target="milos"><span class="icon"></span>MILOS</button>
+  <button class="dock-btn" data-target="ataturk"><span class="icon"></span>Atatürk</button>
+  <button class="dock-btn" data-target="bursa"><span class="icon"></span>Bursa</button>
+  <button class="dock-btn" data-target="tarih"><span class="icon"></span>Tarih</button>
+  <button class="dock-btn" data-target="harita"><span class="icon"></span>Harita</button>
+</nav>
+
+<!-- ANA SAYFA -->
+<section class="hero" id="anasayfa">
+  <div class="hero-tag">ÖZGÜRLÜĞÜN YENİ YÜZÜ</div>
+  <img class="hero-logo-img" src="MIL.png" alt="MILOS Logo" onerror="this.src='https://placehold.co/220x220/0d2a1d/8df0bd?text=MILOS'">
+  <h1>MILOS</h1>
+  <p class="hero-description">Özgürlük, teknoloji ve bağımsızlık ruhuyla geliştirilen yeni nesil işletim sistemi projesi.</p>
+  <div class="hero-buttons">
+    <a href="#milos" class="btn btn-primary">MILOS'u Keşfet</a>
+    <a href="#hakkimizda" class="btn btn-outline">Bizi Tanıyın</a>
+  </div>
+  <div class="scroll-hint">KEŞFETMEK İÇİN AŞAĞI KAYDIR</div>
+</section>
+
+<!-- HAKKIMIZDA -->
+<section id="hakkimizda">
+  <div class="center">
+    <div class="section-label">BİZ KİMİZ?</div>
+    <h2 class="section-title">MILOS Hakkında</h2>
+    <p class="section-text center">MILOS, Red Hat tabanlı olarak geliştirilen ve KDE Plasma masaüstü ortamını kullanan bir işletim sistemi projesidir. Amacımız modern, kullanışlı ve özgür bir bilgisayar deneyimi sunmaktır.</p>
+  </div>
+  <div class="about-layout">
+    <div>
+      <h3 class="section-title" style="font-size:30px">Teknolojiye özgün bir bakış.</h3>
+      <p class="section-text">MILOS yalnızca bir işletim sistemi fikri değil; aynı zamanda üretme, öğrenme ve geliştirme isteğinin bir sonucudur. Açık kaynak dünyasının gücünden yararlanarak kendi tasarım anlayışımızı ortaya koyuyoruz.</p>
+      <div class="os-features">
+        <div class="feature"><strong>Red Hat Tabanlı</strong>Güçlü kurumsal Linux altyapısı</div>
+        <div class="feature"><strong>KDE Plasma</strong>Modern masaüstü deneyimi</div>
+        <div class="feature"><strong>Özgür Yazılım</strong>Açık kaynak yaklaşımı</div>
+        <div class="feature"><strong>MILOS Tasarımı</strong>Kendine özgü görünüm</div>
+      </div>
+    </div>
+    <img class="about-image" src="plasma.png" alt="MILOS Masaüstü" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Desktop'">
+  </div>
+</section>
+
+<!-- VİZYON -->
+<section id="vizyon">
+  <div class="center">
+    <div class="section-label">GELECEK HEDEFİMİZ</div>
+    <h2 class="section-title">Vizyonumuz</h2>
+    <p class="section-text center">Teknolojiyi herkes için erişilebilir, özgür ve anlaşılır hâle getiren; kendi kimliğine sahip, sürekli gelişen bir işletim sistemi ortaya çıkarmak.</p>
+  </div>
+  <div class="grid-3">
+    <div class="glass-card"><div class="card-number">01 / ÖZGÜRLÜK</div><h3>Bağımsız teknoloji</h3><p>Kullanıcıların bilgisayarları üzerinde daha fazla söz sahibi olmasını desteklemek.</p></div>
+    <div class="glass-card"><div class="card-number">02 / YENİLİK</div><h3>Sürekli gelişim</h3><p>Yeni teknolojileri takip ederek daha iyi bir kullanıcı deneyimi oluşturmak.</p></div>
+    <div class="glass-card"><div class="card-number">03 / TASARIM</div><h3>Özgün kimlik</h3><p>Görünümü ve kullanım anlayışıyla kendine ait bir karakter oluşturmak.</p></div>
+  </div>
+</section>
+
+<!-- MİSYON -->
+<section id="misyon">
+  <div class="center">
+    <div class="section-label">BİZİM GÖREVİMİZ</div>
+    <h2 class="section-title">Misyonumuz</h2>
+    <p class="section-text center">Açık kaynak teknolojilerinden yararlanarak güvenilir, kullanışlı ve geliştirilebilir bir işletim sistemi sunmak. Öğrenmeyi, üretmeyi ve paylaşmayı temel almak.</p>
+  </div>
+  <div class="grid-3">
+    <div class="glass-card"><div class="card-number">01</div><h3>Kullanıcı Odaklılık</h3><p>Kolay anlaşılır ve rahat kullanılabilir bir sistem geliştirmek.</p></div>
+    <div class="glass-card"><div class="card-number">02</div><h3>Güvenilirlik</h3><p>Sağlam Linux altyapısı üzerinde kararlı bir deneyim hedeflemek.</p></div>
+    <div class="glass-card"><div class="card-number">03</div><h3>Geliştirilebilirlik</h3><p>Yeni özelliklere ve topluluk katkılarına açık olmak.</p></div>
+  </div>
+</section>
+
+<!-- MILOS -->
+<section id="milos">
+  <div class="center">
+    <div class="section-label">İŞLETİM SİSTEMİMİZ</div>
+    <h2 class="section-title">MILOS İşletim Sistemi</h2>
+    <p class="section-text center">Red Hat altyapısı ve KDE Plasma masaüstü ortamıyla şekillenen MILOS, özgün bir Linux deneyimi oluşturmayı hedefler.</p>
+  </div>
+  <div class="about-layout">
+    <img class="about-image" src="plasma.png" alt="MILOS Red Hat" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Red+Hat'">
+    <div>
+      <h3 class="section-title" style="font-size:30px">Güçlü altyapı, özgün görünüm.</h3>
+      <p class="section-text">MILOS projesinde Red Hat'in kurumsal Linux altyapısından ve KDE Plasma'nın esnek masaüstü ortamından yararlanıyoruz. Kendi görsel kimliğimizi ve kullanıcı deneyimimizi geliştirmeye odaklanıyoruz.</p>
+      <div class="os-features">
+        <div class="feature"><strong>Linux</strong>İşletim sistemi altyapısı</div>
+        <div class="feature"><strong>Red Hat</strong>Temel dağıtım</div>
+        <div class="feature"><strong>Plasma</strong>Masaüstü ortamı</div>
+        <div class="feature"><strong>MILOS</strong>Proje kimliği</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATATÜRK (KIRMIZI) -->
+<section id="ataturk" class="red-theme">
+  <div class="center">
+    <div class="section-label">CUMHURİYET TARİHİ</div>
+    <h2 class="section-title">Mustafa Kemal Atatürk</h2>
+    <p class="section-text center">Türkiye Cumhuriyeti'nin kurucusu Mustafa Kemal Atatürk'ü saygı ve minnetle anıyoruz.</p>
+  </div>
+  <div class="ataturk-gallery">
+    <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+1923" alt="Atatürk 1923" loading="lazy">
+    <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+Portresi" alt="Atatürk portresi" loading="lazy">
+    <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=TBMM" alt="Atatürk TBMM'den çıkarken" loading="lazy">
+  </div>
+  <div class="glass-card center" style="max-width:750px;margin:35px auto 0">
+    <h3>Bağımsızlık ve Cumhuriyet</h3>
+    <p>Cumhuriyet, bağımsızlık ve çağdaşlaşma ideallerini gelecek nesillere taşımak hepimizin sorumluluğudur.</p>
+  </div>
+</section>
+
+<!-- BURSA -->
+<section id="bursa">
+  <div class="center">
+    <div class="section-label">PROJENİN DOĞDUĞU ŞEHİR</div>
+    <h2 class="section-title">Bursa</h2>
+    <p class="section-text center">MILOS projesinin doğduğu şehir: Bursa.</p>
+  </div>
+  <div class="bursa-layout">
+    <img src="https://placehold.co/800x500/0d2a1d/8df0bd?text=Bursa+Ulu+Camii" alt="Bursa Ulu Camii" loading="lazy">
+    <div>
+      <h3 class="section-title" style="font-size:32px">Tarihin ve üretimin şehri.</h3>
+      <p class="section-text">Osmanlı Devleti'nin ilk başkentlerinden biri olan Bursa; tarihi yapıları, kültürü ve doğal güzellikleriyle Türkiye'nin önemli şehirlerinden biridir.</p>
+      <div class="bursa-fact"><strong>MILOS'un doğduğu yer: Bursa</strong><br>MILOS işletim sistemi projesinin başlangıç noktası Bursa'dır.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TARİH (KIRMIZI) -->
+<section id="tarih" class="red-theme">
+  <div class="center">
+    <div class="section-label">GEÇMİŞTEN GÜNÜMÜZE</div>
+    <h2 class="section-title">Türkiye Tarihi</h2>
+    <p class="section-text center">Anadolu ve Türkiye tarihinin önemli dönüm noktalarından bazıları.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1071+Malazgirt" alt="Malazgirt" loading="lazy"><h3>1071 – Malazgirt</h3><p>Malazgirt Savaşı, Anadolu'nun Türk tarihindeki yerini değiştiren önemli dönüm noktalarından biridir.</p></div>
+    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1299+Osmanl%C4%B1" alt="Osmanlı" loading="lazy"><h3>1299 – Osmanlı Devleti</h3><p>Osmanlı Beyliği'nin kuruluşuyla Anadolu'da yeni bir siyasi dönem başladı.</p></div>
+    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1453+%C4%B0stanbul" alt="İstanbul'un Fethi" loading="lazy"><h3>1453 – İstanbul'un Fethi</h3><p>Fatih Sultan Mehmet'in İstanbul'u fethetmesi dünya tarihinin önemli olaylarından biri oldu.</p></div>
+    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1915+%C3%87anakkale" alt="Çanakkale" loading="lazy"><h3>1915 – Çanakkale</h3><p>Çanakkale Cephesi, Türk tarihinin en önemli mücadelelerinden biri olarak hafızalara kazındı.</p></div>
+    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1919+Samsun" alt="Bandırma Vapuru" loading="lazy"><h3>1919 – Samsun'a Çıkış</h3><p>Mustafa Kemal Atatürk'ün Samsun'a çıkışı Millî Mücadele'nin başlangıcı kabul edilir.</p></div>
+    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1920+TBMM" alt="TBMM" loading="lazy"><h3>1920 – TBMM'nin Açılması</h3><p>Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açıldı.</p></div>
+    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1923+Cumhuriyet" alt="Cumhuriyetin ilanı" loading="lazy"><h3>1923 – Cumhuriyet</h3><p>29 Ekim 1923'te Cumhuriyet ilan edildi ve Mustafa Kemal Atatürk ilk Cumhurbaşkanı seçildi.</p></div>
+  </div>
+</section>
+
+<!-- HARİTA (KIRMIZI) -->
+<section id="harita" class="red-theme">
+  <div class="center">
+    <div class="section-label">ANADOLU COĞRAFYASI</div>
+    <h2 class="section-title">Türkiye Fiziki Haritası</h2>
+    <p class="section-text center">Türkiye'nin dağlarını, yükseltilerini ve coğrafi yapısını keşfedin. İllerin üzerine gelerek isimlerini görebilirsiniz.</p>
+  </div>
+  <div id="turkiye-map"></div>
+  <div class="map-legend">
+    <span><i class="legend-dot" style="background:#e34b4b"></i>Başkent Ankara</span>
+    <span><i class="legend-dot" style="background:#28d17c"></i>MILOS'un doğduğu yer: Bursa</span>
+  </div>
+  <p class="map-note">Harita OpenTopoMap topoğrafik katmanını kullanır. İl sınırları GeoJSON verisi üzerinden gösterilir. Harita verileri ve katmanlar internet bağlantısı gerektirir.</p>
+</section>
+
+<footer>
+  <div class="footer-brand">MILOS</div>
+  <p>Özgürlüğün, üretimin ve teknolojinin buluştuğu proje.</p>
+  <p style="margin-top:12px">© <span id="year"></span> MILOS. Tüm hakları saklıdır.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ===== DOCK NAVIGATION ===== */
+const dockBtns = document.querySelectorAll(".dock-btn");
+dockBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = document.getElementById(btn.dataset.target);
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+/* ===== ARKA PLAN RENK GEÇİŞLERİ ===== */
+const body = document.body;
+const colorSections = document.querySelectorAll("section[id]");
+
+const colorObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      const isRed = entry.target.classList.contains("red-theme");
+
+      // Arka plan rengi
+      if (isRed) {
+        body.style.backgroundColor = "#1a0a0a";
+      } else if (id === "anasayfa") {
+        body.style.backgroundColor = "#071b13";
+      } else if (id === "hakkimizda") {
+        body.style.backgroundColor = "#0d2519";
+      } else if (id === "vizyon") {
+        body.style.backgroundColor = "#
