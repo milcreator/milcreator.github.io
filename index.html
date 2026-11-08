@@ -12,15 +12,15 @@
 :root{--page-color:#071b13;--green:#19a66a;--light-green:#8df0bd;--white:#f4fff8;--muted:#b3c8bb}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:110px}
-body{font-family:'Inter',sans-serif;color:var(--white);background:var(--page-color);overflow-x:hidden;transition:background-color 1.4s cubic-bezier(.22,1,.36,1);min-height:100vh}
-body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 15% 15%,rgba(20,150,90,.17),transparent 45%),radial-gradient(ellipse at 85% 75%,rgba(0,90,55,.18),transparent 50%)}
+body{font-family:'Inter',sans-serif;color:var(--white);background:var(--page-color);overflow-x:hidden;transition:background-color 1.2s cubic-bezier(.22,1,.36,1);min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 15% 15%,rgba(20,150,90,.17),transparent 45%),radial-gradient(ellipse at 85% 75%,rgba(0,90,55,.18),transparent 50%);transition:opacity 1.2s ease}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer}
 
-/* DOCK */
-.dock{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;align-items:center;gap:4px;padding:8px 14px;border-radius:22px;background:rgba(255,255,255,.08);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(255,255,255,.08),0 8px 40px rgba(0,0,0,.45);transition:background .3s,box-shadow .3s}
+/* LIQUID GLASS DOCK */
+.dock{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;align-items:center;gap:4px;padding:8px 14px;border-radius:22px;background:rgba(255,255,255,.08);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(255,255,255,.08),0 8px 40px rgba(0,0,0,.45);transition:background .3s,box-shadow .3s,border-color .6s}
 .dock:hover{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(255,255,255,.1),0 12px 50px rgba(0,0,0,.55)}
-.dock-brand{font-weight:900;font-size:16px;letter-spacing:3px;padding:0 12px 0 4px;color:var(--light-green);white-space:nowrap}
+.dock-brand{font-weight:900;font-size:16px;letter-spacing:3px;padding:0 12px 0 4px;color:var(--light-green);white-space:nowrap;transition:color .6s}
 .dock-sep{width:1px;height:22px;background:rgba(255,255,255,.15);margin:0 4px}
 .dock-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:14px;border:none;background:transparent;color:#d5e7dc;font-size:12px;font-weight:600;transition:background .25s,color .25s;white-space:nowrap}
 .dock-btn:hover{background:rgba(255,255,255,.1);color:var(--light-green)}
@@ -29,10 +29,10 @@ button{font:inherit;cursor:pointer}
 .dock-btn.active .icon{opacity:1}
 
 /* SECTIONS */
-section{position:relative;padding:120px 8% 100px;isolation:isolate;min-height:100vh;display:flex;flex-direction:column;justify-content:center;transition:background-color 1.4s cubic-bezier(.22,1,.36,1)}
-.section-label{font-size:11px;color:var(--light-green);letter-spacing:4px;font-weight:800;margin-bottom:15px;text-transform:uppercase;transition:color 1.2s ease}
+section{position:relative;padding:120px 8% 100px;isolation:isolate;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.section-label{font-size:11px;color:var(--light-green);letter-spacing:4px;font-weight:800;margin-bottom:15px;text-transform:uppercase;transition:color .8s}
 .section-title{font-size:clamp(30px,5vw,54px);font-weight:900;line-height:1.15;margin-bottom:22px}
-.section-text{color:var(--muted);line-height:1.9;font-size:15px;max-width:760px;transition:color 1.2s ease}
+.section-text{color:var(--muted);line-height:1.9;font-size:15px;max-width:760px;transition:color .8s}
 .center{text-align:center;margin-left:auto;margin-right:auto}
 
 /* HERO */
@@ -53,31 +53,21 @@ section{position:relative;padding:120px 8% 100px;isolation:isolate;min-height:10
 .glass-card{background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(18px);border-radius:22px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,.12);transition:transform .35s,border-color .35s,background .35s}
 .glass-card:hover{transform:translateY(-7px);border-color:rgba(130,235,175,.4);background:rgba(255,255,255,.09)}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
-.card-number{font-size:13px;color:var(--light-green);letter-spacing:3px;font-weight:900;margin-bottom:18px;transition:color 1.2s ease}
+.card-number{font-size:13px;color:var(--light-green);letter-spacing:3px;font-weight:900;margin-bottom:18px;transition:color .8s}
 .glass-card h3{font-size:21px;margin-bottom:13px}
-.glass-card p{color:var(--muted);font-size:14px;line-height:1.8;transition:color 1.2s ease}
+.glass-card p{color:var(--muted);font-size:14px;line-height:1.8;transition:color .8s}
 
 /* ABOUT */
 .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-top:45px}
 .about-image{width:100%;border-radius:24px;border:1px solid rgba(255,255,255,.12);box-shadow:0 25px 70px rgba(0,0,0,.25)}
 .os-features{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:25px}
 .feature{padding:17px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.04);color:#d9eee1;font-size:13px}
-.feature strong{display:block;color:var(--light-green);margin-bottom:6px;transition:color 1.2s ease}
+.feature strong{display:block;color:var(--light-green);margin-bottom:6px;transition:color .8s}
 
 /* BURSA */
 .bursa-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:45px;margin-top:40px}
 .bursa-layout img{width:100%;border-radius:22px;max-height:390px;object-fit:cover}
 .bursa-fact{margin-top:22px;padding:18px;border-left:3px solid #54d997;background:rgba(255,255,255,.05);color:#d7eadf;line-height:1.8}
-
-/* RED THEME */
-section.red-theme{background:#1a0a0a}
-section.red-theme .section-label{color:#ff9e9e}
-section.red-theme .glass-card{border-color:rgba(255,120,120,.2)}
-section.red-theme .glass-card:hover{border-color:rgba(255,150,150,.5)}
-section.red-theme .section-text{color:#d4b8b8}
-section.red-theme .card-number{color:#ff9e9e}
-section.red-theme .glass-card p{color:#c4a8a8}
-section.red-theme .feature strong{color:#ff9e9e}
 
 /* ATATURK */
 .ataturk-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
@@ -100,6 +90,15 @@ section.red-theme .feature strong{color:#ff9e9e}
 .map-legend{display:flex;flex-wrap:wrap;gap:20px;margin-top:17px;color:#c8dbcf;font-size:13px}
 .legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}
 .map-note{color:#a8c1b1;font-size:12px;margin-top:15px;line-height:1.8}
+
+/* RED THEME - her bölümün kendi rengi JS ile body'ye uygulanır, burada sadece iç öğe renkleri */
+section.red-theme .section-label{color:#ff9e9e}
+section.red-theme .section-text{color:#d4b8b8}
+section.red-theme .glass-card{border-color:rgba(255,120,120,.2)}
+section.red-theme .glass-card:hover{border-color:rgba(255,150,150,.5)}
+section.red-theme .card-number{color:#ff9e9e}
+section.red-theme .glass-card p{color:#c4a8a8}
+section.red-theme .feature strong{color:#ff9e9e}
 
 /* FOOTER */
 footer{padding:45px 7%;background:rgba(0,0,0,.22);border-top:1px solid rgba(255,255,255,.08);text-align:center}
@@ -150,10 +149,9 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   <button class="dock-btn" data-target="harita"><span class="icon"></span>Harita</button>
 </nav>
 
-<!-- ANA SAYFA -->
 <section class="hero" id="anasayfa">
   <div class="hero-tag">ÖZGÜRLÜĞÜN YENİ YÜZÜ</div>
-  <img class="hero-logo-img" src="MIL.png" alt="MILOS Logo" onerror="this.src='https://placehold.co/220x220/0d2a1d/8df0bd?text=MILOS'">
+  <img class="hero-logo-img" src="MIL.png" alt="MILOS Logo" onerror="this.style.display='none'">
   <h1>MILOS</h1>
   <p class="hero-description">Özgürlük, teknoloji ve bağımsızlık ruhuyla geliştirilen yeni nesil işletim sistemi projesi.</p>
   <div class="hero-buttons">
@@ -163,7 +161,6 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   <div class="scroll-hint">KEŞFETMEK İÇİN AŞAĞI KAYDIR</div>
 </section>
 
-<!-- HAKKIMIZDA -->
 <section id="hakkimizda">
   <div class="center">
     <div class="section-label">BİZ KİMİZ?</div>
@@ -181,11 +178,10 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
         <div class="feature"><strong>MILOS Tasarımı</strong>Kendine özgü görünüm</div>
       </div>
     </div>
-    <img class="about-image" src="plasma.png" alt="MILOS Masaüstü" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Desktop'">
+    <img class="about-image" src="plasma.png" alt="MILOS KDE Plasma masaüstü görüntüsü" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Desktop'">
   </div>
 </section>
 
-<!-- VİZYON -->
 <section id="vizyon">
   <div class="center">
     <div class="section-label">GELECEK HEDEFİMİZ</div>
@@ -199,7 +195,6 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   </div>
 </section>
 
-<!-- MİSYON -->
 <section id="misyon">
   <div class="center">
     <div class="section-label">BİZİM GÖREVİMİZ</div>
@@ -213,7 +208,6 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   </div>
 </section>
 
-<!-- MILOS -->
 <section id="milos">
   <div class="center">
     <div class="section-label">İŞLETİM SİSTEMİMİZ</div>
@@ -221,7 +215,7 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
     <p class="section-text center">Red Hat altyapısı ve KDE Plasma masaüstü ortamıyla şekillenen MILOS, özgün bir Linux deneyimi oluşturmayı hedefler.</p>
   </div>
   <div class="about-layout">
-    <img class="about-image" src="plasma.png" alt="MILOS Red Hat" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Red+Hat'">
+    <img class="about-image" src="plasma.png" alt="MILOS masaüstü" onerror="this.src='https://placehold.co/800x600/0d2a1d/8df0bd?text=MILOS+Red+Hat'">
     <div>
       <h3 class="section-title" style="font-size:30px">Güçlü altyapı, özgün görünüm.</h3>
       <p class="section-text">MILOS projesinde Red Hat'in kurumsal Linux altyapısından ve KDE Plasma'nın esnek masaüstü ortamından yararlanıyoruz. Kendi görsel kimliğimizi ve kullanıcı deneyimimizi geliştirmeye odaklanıyoruz.</p>
@@ -235,7 +229,7 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   </div>
 </section>
 
-<!-- ATATÜRK (KIRMIZI) -->
+<!-- ATATÜRK - KIRMIZI GEÇİŞ -->
 <section id="ataturk" class="red-theme">
   <div class="center">
     <div class="section-label">CUMHURİYET TARİHİ</div>
@@ -243,9 +237,9 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
     <p class="section-text center">Türkiye Cumhuriyeti'nin kurucusu Mustafa Kemal Atatürk'ü saygı ve minnetle anıyoruz.</p>
   </div>
   <div class="ataturk-gallery">
-    <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+1923" alt="Atatürk 1923" loading="lazy">
-    <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+Portresi" alt="Atatürk portresi" loading="lazy">
-    <img src="https://placehold.co/500x600/2a0a0a/ffcccc?text=TBMM" alt="Atatürk TBMM'den çıkarken" loading="lazy">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ataturk_in_1923.jpg" alt="Atatürk 1923" loading="lazy" onerror="this.src='https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+1923'">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ataturk-1923.jpg" alt="Atatürk portresi" loading="lazy" onerror="this.src='https://placehold.co/500x600/2a0a0a/ffcccc?text=Atat%C3%BCrk+Portresi'">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Atat%C3%BCrk_TBMM%27den_%C3%A7%C4%B1karken.jpg" alt="Atatürk TBMM'den çıkarken" loading="lazy" onerror="this.src='https://placehold.co/500x600/2a0a0a/ffcccc?text=TBMM'">
   </div>
   <div class="glass-card center" style="max-width:750px;margin:35px auto 0">
     <h3>Bağımsızlık ve Cumhuriyet</h3>
@@ -253,7 +247,6 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   </div>
 </section>
 
-<!-- BURSA -->
 <section id="bursa">
   <div class="center">
     <div class="section-label">PROJENİN DOĞDUĞU ŞEHİR</div>
@@ -261,7 +254,7 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
     <p class="section-text center">MILOS projesinin doğduğu şehir: Bursa.</p>
   </div>
   <div class="bursa-layout">
-    <img src="https://placehold.co/800x500/0d2a1d/8df0bd?text=Bursa+Ulu+Camii" alt="Bursa Ulu Camii" loading="lazy">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bursa_Ulu_Camii.jpg" alt="Bursa Ulu Camii" loading="lazy" onerror="this.src='https://placehold.co/800x500/0d2a1d/8df0bd?text=Bursa+Ulu+Camii'">
     <div>
       <h3 class="section-title" style="font-size:32px">Tarihin ve üretimin şehri.</h3>
       <p class="section-text">Osmanlı Devleti'nin ilk başkentlerinden biri olan Bursa; tarihi yapıları, kültürü ve doğal güzellikleriyle Türkiye'nin önemli şehirlerinden biridir.</p>
@@ -270,7 +263,7 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   </div>
 </section>
 
-<!-- TARİH (KIRMIZI) -->
+<!-- TARİH - KIRMIZI GEÇİŞ -->
 <section id="tarih" class="red-theme">
   <div class="center">
     <div class="section-label">GEÇMİŞTEN GÜNÜMÜZE</div>
@@ -278,17 +271,17 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
     <p class="section-text center">Anadolu ve Türkiye tarihinin önemli dönüm noktalarından bazıları.</p>
   </div>
   <div class="timeline">
-    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1071+Malazgirt" alt="Malazgirt" loading="lazy"><h3>1071 – Malazgirt</h3><p>Malazgirt Savaşı, Anadolu'nun Türk tarihindeki yerini değiştiren önemli dönüm noktalarından biridir.</p></div>
-    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1299+Osmanl%C4%B1" alt="Osmanlı" loading="lazy"><h3>1299 – Osmanlı Devleti</h3><p>Osmanlı Beyliği'nin kuruluşuyla Anadolu'da yeni bir siyasi dönem başladı.</p></div>
-    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1453+%C4%B0stanbul" alt="İstanbul'un Fethi" loading="lazy"><h3>1453 – İstanbul'un Fethi</h3><p>Fatih Sultan Mehmet'in İstanbul'u fethetmesi dünya tarihinin önemli olaylarından biri oldu.</p></div>
-    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1915+%C3%87anakkale" alt="Çanakkale" loading="lazy"><h3>1915 – Çanakkale</h3><p>Çanakkale Cephesi, Türk tarihinin en önemli mücadelelerinden biri olarak hafızalara kazındı.</p></div>
-    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1919+Samsun" alt="Bandırma Vapuru" loading="lazy"><h3>1919 – Samsun'a Çıkış</h3><p>Mustafa Kemal Atatürk'ün Samsun'a çıkışı Millî Mücadele'nin başlangıcı kabul edilir.</p></div>
-    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1920+TBMM" alt="TBMM" loading="lazy"><h3>1920 – TBMM'nin Açılması</h3><p>Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açıldı.</p></div>
-    <div class="timeline-item"><img src="https://placehold.co/500x250/2a0a0a/ffcccc?text=1923+Cumhuriyet" alt="Cumhuriyetin ilanı" loading="lazy"><h3>1923 – Cumhuriyet</h3><p>29 Ekim 1923'te Cumhuriyet ilan edildi ve Mustafa Kemal Atatürk ilk Cumhurbaşkanı seçildi.</p></div>
+    <div class="timeline-item"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/131_Bataille_de_Malazgirt.jpg" alt="Malazgirt" loading="lazy" onerror="this.src='https://placehold.co/500x250/2a0a0a/ffcccc?text=1071+Malazgirt'"><h3>1071 – Malazgirt</h3><p>Malazgirt Savaşı, Anadolu'nun Türk tarihindeki yerini değiştiren önemli dönüm noktalarından biridir.</p></div>
+    <div class="timeline-item"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ottoman_conquests.jpg" alt="Osmanlı" loading="lazy" onerror="this.src='https://placehold.co/500x250/2a0a0a/ffcccc?text=1299+Osmanl%C4%B1'"><h3>1299 – Osmanlı Devleti</h3><p>Osmanlı Beyliği'nin kuruluşuyla Anadolu'da yeni bir siyasi dönem başladı.</p></div>
+    <div class="timeline-item"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Constantinople_1453.jpg" alt="İstanbul'un Fethi" loading="lazy" onerror="this.src='https://placehold.co/500x250/2a0a0a/ffcccc?text=1453+%C4%B0stanbul'"><h3>1453 – İstanbul'un Fethi</h3><p>Fatih Sultan Mehmet'in İstanbul'u fethetmesi dünya tarihinin önemli olaylarından biri oldu.</p></div>
+    <div class="timeline-item"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Turkish_trenches_at_Gallipoli.jpg" alt="Çanakkale" loading="lazy" onerror="this.src='https://placehold.co/500x250/2a0a0a/ffcccc?text=1915+%C3%87anakkale'"><h3>1915 – Çanakkale</h3><p>Çanakkale Cephesi, Türk tarihinin en önemli mücadelelerinden biri olarak hafızalara kazındı.</p></div>
+    <div class="timeline-item"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Band%C4%B1rma_Vapuru.png" alt="Bandırma Vapuru" loading="lazy" onerror="this.src='https://placehold.co/500x250/2a0a0a/ffcccc?text=1919+Samsun'"><h3>1919 – Samsun'a Çıkış</h3><p>Mustafa Kemal Atatürk'ün Samsun'a çıkışı Millî Mücadele'nin başlangıcı kabul edilir.</p></div>
+    <div class="timeline-item"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ataturk_in_1923.jpg" alt="TBMM" loading="lazy" onerror="this.src='https://placehold.co/500x250/2a0a0a/ffcccc?text=1920+TBMM'"><h3>1920 – TBMM'nin Açılması</h3><p>Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açıldı.</p></div>
+    <div class="timeline-item"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/1923_11_03_Resimli_Gazete_Cumhuriyetin_Ilani.jpg" alt="Cumhuriyetin ilanı" loading="lazy" onerror="this.src='https://placehold.co/500x250/2a0a0a/ffcccc?text=1923+Cumhuriyet'"><h3>1923 – Cumhuriyet</h3><p>29 Ekim 1923'te Cumhuriyet ilan edildi ve Mustafa Kemal Atatürk ilk Cumhurbaşkanı seçildi.</p></div>
   </div>
 </section>
 
-<!-- HARİTA (KIRMIZI) -->
+<!-- HARİTA - KIRMIZI GEÇİŞ -->
 <section id="harita" class="red-theme">
   <div class="center">
     <div class="section-label">ANADOLU COĞRAFYASI</div>
@@ -298,46 +291,4 @@ footer p{color:#91a99a;font-size:12px;line-height:1.8}
   <div id="turkiye-map"></div>
   <div class="map-legend">
     <span><i class="legend-dot" style="background:#e34b4b"></i>Başkent Ankara</span>
-    <span><i class="legend-dot" style="background:#28d17c"></i>MILOS'un doğduğu yer: Bursa</span>
-  </div>
-  <p class="map-note">Harita OpenTopoMap topoğrafik katmanını kullanır. İl sınırları GeoJSON verisi üzerinden gösterilir. Harita verileri ve katmanlar internet bağlantısı gerektirir.</p>
-</section>
-
-<footer>
-  <div class="footer-brand">MILOS</div>
-  <p>Özgürlüğün, üretimin ve teknolojinin buluştuğu proje.</p>
-  <p style="margin-top:12px">© <span id="year"></span> MILOS. Tüm hakları saklıdır.</p>
-</footer>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-
-/* ===== DOCK NAVIGATION ===== */
-const dockBtns = document.querySelectorAll(".dock-btn");
-dockBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const target = document.getElementById(btn.dataset.target);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-});
-
-/* ===== ARKA PLAN RENK GEÇİŞLERİ ===== */
-const body = document.body;
-const colorSections = document.querySelectorAll("section[id]");
-
-const colorObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      const isRed = entry.target.classList.contains("red-theme");
-
-      // Arka plan rengi
-      if (isRed) {
-        body.style.backgroundColor = "#1a0a0a";
-      } else if (id === "anasayfa") {
-        body.style.backgroundColor = "#071b13";
-      } else if (id === "hakkimizda") {
-        body.style.backgroundColor = "#0d2519";
-      } else if (id === "vizyon") {
-        body.style.backgroundColor = "#
+    <
